@@ -2,9 +2,10 @@
 
 namespace tweeterapp\model;
 
-class User extends \Illuminate\Database\Eloquent\Model{
-	protected $table = "User";
+class Prestation extends \Illuminate\Database\Eloquent\Model{
+	protected $table = "Prestation";
 	protected $primaryKey = "Id";
 	public    $timestamps = false; 
 
+   }
 }
