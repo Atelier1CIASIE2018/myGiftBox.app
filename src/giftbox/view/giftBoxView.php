@@ -87,7 +87,26 @@ class GiftBoxView extends \mf\view\AbstractView {
         return $res;
     }
 
-    
+    private function renderLogin(){
+        return "<h1> Connexion </h1>
+                <form name='connexion' method='POST' action='/loginPost/'>
+                Login : <input tpye='text' name='login'/><br/>
+                Mot de passe : <input type='text' name='mdp'/><br/>
+                <input type='submit' name='valider' value='Valider'/>
+                </form>";
+    }
+
+    private function renderRegister(){
+        return "<h1> Inscription </h1>
+                <form name='inscription' method='POST' action='/registerPost/'>
+                Prénom : <input tpye='text' name='prenom'/><br/>
+                Nom : <input type='text' name='nom'/><br/>
+                Login : <input type='text' name='log'/><br/>
+                Mot de passe : <input type='text' name='mdp'/><br/>
+                E-mail : <input type='text' name='mail'/><br/>
+                <input type='submit' name='valider' value='Valider'/>
+                </form>";
+    }
     
     protected function renderBody($selector=null){
 
@@ -97,9 +116,9 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'Prestations')$string = $string . self::renderPrestations();
         if ($selector == 'Categories')$string = $string . self::renderCategories();
         if ($selector == 'Categorie')$string = $string . self::renderCategorie();
+        if ($selector == 'Login')$string = $string . self::renderLogin();
+        if ($selector == 'Register')$string = $string . self::renderRegister();
         /*if ($selector == '')$string = $string . self::();
-        if ($selector == '')$string = $string . self::();
-        if ($selector == '')$string = $string . self::();
         if ($selector == '')$string = $string . self::();
         if ($selector == '')$string = $string . self::();
         if ($selector == '')$string = $string . self::();
