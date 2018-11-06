@@ -4,10 +4,7 @@ require_once "src/mf/router/Router.php";
 $loader = new ClassLoader('src');
 $loader->register();
 
-use tweeterapp\model\Follow as Follow;
-use tweeterapp\model\Like as Like;
-use tweeterapp\model\Tweet as Tweet;
-use tweeterapp\model\User as User;
+use ;
 
 use mf\router\Router as Router;
 
