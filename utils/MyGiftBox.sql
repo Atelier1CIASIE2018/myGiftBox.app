@@ -31,7 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `Box` (
   `Id` int(16) NOT NULL,
   `IdUser` int(16) NOT NULL,
-  `Etat` int(11) NOT NULL,
+  `Nom` varchar(256) NOT NULL,
+  `Etat` int(11) DEFAULT 1,
   `Message` text NOT NULL,
   `Url` varchar(256) NOT NULL,
   `MessageRetour` text NOT NULL
