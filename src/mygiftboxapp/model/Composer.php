@@ -1,17 +1,11 @@
 <?php
 
-namespace mygiftboxapp\model;
+namespace tweeterapp\model;
 
-class Composer extends \Illuminate\Database\Eloquent\Model{
-	protected $table = "Composer";
+class Prestation extends \Illuminate\Database\Eloquent\Model{
+	protected $table = "Prestation";
 	protected $primaryKey = "Id";
 	public    $timestamps = false; 
-	
-	public function box() {
-       		return $this->belongsTo('\mygiftboxapp\model\Box', 'IdBox');
-	}
-	public function prestation() {
-       		return $this->belongsTo('\mygiftboxapp\model\Prestation', 'IdCatalogue');
-	}
-   	
+
+   }
 }

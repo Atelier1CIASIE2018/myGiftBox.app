@@ -4,15 +4,17 @@ require_once "src/mf/router/Router.php";
 $loader = new ClassLoader('src');
 $loader->register();
 
-use tweeterapp\model\Follow as Follow;
-use tweeterapp\model\Like as Like;
-use tweeterapp\model\Tweet as Tweet;
-use tweeterapp\model\User as User;
+use \mygiftboxapp\model\Box as Box;
+use \mygiftboxapp\model\Prestation as Prestation;
+use \mygiftboxapp\model\Categorie as Categorie;
+use \mygiftboxapp\model\Composer as Composer;
+use \mygiftboxapp\model\User as User;
 
 use mf\router\Router as Router;
 
 /* pour le chargement automatique des classes dans vendor */
 require_once 'vendor/autoload.php';
+
 $config = parse_ini_file("conf/config.ini");
 
 /* une instance de connexion  */
