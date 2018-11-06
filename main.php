@@ -4,11 +4,11 @@ require_once "src/mf/router/Router.php";
 $loader = new ClassLoader('src');
 $loader->register();
 
-use \mygiftboxapp\model\Box as Box;
-use \mygiftboxapp\model\Prestation as Prestation;
-use \mygiftboxapp\model\Categorie as Categorie;
-use \mygiftboxapp\model\Composer as Composer;
-use \mygiftboxapp\model\User as User;
+use \giftbox\model\Box as Box;
+use \giftbox\model\Prestation as Prestation;
+use \giftbox\model\Categorie as Categorie;
+use \giftbox\model\Composer as Composer;
+use \giftbox\model\User as User;
 
 use mf\router\Router as Router;
 
@@ -24,42 +24,12 @@ $db->addConnection( $config ); /* configuration avec nos paramètres */
 $db->setAsGlobal();            /* visible de tout fichier */
 $db->bootEloquent();           /* établir la connexion */
 
-/*$u = new User();
-$l = new Like();*/
-
-/*var_dump($u);
-var_dump($l);*/
-
-
-//$ctrl = new tweeterapp\control\TweeterController();
-//echo $ctrl->viewHome();
-
-
-
-
-/* configuration d'Eloquent (cf partie 1 du projet ) */
-
 $router = new \mf\router\Router();
 
-$router->addRoute('home', '/home/', '\tweeterapp\control\TweeterController', 'viewHome');
+$router->addRoute('home', '/home/', '\giftbox\control\mygiftboxController', 'viewHome');
 
-$router->addRoute('tweet', '/tweet/', '\tweeterapp\control\TweeterController', 'viewTweet');
-// Recup le tweet 65 -> main.php/tweet/?id=65
-
-$router->addRoute('user', '/user/', '\tweeterapp\control\TweeterController', 'viewUserTweets');
-// Recup le profil du user 7 -> main.php/user/?id=7
+$router->addRoute('prestation', '/prestation/', '\giftbox\control\mygiftboxController', 'viewPrestation');
 
 $router->setDefaultRoute('/home/');
 
 echo ($router->run());
-
-/*$c = Tweet::where('id' ,'=', 49)->first();
-$tweet = $c->user()->first();
-echo ($tweet);*/
-
-$router->urlfor('/user/', ['id'=>'1', 'id2'=>'2']);
-/* Après exécution de cette instruction, l'attribut statique $routes et
-   $aliases de la classe Router auront les valeurs suivantes: */
-
-/*var_dump(Router::$routes);
-var_dump(Router::$aliases);*/

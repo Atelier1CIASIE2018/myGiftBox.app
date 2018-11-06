@@ -1,6 +1,6 @@
 <?php
 
-namespace tweeterapp\model;
+namespace giftbox\model;
 
 class Prestation extends \Illuminate\Database\Eloquent\Model{
 	protected $table = "Prestation";

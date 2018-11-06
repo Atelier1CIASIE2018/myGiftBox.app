@@ -1,6 +1,6 @@
 <?php
 
-namespace mygiftboxapp\control;
+namespace giftbox\control;
 
 /* Classe TweeterController :
  *  
@@ -16,7 +16,7 @@ namespace mygiftboxapp\control;
  *   
  */
 
-class TweeterController extends \mf\control\AbstractController {
+class GiftBoxController extends \mf\control\AbstractController {
 
 
     /* Constructeur :

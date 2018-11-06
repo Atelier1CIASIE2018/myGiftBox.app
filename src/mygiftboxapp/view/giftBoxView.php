@@ -1,8 +1,8 @@
 <?php
 
-namespace mygiftboxapp\view;
+namespace giftbox\view;
 
-class TweeterView extends \mf\view\AbstractView {
+class GiftBoxView extends \mf\view\AbstractView {
   
     /* Constructeur 
     *

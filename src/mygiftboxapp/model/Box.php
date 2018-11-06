@@ -1,6 +1,6 @@
 <?php
 
-namespace mygiftboxapp\model;
+namespace giftbox\model;
 
 class Box extends \Illuminate\Database\Eloquent\Model{
 	protected $table = "Box";
@@ -8,10 +8,10 @@ class Box extends \Illuminate\Database\Eloquent\Model{
 	public    $timestamps = false; 
 
 	public function user() {
-       		return $this->belongsTo('\mygiftboxapp\model\User', 'IdUser');
+       		return $this->belongsTo('\giftbox\model\User', 'IdUser');
 	}
 	
 	public function composer() {
-     		return $this->hasMany('\mygiftboxapp\model\Composer', 'IdBox');
+     		return $this->hasMany('\giftbox\model\Composer', 'IdBox');
 	}
 }

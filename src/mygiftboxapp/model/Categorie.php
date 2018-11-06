@@ -1,6 +1,6 @@
 <?php
 
-namespace mygiftboxapp\model;
+namespace giftbox\model;
 
 class Categorie extends \Illuminate\Database\Eloquent\Model{
 	protected $table = "Categorie";
@@ -8,6 +8,6 @@ class Categorie extends \Illuminate\Database\Eloquent\Model{
 	public    $timestamps = false; 
 
 	public function prestation() {
-     		return $this->hasMany('\mygiftboxapp\model\Prestation', 'IdCategorie');
+     		return $this->hasMany('\giftbox\model\Prestation', 'IdCategorie');
 	}
 }
