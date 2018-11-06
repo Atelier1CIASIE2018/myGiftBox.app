@@ -26,6 +26,6 @@ $db->bootEloquent();           /* établir la connexion */
 
 require_once "src/mf/router/routes.php";
 
-$router->setDefaultRoute('/home/');
-
 echo ($router->run());
+
+?>
