@@ -19,7 +19,7 @@ $router->addRoute('loginPost', '/loginPost/', '\giftbox\control\giftBoxControlle
 $router->addRoute('register', '/register/', '\giftbox\control\giftBoxController', 'viewRegister'); //GET
 //post pour s'inscrire
 $router->addRoute('registerPost', '/registerPost/', '\giftbox\control\giftBoxController', 'postRegister'); //POST
-//liste des boxes
+//liste des boxes du profil
 $router->addRoute('boxes', '/boxes/', '\giftbox\control\giftBoxController', 'viewBoxes'); //GET
 //détails d'une box : /box/?id=x
 $router->addRoute('box', '/box/', '\giftbox\control\giftBoxController', 'viewBox'); //GET
@@ -35,10 +35,15 @@ $router->addRoute('removeBox', '/box/remove/', '\giftbox\control\giftBoxControll
 $router->addRoute('updateBox', '/box/update/', '\giftbox\control\giftBoxController', 'updateBox'); //UPDATE
 //modifie l'état d'une box à 2 (validé) : /box/confirm/?id=x
 $router->addRoute('confirmBox', '/box/confirm/', '\giftbox\control\giftBoxController', 'confirmBox'); //UPDATE
+//page de récapitulatif avant le payement : box/summary/?id=x
+$router->addRoute('summaryBox', '/box/summary/', '\giftbox\control\giftBoxController', 'summaryBox'); //GET
 //modifie l'état d'une box à 3 (payé) : /box/pay/?id=x
-$router->addRoute('payBox', '/box/pay/', '\giftbox\control\giftBoxController', 'pay'); //UPDATE
-//page du profil 
-$router->addRoute('profile', '/profile/', '\giftbox\control\giftBoxController', 'viewProfile'); //
+$router->addRoute('payBox', '/box/pay/', '\giftbox\control\giftBoxController', 'payBox'); //UPDATE
+//génère l'url de la box et le stocke dans la BDD : /box/url/?id=x
+$router->addRoute('urlBox', '/box/url/', '\giftbox\control\giftBoxController', 'urlBox'); //UPDATE
+//page de la box pour le destinataire : /box/
+$router->addRoute('receiverUrl', '/box/receiver/', '\giftbox\control\giftBoxController', 'receiverUrl'); //UPDATE
+$router->addRoute('profile', '/profile/', '\giftbox\control\giftBoxController', 'viewProfile'); //GET
 //modifie les données du profil
 $router->addRoute('profileUpdate', '/profile/update', '\giftbox\control\giftBoxController', 'updateProfile'); //UPDATE
 ?>
