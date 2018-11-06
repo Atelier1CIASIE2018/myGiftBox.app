@@ -1,8 +1,12 @@
 <?php
+
 $router = new \mf\router\Router();
 
 //page d'accueil
 $router->addRoute('home', '/home/', '\giftbox\control\giftBoxController', 'viewHome'); //GET
+
+//route par défaut
+$router->setDefaultRoute('/home/');
 
 //liste des prestations
 $router->addRoute('prestations', '/prestations/', '\giftbox\control\giftBoxController', 'viewPrestations'); //GET
