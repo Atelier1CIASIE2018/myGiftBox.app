@@ -64,7 +64,7 @@ $router->addRoute('urlBox', '/box/url/', '\giftbox\control\giftBoxController', '
 //page de la box pour le destinataire : /box/receiver/?id=x
 $router->addRoute('receiverUrl', '/box/receiver/', '\giftbox\control\giftBoxController', 'receiverUrl'); //UPDATE
 
-//ajoute un message de retour de la part du destinataire
+//ajoute un message de retour de la part du destinataire : /box/receiver/message/?id=x
 $router->addRoute('receiverMessage', '/box/receiver/message/', '\giftbox\control\giftBoxController', 'receiverMessage'); //UPDATE
 
 //page du profil
@@ -74,23 +74,23 @@ $router->addRoute('profile', '/profile/', '\giftbox\control\giftBoxController', 
 $router->addRoute('viewProfile', '/profile/view/', '\giftbox\control\giftBoxController', 'viewProfile'); //GET
 
 //modifie les données du profil
-$router->addRoute('profileUpdate', '/profile/update', '\giftbox\control\giftBoxController', 'updateProfile'); //UPDATE
+$router->addRoute('profileUpdate', '/profile/update/', '\giftbox\control\giftBoxController', 'updateProfile'); //UPDATE
 
 //page d'administration
 $router->addRoute('admin', '/admin/', '\giftbox\control\giftBoxController', 'viewAdmin'); //GET
 
 //page d'ajout d'une prestation
-$router->addRoute('newPrestation', '/admin/new/', '\giftbox\control\giftBoxController', 'newPrestation'); //GET
+$router->addRoute('newPrestation', '/admin/prestation/new/', '\giftbox\control\giftBoxController', 'newPrestation'); //GET
 
 //ajoute une prestation à la BDD
-$router->addRoute('postPrestation', '/admin/post/', '\giftbox\control\giftBoxController', 'postPrestation'); //UPDATE
+$router->addRoute('postPrestation', '/admin/prestation/post/', '\giftbox\control\giftBoxController', 'postPrestation'); //UPDATE
 
-//page admin d'une préstation : /admin/prestation/?id=x
+//page admin d'une prestation : /admin/prestation/?id=x
 $router->addRoute('prestationAdmin', '/admin/prestation/', '\giftbox\control\giftBoxController', 'viewAdminPrestation'); //GET
 
 //modifie les données d'une prestation
 $router->addRoute('updatePrestation', '/admin/prestation/update/', '\giftbox\control\giftBoxController', 'updatePrestation'); //UPDATE
 
-//retire une prestation du catalogue : /admin/prestation/remove/?id=x
+//retire une prestation du catalogue : /admin/prestation/remove/
 $router->addRoute('removePrestation', '/admin/prestation/remove/', '\giftbox\control\giftBoxController', ''); //DELETE
 ?>
