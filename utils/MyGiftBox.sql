@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
@@ -66,7 +66,7 @@ INSERT INTO `Categorie` (`Id`, `Nom`) VALUES
 
 CREATE TABLE `Composer` (
   `IdBox` int(16) NOT NULL,
-  `IdCatalogue` int(16) NOT NULL,
+  `IdPrestation` int(16) NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
