@@ -32,7 +32,7 @@ class giftBoxController extends \mf\control\AbstractController {
         $vue = new \giftbox\view\giftBoxView($categorie);
         $vue->render('Categories');
     }
-    public function Categorie(){
+    public function viewCategorie(){
         $id = $_GET['Id'];
         $prestations = \giftbox\model\Prestation::select('*')->where('IdCategorie', "=", $id)->get();
         $vue = new \giftbox\view\giftBoxView($prestations);
