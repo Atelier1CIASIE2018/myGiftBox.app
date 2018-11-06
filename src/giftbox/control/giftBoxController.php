@@ -32,13 +32,19 @@ class giftBoxController extends \mf\control\AbstractController {
         $vue = new \giftbox\view\giftBoxView($categorie);
         $vue->render('Categories');
     }
+    public function Categorie(){
+        $id = $_GET['Id'];
+        $prestations = \giftbox\model\Prestation::select('*')->where('IdCategorie', "=", $id)->get();
+        $vue = new \giftbox\view\giftBoxView($prestations);
+        $vue->render('Categorie');
+    }
 
     public function viewLogin(){
         $vue->render('Login');
     }
 
     public function postLogin(){
-        
+        $data = json_decode(file_get_contents('php://input'));
     }
 
     public function viewRegister(){
@@ -46,11 +52,14 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function postRegister(){
-        
+        $data = json_decode(file_get_contents('php://input'));
     }
 
     public function viewBoxes(){
-        
+        $id = $_GET['Id'];
+        $prestations = \giftbox\model\Prestation::select('*')->where('IdCategorie', "=", $id)->get();
+        $vue = new \giftbox\view\giftBoxView($prestations);
+        $vue->render('Categorie');
     }
 
     public function viewBox(){
