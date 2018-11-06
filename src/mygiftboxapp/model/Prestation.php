@@ -2,10 +2,8 @@
 
 namespace tweeterapp\model;
 
-class Prestation extends \Illuminate\Database\Eloquent\Model{
-	protected $table = "Prestation";
+class Catalogue extends \Illuminate\Database\Eloquent\Model{
+	protected $table = "Catalogue";
 	protected $primaryKey = "Id";
 	public    $timestamps = false; 
-
-   }
 }
