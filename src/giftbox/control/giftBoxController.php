@@ -40,6 +40,7 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function viewLogin(){
+        $vue = new \giftbox\view\giftBoxView();
         $vue->render('Login');
     }
 
@@ -48,6 +49,7 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function viewRegister(){
+        $vue = new \giftbox\view\giftBoxView();
         $vue->render('Register');
     }
 
@@ -57,9 +59,9 @@ class giftBoxController extends \mf\control\AbstractController {
 
     public function viewBoxes(){
         $id = $_GET['Id'];
-        $prestations = \giftbox\model\Prestation::select('*')->where('IdCategorie', "=", $id)->get();
+        $prestations = \giftbox\model\Box::select('*')->where('IdCategorie', "=", $id)->get();
         $vue = new \giftbox\view\giftBoxView($prestations);
-        $vue->render('Categorie');
+        $vue->render('Boxes');
     }
 
     public function viewBox(){
