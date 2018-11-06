@@ -59,13 +59,15 @@ class giftBoxController extends \mf\control\AbstractController {
 
     public function viewBoxes(){
         $id = $_GET['Id'];
-        $prestations = \giftbox\model\Box::select('*')->where('IdCategorie', "=", $id)->get();
-        $vue = new \giftbox\view\giftBoxView($prestations);
+        $boxes = \giftbox\model\Box::select('*')->where('IdUser', "=", $id)->get();
+        $vue = new \giftbox\view\giftBoxView($boxes);
         $vue->render('Boxes');
     }
 
     public function viewBox(){
-        
+        $id = $_GET["Id"];
+        $box = \giftbox\model\Box::->where('Id', "=", $id)->first();
+        $composer = \giftbox\model\Composer::where("");
     }
 
     public function newBox(){
