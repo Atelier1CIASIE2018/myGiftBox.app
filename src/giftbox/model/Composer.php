@@ -7,5 +7,4 @@ class Composer extends \Illuminate\Database\Eloquent\Model{
 	protected $primaryKey = "Id";
 	public    $timestamps = false; 
 
-   }
 }

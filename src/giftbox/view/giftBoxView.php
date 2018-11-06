@@ -107,6 +107,50 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <input type='submit' name='valider' value='Valider'/>
                 </form>";
     }
+
+    private function renderBoxes(){
+        $array = array("Validé","Payé","Transmis","Ouvert");
+        $res = "<div>";
+        foreach ($this->data as $value) {
+            if($value['Etat'] == 1){
+                $res = $res.$value['Nom']." : <a href='#'><input type='button' value='modifier'/></a> <a href='#'><input type='button' value='payer'/></a>";
+            }
+            else if($value['Etat'] == 2){
+                $res = $res. $value['Nom'] ." :   ".$array[$value["Etat"] - 2]."  <a href='#'><input type='button' value='Payer'/></a>";
+            }
+            else{
+                $res = $res . $value['Nom'] ." :   ".$array[$value["Etat"] - 2]."  <a href='#'><input type='button' value='Voir URL'/></a>";
+            }    
+            $res .= "<br/><br/>";            
+        }
+        $res .= "</div>";
+        return $res;
+    }
+
+    private function renderBox(){
+        $res = "<div>";
+        foreach ($this->data['prestations'] as $value1) {
+            //echo $value1;
+            $c = \giftbox\model\Prestation::where('Id' ,'=', $value1['Id'])->first();
+
+            $router = new \mf\router\Router();
+            $urlCateg = $router->urlfor('/prestation/', ['Id'=>$value1['Id']]);
+
+            $categorie = $c->Categorie()->first();
+            $categ = $categorie['Nom'];
+
+            //var_dump($value1);
+            $res = $res . "<a href='".$urlCateg."'><div>
+                <p>".$value1['Nom']."</p>
+                <p>".$value1['Prix']." €</p>
+                <p>".$categ."</p>
+                <img src ='/giftBox/img/".$value1['Img']."' width='200'>
+                <p>".$value1['Description']."</p>
+            </div></a>";
+        }
+        $res = $res . "</div>";
+        return $res;
+    }
     
     protected function renderBody($selector=null){
 
@@ -118,9 +162,9 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'Categorie')$string = $string . self::renderCategorie();
         if ($selector == 'Login')$string = $string . self::renderLogin();
         if ($selector == 'Register')$string = $string . self::renderRegister();
+        if ($selector == 'Boxes')$string = $string . self::renderBoxes();
+        if ($selector == 'Box')$string = $string . self::renderBox();
         /*if ($selector == '')$string = $string . self::();
-        if ($selector == '')$string = $string . self::();
-        if ($selector == '')$string = $string . self::();
         if ($selector == '')$string = $string . self::();
         if ($selector == '')$string = $string . self::();*/
         $string = $string ."</article></section><footer>".self::renderFooter()."</footer>";
