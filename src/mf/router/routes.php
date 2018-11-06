@@ -58,7 +58,7 @@ $router->addRoute('summaryBox', '/box/summary/', '\giftbox\control\giftBoxContro
 //modifie l'état d'une box à 3 (payé) : /box/pay/?id=x
 $router->addRoute('payBox', '/box/pay/', '\giftbox\control\giftBoxController', 'payBox'); //UPDATE
 
-//génère l'url de la box et le stocke dans la BDD : /box/url/?id=x
+//génère l'url de la box et le stocke dans la BDD et passe l'état à 4 (remis) : /box/url/?id=x
 $router->addRoute('urlBox', '/box/url/', '\giftbox\control\giftBoxController', 'urlBox'); //UPDATE
 
 //page de la box pour le destinataire : /box/receiver/?id=x
@@ -66,6 +66,9 @@ $router->addRoute('receiverUrl', '/box/receiver/', '\giftbox\control\giftBoxCont
 
 //ajoute un message de retour de la part du destinataire : /box/receiver/message/?id=x
 $router->addRoute('receiverMessage', '/box/receiver/message/', '\giftbox\control\giftBoxController', 'receiverMessage'); //UPDATE
+
+//modifie l'état d'une box à 5 (ouvert) : /box/receiver/open/?id=x
+$router->addRoute('urlBox', '/box/receiver/open/', '\giftbox\control\giftBoxController', 'urlBox'); //UPDATE
 
 //page du profil
 $router->addRoute('profile', '/profile/', '\giftbox\control\giftBoxController', 'profile'); //GET
