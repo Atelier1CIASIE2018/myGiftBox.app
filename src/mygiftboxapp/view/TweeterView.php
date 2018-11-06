@@ -1,6 +1,6 @@
 <?php
 
-namespace tweeterapp\view;
+namespace mygiftboxapp\view;
 
 class TweeterView extends \mf\view\AbstractView {
   

@@ -1,8 +1,0 @@
-public function user() {
-       return $this->belongsTo('\tweeterapp\model\User', 'author');
-
-       /* 'Ville'    : le nom de la classe du model lié */
-       /* 'ville_id' : la clé étrangère dans la table courante */
-}
-public function tweets() {
-       return $this->hasMany('\tweeterapp\model\Tweet', 'author');}

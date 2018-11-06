@@ -1,6 +1,6 @@
 <?php
 
-namespace tweeterapp\control;
+namespace mygiftboxapp\control;
 
 /* Classe TweeterController :
  *  
