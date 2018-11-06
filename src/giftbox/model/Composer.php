@@ -2,8 +2,8 @@
 
 namespace giftbox\model;
 
-class Prestation extends \Illuminate\Database\Eloquent\Model{
-	protected $table = "Prestation";
+class Composer extends \Illuminate\Database\Eloquent\Model{
+	protected $table = "Composer";
 	protected $primaryKey = "Id";
 	public    $timestamps = false; 
 
