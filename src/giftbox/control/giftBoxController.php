@@ -11,7 +11,7 @@ class giftBoxController extends \mf\control\AbstractController {
     public function viewHome(){
         $prestations = \giftbox\model\Prestation::take(3)->orderBy('Id', 'desc')->get();
         $vue = new \giftbox\view\giftBoxView($prestations);
-        $vue->render('home');
+        $vue->render('Home');
     }
     
     public function viewPrestation(){
@@ -28,11 +28,13 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function viewCategories(){
-        
+        $categorie = \giftbox\model\Categorie::all();
+        $vue = new \giftbox\view\giftBoxView($categorie);
+        $vue->render('Categories');
     }
 
     public function viewLogin(){
-        
+        $vue->render('Login');
     }
 
     public function postLogin(){
@@ -40,7 +42,7 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function viewRegister(){
-        
+        $vue->render('Register');
     }
 
     public function postRegister(){
