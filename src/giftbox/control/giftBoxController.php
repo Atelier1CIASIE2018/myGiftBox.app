@@ -66,8 +66,9 @@ class giftBoxController extends \mf\control\AbstractController {
 
     public function viewBox(){
         $id = $_GET["Id"];
-        $box = \giftbox\model\Box::->where('Id', "=", $id)->first();
-        $composer = \giftbox\model\Composer::where("");
+        $box = \giftbox\model\Box::where('Id', "=", $id)->first();
+        var_dump($box);
+        //$composer = \giftbox\model\Composer::where("IdBox", "=", );
     }
 
     public function newBox(){
