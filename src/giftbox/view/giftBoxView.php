@@ -17,71 +17,91 @@ class GiftBoxView extends \mf\view\AbstractView {
     
     private function renderHome(){
         $res = "<div>";
-        foreach ($this->data as $value1) {
-            $c = \giftbox\model\Prestation::where('Id' ,'=', $value1['Id'])->first();
+        foreach ($this->data["prestations"] as $value) {
+            $c = \giftbox\model\Prestation::where('Id' ,'=', $value['Id'])->first();
 
             $router = new \mf\router\Router();
-            $urlCateg = $router->urlfor('/prestation/', ['Id'=>$value1['Id']]);
-
-            $categorie = $c->Categorie()->first();
-            $categ = $categorie['Nom'];
+            $urlPrestation = $router->urlfor('/prestation/', ['Id'=>$value['Id']]);
+            $urlCategorie = $router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
 
             //var_dump($value1);
-            $res = $res . "<a href='".$urlCateg."'><div>
-                <p>".$value1['Nom']."</p>
-                <p>".$value1['Prix']." €</p>
-                <p>".$categ."</p>
-                <img src ='/giftBox/img/".$value1['Img']."' width='200'>
-                <p>".$value1['Description']."</p>
-            </div></a>";
+            $res = $res . "<div>
+                <a href='".$urlPrestation."'>
+                    <p>".$value['Nom']."</p>
+                    <p>".$value['Prix']." €</p>
+                </a>
+                <p><a href='".$urlCategorie."'>".$this->data["categories"][$value["IdCategorie"] - 1]."</a></p>
+                <a href='".$urlPrestation."'>
+                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
+                    <p>".$value['Description']."</p>
+                </a>
+            </div><hr>";
         }
         $res = $res . "</div>";
         return $res;
     }
 
     private function renderPrestation(){
-        $res = $this->data['Nom'];
+        $res = "<div>
+            <p>".$this->data['Nom']."</p>
+            <p>".$this->data['Prix']." €</p>
+            <img src ='/giftBox/img/".$this->data['Img']."' width='200'>
+            <p>".$this->data['Description']."</p>
+        </div>";
         return $res;
     }
 
     private function renderPrestations(){
+        $router = new \mf\router\Router();
         $res = "<div>";
-        foreach ($this->data as $value1) {
-            $res = $res . "<div>
-                <p>".$value1['Nom']."</p>
-            </div>";
+        foreach ($this->data["prestations"] as $value) {
+            $urlPrestation = $router->urlfor('/prestation/', ['Id'=>$value['Id']]);
+            $urlCategorie = $router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
+            $res .="<div>
+                <a href='".$urlPrestation."'>
+                    <p>".$value['Nom']."</p>
+                    <p>".$value['Prix']."</p>
+                </a>
+                <p><a href='".$urlCategorie."'>".$this->data["categories"][$value["IdCategorie"] - 1]."</p>
+                <a href='".$urlPrestation."'>
+                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
+                    <p>".$value['Description']."</p>
+                </a>
+            </div><hr>";
         }
-        $res = $res . "</div>";
+        $res .= "</div>";
         return $res;
     }
 
     private function renderCategories(){
+        $router = new \mf\router\Router();
         $res = "<div>";
         //var_dump($this->data);
         foreach ($this->data as $value) {
-            $res = $res."<div> <p>".$value['Nom']."</p> </div>";
+            $urlCategorie = $router->urlfor('/categorie/', ['Id'=>$value['Id']]);
+            $res .= "<div>
+                <a href='".$urlCategorie."'<p>".$value['Nom']."</p></a>
+            </div>";
         }
         $res = $res."</div>";
         return $res;
     }
 
     private function renderCategorie(){
+        $router = new \mf\router\Router();
         $res = "<div>";
         //var_dump($this->data);
-        foreach ($this->data as $value1) {
-
-            $c = \giftbox\model\Prestation::where('Id' ,'=', $value1['Id'])->first();
-
-            $router = new \mf\router\Router();
-            $urlCateg = $router->urlfor('/prestation/', ['Id'=>$value1['Id']]);
-
+        foreach ($this->data as $value1) {            
+            $urlPrestation = $router->urlfor('/prestation/', ['Id'=>$value1['Id']]);
             //var_dump($value1);
-            $res = $res . "<a href='".$urlCateg."'><div>
-                <p>".$value1['Nom']."</p>
-                <p>".$value1['Prix']." €</p>
-                <img src ='/giftBox/img/".$value1['Img']."' width='200'>
-                <p>".$value1['Description']."</p>
-            </div></a>";
+            $res = $res . "<div>
+                <a href='".$urlPrestation."'>
+                    <p>".$value1['Nom']."</p>
+                    <p>".$value1['Prix']." €</p>
+                    <img src ='/giftBox/img/".$value1['Img']."' width='200'>
+                    <p>".$value1['Description']."</p>
+                </a>
+            </div><hr>";
         }
         $res = $res."</div>";
         return $res;

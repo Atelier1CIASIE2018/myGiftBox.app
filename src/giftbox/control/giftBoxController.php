@@ -10,20 +10,30 @@ class giftBoxController extends \mf\control\AbstractController {
     
     public function viewHome(){
         $prestations = \giftbox\model\Prestation::take(3)->orderBy('Id', 'desc')->get();
-        $vue = new \giftbox\view\giftBoxView($prestations);
+        $categories = \giftbox\model\Categorie::all();
+        $nomCategories = array();
+        foreach ($categories as $categorie){
+            array_push($nomCategories, $categorie->Nom);
+        }
+        $vue = new \giftbox\view\giftBoxView(array("prestations" => $prestations, "categories" => $nomCategories));
         $vue->render('Home');
     }
     
     public function viewPrestation(){
         $id = $_GET['Id'];
-        $prestation = \giftbox\model\Prestation::select('*')->where('id', "=", $id)->first();
+        $prestation = \giftbox\model\Prestation::where('id', "=", $id)->first();
         $vue = new \giftbox\view\giftBoxView($prestation);
         $vue->render('Prestation');
     }
 
     public function viewPrestations(){
-        $categorie = \giftbox\model\Prestation::all();
-        $vue = new \giftbox\view\giftBoxView($categorie);
+        $prestations = \giftbox\model\Prestation::all();
+        $categories = \giftbox\model\Categorie::all();
+        $nomCategories = array();
+        foreach ($categories as $categorie){
+            array_push($nomCategories, $categorie->Nom);
+        }
+        $vue = new \giftbox\view\giftBoxView(array("prestations" => $prestations, "categories" => $nomCategories));
         $vue->render('Prestations');
     }
 
@@ -34,7 +44,7 @@ class giftBoxController extends \mf\control\AbstractController {
     }
     public function viewCategorie(){
         $id = $_GET['Id'];
-        $prestations = \giftbox\model\Prestation::select('*')->where('IdCategorie', "=", $id)->get();
+        $prestations = \giftbox\model\Prestation::where('IdCategorie', "=", $id)->get();
         $vue = new \giftbox\view\giftBoxView($prestations);
         $vue->render('Categorie');
     }
@@ -120,17 +130,4 @@ class giftBoxController extends \mf\control\AbstractController {
     public function updateProfile(){
         
     }
-    /*public function viewTweet(){
-        $id = $_GET['id'];
-        $tweet = \tweeterapp\model\Tweet::select('id', 'text', 'author', 'created_at', 'score')->where('id', "=", $id)->first();
-        $vue = new \tweeterapp\view\TweeterView($tweet);
-        $vue->render('tweet');
-    }*/
-    
-    /*public function viewUserTweets(){
-        $id = $_GET['id'];
-        $tweets = \tweeterapp\model\Tweet::select('id', 'text', 'author', 'created_at')->where('author', "=", $id)->get();
-        $vue = new \tweeterapp\view\TweeterView($tweets);
-        $vue->render('user');
-    }*/
 }
