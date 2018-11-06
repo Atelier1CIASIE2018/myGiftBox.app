@@ -31,7 +31,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <p>".$value1['Nom']."</p>
                 <p>".$value1['Prix']." €</p>
                 <p>".$categ."</p>
-                <img src ='img/".$value1['Img']."' width='200'>
+                <img src ='/giftBox/img/".$value1['Img']."' width='200'>
                 <p>".$value1['Description']."</p>
             </div></a>";
         }
