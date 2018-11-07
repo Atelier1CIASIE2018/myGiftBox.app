@@ -77,7 +77,7 @@ $router->addRoute('urlBox', '/box/receiver/open/', '\giftbox\control\giftBoxCont
 $router->addRoute('profile', '/profile/', '\giftbox\control\giftBoxController', 'profile'); //GET
 
 //page de modification du profil
-$router->addRoute('viewProfile', '/profile/view/', '\giftbox\control\giftBoxController', 'viewProfile'); //GET
+$router->addRoute('viewProfile', '/profile/view/', '\giftbox\control\giftBoxController', 'profile'); //GET
 
 //modifie les données du profil
 $router->addRoute('profileUpdate', '/profile/update/', '\giftbox\control\giftBoxController', 'updateProfile'); //UPDATE

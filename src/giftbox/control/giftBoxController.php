@@ -118,10 +118,6 @@ class giftBoxController extends \mf\control\AbstractController {
         
     }
 
-    public function summaryBox(){
-        
-    }
-
     public function urlBox(){
         
     }
@@ -134,8 +130,15 @@ class giftBoxController extends \mf\control\AbstractController {
         
     }
 
-    public function viewProfile(){
-        
+    public function profile(){
+        if($_SERVER["PATH_INFO"] == "/profile/"){
+            $vue = new \giftbox\view\giftBoxView("");
+            $vue->render('Profil');
+        }
+        if($_SERVER["PATH_INFO"] == "/profile/view/"){
+            $vue = new \giftbox\view\giftBoxView("");
+            $vue->render('ProfilView');
+        }
     }
 
     public function updateProfile(){
