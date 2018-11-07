@@ -78,33 +78,33 @@ body > footer {
 /* Fin Menu */
 /* Debut Home */
 @media screen and (max-width: 720px) {
-  article > div > div > a > img {
+  #home > div > div > a > img {
     width: 31.2%;
     margin-left: 1.6%; }
 
-  article > div > div > a > p {
+  #home > div > div > a > p {
     width: 64%;
     margin-left: 1.6%; }
 
-  article > div > div > a:nth-child(3) > p {
+  #home > div > div > a:nth-child(3) > p {
     width: 64%;
     margin-left: 1.6%; }
 
-  article > div > div > a, article > div div {
+  #home > div > div > a, #home > div div {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; }
 
-  article > div div > a:nth-child(1) {
+  #home > div div > a:nth-child(1) {
     width: 64%;
     margin-left: 1.6%;
     text-align: center; }
 
-  article > div > div > a:nth-child(1) > p {
+  #home > div > div > a:nth-child(1) > p {
     width: 47.6%;
     margin-left: 1.6%; }
 
-  article > div > div > p {
+  #home > div > div > p {
     width: 31.2%;
     margin-left: 1.6%;
     text-align: center; }
@@ -114,9 +114,94 @@ body > footer {
     margin-left: 26.2%;
     height: 50px; }
 
-  article > img:first-child {
+  #home > img:first-child {
     display: none; } }
 @media screen and (min-width: 720px) {
+  #home > div > div > a > p {
+    width: 55.8%;
+    margin-left: 1.6%; }
+
+  #home > div > div > a > img {
+    width: 23%;
+    margin-left: 9.8%; }
+
+  #home > img:first-child {
+    width: 100%;
+    z-index: 0; }
+
+  #home > div > div > a:nth-child(3) > p {
+    width: 55.8%;
+    margin-left: 1.6%; }
+
+  #home > div > div > a, #home > div div, #home div > a:last-child {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+
+  #home div div a {
+    width: 100%; }
+
+  #home > div div > a:nth-child(1) {
+    width: 55.8%;
+    margin-left: 9.8%;
+    text-align: center; }
+
+  #home > div > div > a:nth-child(1) > p {
+    width: 47.6%;
+    margin-left: 1.6%; }
+
+  #home > div > div > p {
+    width: 23%;
+    margin-left: 1.6%;
+    text-align: center; }
+
+  #home div > a:last-child > button {
+    width: 14.8%;
+    margin-left: 42.6%;
+    height: 50px; } }
+/* Fin home */
+/* Debut Inscription/connection */
+@media screen and (min-width: 720px) {
+  article > form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 31.2%;
+    margin-left: 34.4%; }
+
+  article > form > input, article > form > p {
+    width: 100%;
+    text-align: center; }
+
+  article input:last-child {
+    width: auto;
+    margin: auto;
+    margin-top: 20px; } }
+@media screen and (max-width: 720px) {
+  article > form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 77.12%;
+    margin-left: 11.44%; }
+
+  article > form > input, article > form > p {
+    width: 100%;
+    text-align: center; }
+
+  article input:last-child {
+    margin-top: 20px; } }
+/* Fin Inscription/Connection */
+/* Debut Categories */
+@media screen and (min-width: 720px) {
+  /*article div div{
+  	display: flex;
+  	flex-direction: row;
+  	flex-wrap: wrap;
+  }
+  article > div > div > a > img{
+  	@include grille(12, 1.6%, 1, 4);
+  }*/
   article > div > div > a > p {
     width: 55.8%;
     margin-left: 1.6%; }
@@ -159,39 +244,5 @@ body > footer {
     width: 14.8%;
     margin-left: 42.6%;
     height: 50px; } }
-/* Fin home */
-/* Debut Inscription/connection */
-@media screen and (min-width: 720px) {
-  article > form {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 31.2%;
-    margin-left: 34.4%; }
-
-  article > form > input, article > form > p {
-    width: 100%;
-    text-align: center; }
-
-  article input:last-child {
-    width: auto;
-    margin: auto;
-    margin-top: 20px; } }
-@media screen and (max-width: 720px) {
-  article > form {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 77.12%;
-    margin-left: 11.44%; }
-
-  article > form > input, article > form > p {
-    width: 100%;
-    text-align: center; }
-
-  article input:last-child {
-    margin-top: 20px; } }
-/* Fin Inscription/Connection */
-/* Debut Prestations */
 
 /*# sourceMappingURL=style.css.map */

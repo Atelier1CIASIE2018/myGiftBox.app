@@ -78,28 +78,28 @@ header button{
 /* Debut Home */
 
 @media screen and (max-width:720px){
-	article > div > div > a > img{
+	#home > div > div > a > img{
 		@include grille(12, 1.6%, 0, 4);
 	}
-	article > div > div > a > p{
+	#home > div > div > a > p{
 		@include grille(12, 1.6%, 0, 8);
 	}
-	article > div > div > a:nth-child(3) > p{
+	#home > div > div > a:nth-child(3) > p{
 		@include grille(12, 1.6%, 0, 8);
 	}
-	article > div > div > a, article > div div{
+	#home > div > div > a, #home > div div{
 		display: flex;
 		flex-direction:row;
 		flex-wrap:wrap;
 	}
-	article > div div > a:nth-child(1){
+	#home > div div > a:nth-child(1){
 		@include grille(12, 1.6%, 0, 8);
 		text-align:center;
 	}
-	article > div > div > a:nth-child(1) > p{
+	#home > div > div > a:nth-child(1) > p{
 		@include grille(2, 1.6%, 0, 1);
 	}
-	article > div > div > p{
+	#home > div > div > p{
 		@include grille(3, 1.6%, 0, 1);
 		text-align:center;
 	}
@@ -107,45 +107,45 @@ header button{
 		@include grille(12, 1.6%, 3, 6);
 		height:50px;
 	}
-	article > img:first-child{
+	#home > img:first-child{
 		display:none;
 	}
 }
 @media screen and (min-width:720px){
 	
-	article > div > div > a > p{
+	#home > div > div > a > p{
 		@include grille(12, 1.6%, 0, 7);
 	}
-	article > div > div > a > img{
+	#home > div > div > a > img{
 		@include grille(12, 1.6%, 1, 3);
 	}
-	article > img:first-child{
+	#home > img:first-child{
 		width:100%;
 		z-index:0;
 	}
-	article > div > div > a:nth-child(3) > p{
+	#home > div > div > a:nth-child(3) > p{
 		@include grille(12, 1.6%, 0, 7);
 	}
-	article > div > div > a, article > div div, article div > a:last-child{
+	#home > div > div > a, #home > div div, #home div > a:last-child{
 		display: flex;
 		flex-direction:row;
 		flex-wrap:wrap;
 	}
-	article div div a {
+	#home div div a {
 		width:100%;
 	}
-	article > div div > a:nth-child(1){
+	#home > div div > a:nth-child(1){
 		@include grille(12, 1.6%, 1, 7);
 		text-align:center;
 	}
-	article > div > div > a:nth-child(1) > p{
+	#home > div > div > a:nth-child(1) > p{
 		@include grille(2, 1.6%, 0, 1);
 	}
-	article > div > div > p{
+	#home > div > div > p{
 		@include grille(12, 1.6%, 0, 3);
 		text-align:center;
 	}
-	article div > a:last-child > button{
+	#home div > a:last-child > button{
 		@include grille(12, 1.6%, 5, 2);
 		height:50px;
 	}
@@ -189,4 +189,52 @@ header button{
 }
 
 /* Fin Inscription/Connection */
-/* Debut Prestations */
+/* Debut Categories */
+
+@media screen and (min-width:720px){
+	/*article div div{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	article > div > div > a > img{
+		@include grille(12, 1.6%, 1, 4);
+	}*/
+	
+	article > div > div > a > p{
+		@include grille(12, 1.6%, 0, 7);
+	}
+	article > div > div > a > img{
+		@include grille(12, 1.6%, 1, 3);
+	}
+	article > img:first-child{
+		width:100%;
+		z-index:0;
+	}
+	article > div > div > a:nth-child(3) > p{
+		@include grille(12, 1.6%, 0, 7);
+	}
+	article > div > div > a, article > div div, article div > a:last-child{
+		display: flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+	}
+	article div div a {
+		width:100%;
+	}
+	article > div div > a:nth-child(1){
+		@include grille(12, 1.6%, 1, 7);
+		text-align:center;
+	}
+	article > div > div > a:nth-child(1) > p{
+		@include grille(2, 1.6%, 0, 1);
+	}
+	article > div > div > p{
+		@include grille(12, 1.6%, 0, 3);
+		text-align:center;
+	}
+	article div > a:last-child > button{
+		@include grille(12, 1.6%, 5, 2);
+		height:50px;
+	}
+}
