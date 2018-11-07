@@ -55,7 +55,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderPrestations(){
-        $res = "<div>";
+        $res = "<div id='prestations'><div>";
         foreach ($this->data["prestations"] as $value) {
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
@@ -72,7 +72,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <a href='/giftBox/main.php/box/add/?Id=".$value['Id']."'><button>+</button></a>
             </div><hr>";
         }
-        $res .= "</div>";
+        $res .= "</div></div>";
         return $res;
     }
 
