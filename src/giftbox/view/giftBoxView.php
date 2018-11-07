@@ -41,7 +41,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             </div><hr>";
         }
         $res = $res . " <a href='/giftBox/main.php/prestations/'><button>Voir plus...</button></a></div></div>";
-        return $res;
+        return $res;   // FINI
     }
 
     private function renderPrestation(){
@@ -51,7 +51,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             <img src ='/giftBox/img/".$this->data['Img']."' width='200'>
             <p>".$this->data['Description']."</p>
         </div>";
-        return $res;
+        return $res;  // FINI
     }
 
     private function renderPrestations(){
@@ -73,7 +73,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             </div><hr>";
         }
         $res .= "</div></div>";
-        return $res;
+        return $res;  // FINI
     }
 
     private function renderCategories(){
@@ -85,7 +85,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             </div>";
         }
         $res = $res."</div>";
-        return $res;
+        return $res;    // FINI
     }
 
     private function renderCategorie(){
@@ -102,7 +102,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             </div><hr>";
         }
         $res = $res."</div>";
-        return $res;
+        return $res;    // FINI
     }
 
     private function renderLogin(){
@@ -111,7 +111,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <p>Login : </p><input tpye='text' name='login'/>
                 <p>Mot de passe : </p><input type='text' name='mdp'/>
                 <input type='submit' name='valider' value='Valider'/>
-                </form>";
+                </form>";   // AUTHENTIFICATION 
     }
 
     private function renderRegister(){
@@ -123,7 +123,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <p>Mot de passe : </p><input type='text' name='mdp'/>
                 <p>E-mail : </p><input type='text' name='mail'/>
                 <input type='submit' name='valider' value='Valider'/>
-                </form>";
+                </form>"; // FINI
     }
 
     private function renderBoxes(){
@@ -160,7 +160,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             $res .= "<br/><br/>";            
         }
         $res .= "</div>";
-        return $res;
+        return $res;    // FINI
     }
 
     private function renderBox(){
@@ -206,24 +206,25 @@ class GiftBoxView extends \mf\view\AbstractView {
             }
         }
         $res .= "</div><br>";
-        return $res;
+        return $res;    
     }
 
-    private function renderNewBox(){
-        $res = "<form name='creer' method='POST' action=''>
-                <p> Titre : <p>
-                <textarea name='Texte' rows='10' cols='50'>";
-
-        if($_SESSION['new']['box']['Message'] != ""){
-            $res .= $_SESSION['new']['box']['Message'] . "</textarea>";
+    private function renderBoxNotSave(){
+        $res = "<form name='creer' method='POST' action='/giftBox/main.php/box/form/'>
+                <p> Titre : <p> <input type='text' name='titre'/>
+                <p> Message : </p><textarea name='Texte' rows='10' cols='50'>";
+        if(isset($_SESSION['box'])){
+            if($_SESSION['box']['Message'] != ""){
+            $res .= $_SESSION['box']['Message'] . "</textarea>";
+            } 
         }
         else{
             $res .= "Veuillez saisir un message </textarea>";
         }
 
-        if(isset($_SESSION['new']['prestations'][0])){
+        if(isset($_SESSION['prestations'][0])){
             $total = 0;
-            foreach ($_SESSION['new']['prestations'] as $value) {
+            foreach ($_SESSION['prestations'] as $value) {
                 $total += $value['Prix'];
             }
             $res .= "<h2> Tarif : ".$total." € </h2>";
@@ -232,27 +233,30 @@ class GiftBoxView extends \mf\view\AbstractView {
             $res .= "<h2> Tarif : 00,00 € </h2>";
         }
 
-        $checked1 = "";
+        $checked1 = "checked";
         $checked2 = "";
         $checked3 = "";
 
-        if($_SESSION['new']['date'] == date("Y"."-"."m"."-"."d")){
-            $checked1 = "checked";
+        if(isset($_SESSION['date'])){
+            if(is_array($_SESSION['date'])){
+                $checked3 = "checked";
+                $checked1 = "";
+            }
+            else if(date("Y-m-d") != $_SESSION['date'] && $_SESSION['date'] != 0){
+                $checked2 = "checked";
+                $checked1 = "";
+            }
         }
-        else if(is_array($_SESSION['new']['date'])){
-            $checked2 = "checked";
-        }
-        else{
-            $checked3 = "checked";
-        }
+        
 
-        $res .= "<input type='radio' name='choixDate' value='1' $checked1/> Maintenant
+        $res .= "<input type='radio' name='choixDate' value='1' $checked1/> Aujourd'hui
                 <input type='radio' name='choixDate' value='2' $checked2/> Date précise
                 <input type='radio' name='choixDate' value='3' $checked3/> Une par une";
 
         $res .= "<input type='submit' name='choixForm' value='Ajouter'/>";
 
-        foreach ($_SESSION['new']['prestations'] as $value) {
+        if(isset($_SESSION['prestations'])){
+            foreach ($_SESSION['prestations'] as $value) {
             $router = new \mf\router\Router();
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
@@ -266,9 +270,11 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <p>".$value['Description']."</p>
             </div><hr>
             <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'><button>X</button></a>";
-        }
+            }
+        } 
 
         $res .= "<input type='submit' name='choixForm' value='Valider'/> </form>";
+        return $res;
     }
 
     private function renderSummaryBox(){
@@ -412,7 +418,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'Register')$string = $string . self::renderRegister();
         if ($selector == 'Boxes')$string = $string . self::renderBoxes();
         if ($selector == 'Box')$string = $string . self::renderBox();
-        if ($selector == 'NewBox')$string = $string . self::renderNewBox();
+        if ($selector == 'NewBox')$string = $string . self::renderBoxNotSave();
         if ($selector == 'SummaryBox')$string = $string . self::renderSummaryBox();
         if ($selector == 'PayBox')$string = $string . self::renderBoxPay();
         if ($selector == 'Profil')$string = $string . self::renderProfil();
