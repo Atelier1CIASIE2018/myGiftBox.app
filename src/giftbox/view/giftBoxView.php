@@ -106,8 +106,8 @@ class GiftBoxView extends \mf\view\AbstractView {
     private function renderLogin(){
         return "<h1> Connexion </h1>
                 <form name='connexion' method='POST' action='/giftBox/main.php/loginPost/'>
-                <p>Login : </p><input tpye='text' name='login'/><br/>
-                <p>Mot de passe : </p><input type='text' name='mdp'/><br/>
+                <p>Login : </p><input tpye='text' name='login'/>
+                <p>Mot de passe : </p><input type='text' name='mdp'/>
                 <input type='submit' name='valider' value='Valider'/>
                 </form>";
     }
@@ -115,11 +115,11 @@ class GiftBoxView extends \mf\view\AbstractView {
     private function renderRegister(){
         return "<h1> Inscription </h1>
                 <form name='inscription' method='POST' action='/giftBox/main.php/registerPost/'>
-                <p>Prénom : </p><input tpye='text' name='prenom'/><br/>
-                <p>Nom : </p><input type='text' name='nom'/><br/>
-                <p>Login : </p><input type='text' name='log'/><br/>
-                <p>Mot de passe : </p><input type='text' name='mdp'/><br/>
-                <p>E-mail : </p><input type='text' name='mail'/><br/>
+                <p>Prénom : </p><input tpye='text' name='prenom'/>
+                <p>Nom : </p><input type='text' name='nom'/>
+                <p>Login : </p><input type='text' name='log'/>
+                <p>Mot de passe : </p><input type='text' name='mdp'/>
+                <p>E-mail : </p><input type='text' name='mail'/>
                 <input type='submit' name='valider' value='Valider'/>
                 </form>";
     }
@@ -208,17 +208,34 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderNewBox(){
-        return "<form name='creer' method='POST'>
+        $res = "<form name='creer' method='POST'>
                 <p> Titre : <p>
-                <textarea name='Texte' rows='10' cols='50'>
-                
-                
-                Écrire votre message ici
-                </textarea>
-                <h2> Tarif : 00,00 € </h2>
-                <input type='radio' name='test' value='Maintenant' checked /> Maintenant
-                <input type='radio' name='test' value='datePrecise'/> Date précise
-                <input type='radio' name='test' value='uneParUne'/> Une par une
+                <textarea name='Texte' rows='10' cols='50'>";
+
+        if($_SESSION['new']['box']['Message'] != ""){
+            $res .= $_SESSION['new']['box']['Message'] . "</textarea>";
+        }
+        else{
+            $res .= "Veuillez saisir un message </textarea>";
+        }
+
+        if(isset($_SESSION['new']['prestations'][0])){
+            $total = 0;
+            foreach ($_SESSION['new']['prestations'] as $value) {
+                $total += $value['Prix'];
+            }
+            $res .= "<h2> Tarif : ".$total." € </h2>";
+        }
+        else{
+            $res .= "<h2> Tarif : 00,00 € </h2>";
+        }
+
+        
+
+
+                "<input type='radio' name='choixDate' value='1' checked /> Maintenant
+                <input type='radio' name='choixDate' value='2'/> Date précise
+                <input type='radio' name='choixDate' value='3'/> Une par une
                 <br/>
                 <a href='/giftBox/main.php/prestations/'><button>Ajouter</button></a>
                 </form>";
