@@ -4,8 +4,8 @@ namespace mf\view;
 
 abstract class AbstractView {
 
-    static protected $style_sheets = ['style.css']; /* un tableau de fichiers style */
-    static protected $app_title    = "MF app Title"; /* un titre de document */
+    static protected $style_sheets = ['css/style.css']; /* un tableau de fichiers style */
+    static protected $app_title    = "My Gift Box App !"; /* un titre de document */
     protected $data        = null; /* le modèle de données nécessaire */
     
     /* Constructeur 
