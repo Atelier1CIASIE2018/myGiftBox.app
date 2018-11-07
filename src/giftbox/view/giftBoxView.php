@@ -21,7 +21,8 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
     
     private function renderHome(){
-        $res = " <img src='/giftBox/img/cadeau.jpg' >
+        $res = "<div id='home'> 
+                <img src='/giftBox/img/cadeau.jpg' >
                 <div> <h1> Nouveautés : </h1>";
         foreach ($this->data["prestations"] as $value) {
             $router = new \mf\router\Router();
@@ -39,7 +40,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 </a>
             </div><hr>";
         }
-        $res = $res . " <a href='/giftBox/main.php/prestations/'><button>Voir plus...</button></a></div>";
+        $res = $res . " <a href='/giftBox/main.php/prestations/'><button>Voir plus...</button></a></div></div>";
         return $res;
     }
 
@@ -208,7 +209,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderNewBox(){
-        $res = "<form name='creer' method='POST'>
+        $res = "<form name='creer' method='POST' action=''>
                 <p> Titre : <p>
                 <textarea name='Texte' rows='10' cols='50'>";
 
@@ -230,15 +231,44 @@ class GiftBoxView extends \mf\view\AbstractView {
             $res .= "<h2> Tarif : 00,00 € </h2>";
         }
 
-        
+        $checked1 = "";
+        $checked2 = "";
+        $checked3 = "";
 
+        if($_SESSION['new']['date'] == date("Y"."-"."m"."-"."d")){
+            $checked1 = "checked";
+        }
+        else if(is_array($_SESSION['new']['date'])){
+            $checked2 = "checked";
+        }
+        else{
+            $checked3 = "checked";
+        }
 
-                "<input type='radio' name='choixDate' value='1' checked /> Maintenant
-                <input type='radio' name='choixDate' value='2'/> Date précise
-                <input type='radio' name='choixDate' value='3'/> Une par une
-                <br/>
-                <a href='/giftBox/main.php/prestations/'><button>Ajouter</button></a>
-                </form>";
+        $res .= "<input type='radio' name='choixDate' value='1' $checked1/> Maintenant
+                <input type='radio' name='choixDate' value='2' $checked2/> Date précise
+                <input type='radio' name='choixDate' value='3' $checked3/> Une par une";
+
+        $res .= "<input type='submit' name='choixForm' value='Ajouter'/>";
+
+        foreach ($_SESSION['new']['prestations'] as $value) {
+            $router = new \mf\router\Router();
+            $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
+            $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
+            $res = $res . "<div>
+                <a href='".$urlPrestation."'>
+                    <p>".$value['Nom']."</p>
+                    <p>".$value['Prix']." €</p>
+                </a>
+                <p>".$this->data["categories"][$value["IdCategorie"] - 1]."</p>
+                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
+                    <p>".$value['Description']."</p>
+            </div><hr>
+            <input type='submit' name='choixForm' value='X'/>";
+
+        }
+
+        $res .= "<input type='submit' name='choixForm' value='Valider'/> </form>";
     }
 
     private function renderSummaryBox(){
