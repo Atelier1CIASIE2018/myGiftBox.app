@@ -242,7 +242,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 $checked3 = "checked";
                 $checked1 = "";
             }
-            else if(date("Y-m-d") != $_SESSION['date'] && $_SESSION['date'] != 0){
+            else if(date("Y-m-d") != $_SESSION['date'] && $_SESSION['date'] != "1970-01-01"){
                 $checked2 = "checked";
                 $checked1 = "";
             }
@@ -257,6 +257,12 @@ class GiftBoxView extends \mf\view\AbstractView {
                 $router = new \mf\router\Router();
                 $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
                 $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
+                if($_SESSION["date"][$value["Id"]] == "1970-01-01"){
+                    $date = "";
+                }
+                else{
+                    $date = $_SESSION["date"][$value["Id"]];
+                }
                 $res = $res . "<div>
                     <a href='".$urlPrestation."'>
                         <p>".$value['Nom']."</p>
@@ -265,12 +271,12 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <p>".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
-                    <p>".$_SESSION["date"][$value["Id"]]."</p>
+                    <p>".$date."</p>
                 </div><hr>
-                <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'><button>X</button></a>";
+                <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'>X</a>";
             }
         }
-        $res .= "<input type='submit' name='choixForm' value='Valider'/> </form>";
+        $res .= "<input type='submit' name='choixForm' value='Sauvegarder'/> </form>";
         return $res;
     }
 

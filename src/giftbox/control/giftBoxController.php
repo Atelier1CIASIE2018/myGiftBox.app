@@ -90,30 +90,25 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function viewBox(){
-        if(isset($_SESSION["box"]["Id"])){
-            $id = $_GET["Id"];
-            $box = \giftbox\model\Box::where('Id', "=", $id)->first();
-            $composer = \giftbox\model\Composer::where("IdBox", "=", $box->Id)->get();
-            $idPrestations = array();
-            foreach ($composer as $c) {
-                array_push($idPrestations, $c->IdPrestation);
-            }
-            $prestations = \giftbox\model\Prestation::whereIn("Id", $idPrestations)->get();
-            $categories = \giftbox\model\Categorie::all();
-            $nomCategories = array();
-            foreach ($categories as $categorie){
-                array_push($nomCategories, $categorie->Nom);
-            }
-            $dates = array();
-            $composer = \giftbox\model\Composer::select(["IdPrestation", "Date"])->where("IdBox", "=", $id)->get();
-            foreach ($composer as $c) {
-                $dates[$c->IdPrestation] = $c->Date;
-            }
-            $_SESSION["box"] = $box;
-            $_SESSION["prestations"] = $prestations;
-            $_SESSION["categories"] = $nomCategories;
-            $_SESSION["date"] = $dates;
-        }        
+        $id = $_GET["Id"];
+        $box = \giftbox\model\Box::where('Id', "=", $id)->first();
+        $composer = \giftbox\model\Composer::where("IdBox", "=", $box->Id)->get();
+        $idPrestations = array();
+        $dates = array();
+        foreach ($composer as $c) {
+            array_push($idPrestations, $c->IdPrestation);
+            $dates[$c->IdPrestation] = $c->Date;
+        }
+        $prestations = \giftbox\model\Prestation::whereIn("Id", $idPrestations)->get();
+        $categories = \giftbox\model\Categorie::all();
+        $nomCategories = array();
+        foreach ($categories as $categorie){
+            array_push($nomCategories, $categorie->Nom);
+        }
+        $_SESSION["box"] = $box;
+        $_SESSION["prestations"] = $prestations;
+        $_SESSION["categories"] = $nomCategories;
+        $_SESSION["date"] = $dates;  
         $vue = new \giftbox\view\giftBoxView("");
         if($_SERVER["PATH_INFO"] == "/box/"){
             if(isset($_GET["update"])){
@@ -164,9 +159,9 @@ class giftBoxController extends \mf\control\AbstractController {
                         $_SESSION["date"] = array();
                     }
                 }
-                header("Location: ".$this->router->urlFor("/prestations/", []));
+                header("Location: ".$this->router->urlFor("/prestations/", [])."/");
             }
-            if($_POST["choixForm"] == "Valider"){
+            if($_POST["choixForm"] == "Sauvegarder"){
                 if(isset($_SESSION["box"])){
                     $_SESSION["box"]->Nom = $_POST["titre"];
                     $_SESSION["box"]->IdUser = $_SESSION["user"]->Id;
@@ -186,7 +181,7 @@ class giftBoxController extends \mf\control\AbstractController {
                             $_SESSION["date"] = $_POST["date"];
                         } 
                         else{
-                            $_SESSION["date"] = 0;
+                            $_SESSION["date"] = "1970-01-01";
                         }                          
                     }
                     if($_POST["choixDate"] == 3){
@@ -199,11 +194,20 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function addPrestationBox(){
-    
+        $id = $_GET["Id"];
+        $composer = new \giftbox\model\Composer();
+        $composer->IdBox = $_SESSION["box"]["Id"];
+        $composer->IdPrestation = $_GET["Id"];
+        $composer->Date = "1970-01-01";
+        $composer->save();
+        header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
     }
 
     public function removePrestationBox(){
-        
+        $id = $_GET["Id"];
+        $composer = \giftbox\model\Composer::where("IdBox", "=", $_SESSION["box"]["Id"])->where("IdPrestation", "=", $id)->first();
+        \giftbox\model\Composer::where("IdBox", "=", $_SESSION["box"]["Id"])->where("IdPrestation", "=", $id)->delete();
+        header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
     }
 
     public function updateBox(){
