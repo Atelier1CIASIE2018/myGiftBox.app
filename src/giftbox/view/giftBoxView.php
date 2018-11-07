@@ -11,7 +11,8 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderHeader(){
-        return '<h1>My Gift Box App</h1>';
+        return '<head> <link rel="stylesheet" type="text/css" href="/html/css/style.css"> </head>
+                <h1>My Gift Box App</h1>';
     }
     
     private function renderFooter(){
@@ -19,7 +20,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
     
     private function renderHome(){
-        $res = "<div>";
+        $res = "<div> <h1> Nouveauté : </h1>";
         foreach ($this->data["prestations"] as $value) {
             $router = new \mf\router\Router();
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -36,7 +37,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 </a>
             </div><hr>";
         }
-        $res = $res . "</div>";
+        $res = $res . " <a href='main.php/prestations/'><button>Voir plus...</button></a></div>";
         return $res;
     }
 
@@ -202,6 +203,19 @@ class GiftBoxView extends \mf\view\AbstractView {
         $res .= "</div><br>";
         return $res;
     }
+
+    private function renderNewBox(){
+        return "<form name='creer' method='POST'>
+                <p> Titre : <p>
+                <textarea name='Texte' rows='10' cols='50'>
+                Écrire votre message ici
+                </textarea>
+                <h2> Tarif : 00,00 € </h2>
+                <input type='radio' name='maintenant' value='Maintenant' checked /> Maintenant
+                <input type='radio' name='datePrecise' value='Maintenant'/> Date précise
+                <input type='radio' name='uneParUne' value='Maintenant'/> Une par une
+                </form>";
+    }
     
     protected function renderBody($selector=null){
 
@@ -215,7 +229,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'Register')$string = $string . self::renderRegister();
         if ($selector == 'Boxes')$string = $string . self::renderBoxes();
         if ($selector == 'Box')$string = $string . self::renderBox();
-        //if ($selector == '')$string = $string . self::();
+        if ($selector == 'NewBox')$string = $string . self::renderNewBox();
         $string = $string ."</article></section><footer>".self::renderFooter()."</footer>";
         return $string;
     }
