@@ -1,0 +1,140 @@
+/*
+$cols: dans une grille de x colonnes
+*/
+/*
+.col{
+	margin-left: $size_gutter;
+	margin-bottom: 5px;
+	box-sizing: border-box;
+}*/
+body {
+  margin: 0; }
+
+h1 {
+  text-align: center; }
+
+* {
+  font-family: sans-serif; }
+
+@media screen and (max-width: 720px) {
+  article > div > div > a > img {
+    width: 31.2%;
+    margin-left: 1.6%; }
+
+  article > div > div > a:nth-child(3) > p {
+    width: 64%;
+    margin-left: 1.6%; }
+
+  article > div > div > a, article > div div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+
+  article > div div > a:nth-child(1) {
+    width: 64%;
+    margin-left: 1.6%;
+    text-align: center; }
+
+  article > div > div > a:nth-child(1) > p {
+    width: 47.6%;
+    margin-left: 1.6%; }
+
+  article > div > div > p {
+    width: 31.2%;
+    margin-left: 1.6%;
+    text-align: center; }
+
+  header button {
+    width: 47.6%;
+    margin-left: 1.6%;
+    height: 50px; }
+
+  button {
+    width: 47.6%;
+    margin-left: 26.2%;
+    height: 50px; }
+
+  article > img:first-child {
+    display: none; } }
+@media screen and (min-width: 720px) {
+  header {
+    background-color: DarkGray; }
+
+  article > div > div > a > img {
+    width: 23%;
+    margin-left: 9.8%; }
+
+  article > img:first-child {
+    width: 100%;
+    z-index: 0; }
+
+  article > div > div > a:nth-child(3) > p {
+    width: 55.8%;
+    margin-left: 1.6%; }
+
+  article > div > div > a, article > div div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+
+  article div div a {
+    width: 100%; }
+
+  article > div div > a:nth-child(1) {
+    width: 55.8%;
+    margin-left: 9.8%;
+    text-align: center; }
+
+  article > div > div > a:nth-child(1) > p {
+    width: 47.6%;
+    margin-left: 1.6%; }
+
+  article > div > div > p {
+    width: 23%;
+    margin-left: 1.6%;
+    text-align: center; }
+
+  header a:nth-child(1) {
+    width: 10.7%;
+    margin-left: 1.6%;
+    height: 50px;
+    flex-grow: 2;
+    z-index: 1; }
+
+  header a:nth-child(2) {
+    width: 10.7%;
+    margin-left: 7.75%;
+    height: 50px;
+    flex-grow: 2;
+    z-index: 1; }
+
+  header button {
+    height: 50px;
+    width: -moz-available; }
+
+  header h1 {
+    width: 59.9%;
+    margin-left: 1.6%;
+    flex-grow: 1;
+    margin-bottom: 0;
+    margin-top: 0;
+    z-index: 1;
+    color: #00f0f0; }
+
+  header {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    align-items: center; }
+
+  article div > a:last-child {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+
+  article div > a:last-child > button {
+    width: 14.8%;
+    margin-left: 42.6%;
+    height: 50px; } }
+
+/*# sourceMappingURL=style.css.map */

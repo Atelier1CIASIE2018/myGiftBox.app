@@ -1,0 +1,128 @@
+@import "_grille";
+
+body{
+	margin:0;
+}
+h1{
+	text-align:center;
+}
+*{
+	font-family:sans-serif ;
+}
+@media screen and (max-width:720px){
+	//taille grille, gutter, offset, taille element
+	article > div > div > a > img{
+		@include grille(12, 1.6%, 0, 4);
+	}
+	article > div > div > a:nth-child(3) > p{
+		@include grille(12, 1.6%, 0, 8);
+	}
+	article > div > div > a, article > div div{
+		display: flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+	}
+	article > div div > a:nth-child(1){
+		@include grille(12, 1.6%, 0, 8);
+		text-align:center;
+	}
+	article > div > div > a:nth-child(1) > p{
+		//font-size:18px;
+		@include grille(2, 1.6%, 0, 1);
+	}
+	article > div > div > p{
+		@include grille(3, 1.6%, 0, 1);
+		text-align:center;
+	}
+	header button{
+		@include grille(12, 1.6%, 0, 6);
+		height:50px;
+	}
+	button{
+		@include grille(12, 1.6%, 3, 6);
+		height:50px;
+	}
+	article > img:first-child{
+		display:none;
+	}
+}
+@media screen and (min-width:720px){
+	//taille grille, gutter, offset, taille element
+	header{
+		background-color:DarkGray   ;
+	}
+	article > div > div > a > img{
+		@include grille(12, 1.6%, 1, 3);
+	}
+	article > img:first-child{
+		width:100%;
+		z-index:0;
+	}
+	article > div > div > a:nth-child(3) > p{
+		@include grille(12, 1.6%, 0, 7);
+	}
+	article > div > div > a, article > div div{
+		display: flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+	}
+	article div div a {
+		width:100%;
+	}
+	article > div div > a:nth-child(1){
+		@include grille(12, 1.6%, 1, 7);
+		text-align:center;
+	}
+	article > div > div > a:nth-child(1) > p{
+		//font-size:18px;
+		@include grille(2, 1.6%, 0, 1);
+
+	}
+	article > div > div > p{
+		@include grille(12, 1.6%, 0, 3);
+		text-align:center;
+	}
+	header a:nth-child(1){
+		@include grille(16, 1.6%, 0, 2);
+		height:50px;
+		flex-grow:2;
+		z-index:1;
+	}
+	header a:nth-child(2){
+		@include grille(16, 1.6%, 1, 2);
+		height:50px;
+		flex-grow:2;
+		z-index:1;
+		
+	}
+	header a > button{
+		//background-color: rgba(0, 0, 0, 0.6);
+	}
+	header button{
+		height:50px;
+		width:-moz-available
+	}
+	header h1{
+		@include grille(16, 1.6%, 0, 10);
+		flex-grow:1;
+		margin-bottom:0;
+		margin-top:0;
+		z-index:1;
+		color:darken(Aqua, 3%) ;
+	}
+	header{
+		display:flex;
+		flex-direction:row-reverse;
+		flex-wrap:wrap;
+		align-items: center;
+	}
+	article div > a:last-child {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	article div > a:last-child > button{
+		@include grille(12, 1.6%, 5, 2);
+		height:50px;
+	}
+}
