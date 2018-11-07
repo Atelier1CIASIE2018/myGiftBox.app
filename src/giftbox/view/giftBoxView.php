@@ -214,12 +214,52 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <input type='radio' name='test' value='datePrecise'/> Date précise
                 <input type='radio' name='test' value='uneParUne'/> Une par une
                 <br/>
-                <a href='main.php/prestations'><button>Ajouter</button></a>
+                <a href='/giftBox/main.php/prestations/'><button>Ajouter</button></a>
                 </form>";
     }
 
-    private function renderSummaryBox(){
+    //NOT VERIFIED
 
+    private function renderSummaryBox(){
+        $res = "<div> <h1> Préstations sélectionnée : </h1>";
+            foreach ($this->data["prestations"] as $value) {
+            $router = new \mf\router\Router();
+            $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
+            $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
+            $res = $res . "<div>
+                <a href='".$urlPrestation."'>
+                    <p>".$value['Nom']."</p>
+                    <p>".$value['Prix']." €</p>
+                </a>
+                <p><a href='".$urlCategorie."'>".$this->data["categories"][$value["IdCategorie"] - 1]."</a></p>
+                <a href='".$urlPrestation."'>
+                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
+                    <p>".$value['Description']."</p>
+                </a>
+            </div><hr>";
+        }
+
+        if($this->data['box']['Etat'] > 2){
+            $res .= "<p> URL </p>";
+        }
+        else{
+            $res .= "<a href='/giftBox/main.php/box/pay/'><button>Payer</button></a>";      
+        }
+        $res .= "</div>";
+        return $res;
+    }
+
+    // NOT VERIFIED
+
+    private function renderProfil(){
+        $res = "<div><h1> Voici votre profil : </h1> <br/> 
+        Nom : ".$this->data[0]."<br/> 
+        Prénom : ".$this->data[1]."<br/> 
+        E-mail : ".$this->data[2]."<br/> 
+        Pseudo : ".$this->data[3]."<br/>
+        <a href='/giftBox/main.php/profile/view/'><button>Payer</button></a>";
+
+        return $res;
     }
     
     protected function renderBody($selector=null){
@@ -235,6 +275,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'Boxes')$string = $string . self::renderBoxes();
         if ($selector == 'Box')$string = $string . self::renderBox();
         if ($selector == 'NewBox')$string = $string . self::renderNewBox();
+        if ($selector == 'Profil')$string = $string . self::renderProfil();
         $string = $string ."</article></section><footer>".self::renderFooter()."</footer>";
         return $string;
     }
