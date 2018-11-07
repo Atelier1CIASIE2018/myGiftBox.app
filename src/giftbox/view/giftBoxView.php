@@ -271,6 +271,8 @@ class GiftBoxView extends \mf\view\AbstractView {
         return $res;
     }
 
+    // NOT VERIFIED
+
     private function renderAdmin(){
         $res = "<a href='/giftBox/main.php/admin/new/'><button>Ajouter une préstation</button></a> <div>";
             foreach ($this->data['prestations'] as $value) {
@@ -287,9 +289,25 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
                 </a>
+                <a href='/giftBox/main.php/admin/prestation/'><button>Modifier</button></a>
+                <a href='/giftBox/main.php/admin/prestation/remove/'><button>X</button></a>
             </div><hr>";
             }
+        return $res;
+    }
 
+    // NOT VERIFIED
+
+    private function renderNewPrestation(){
+        return "<h1> Ajout d'une préstation : </h1>
+                <form name='ajout' method='POST'>
+                Nom : <input type='text' name='nom'/>
+                Description : <input type='text' name='desc'/>
+                Prix : <input type='text' name='prix'/>
+                Image : <input type='file' name='image'/>
+                <input type='submit' name='valider' value='valider'/>
+                </form>
+                ";
     }
     
     protected function renderBody($selector=null){
@@ -308,6 +326,8 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'SummaryBox')$string = $string . self::renderSummaryBox();
         if ($selector == 'Profil')$string = $string . self::renderProfil();
         if ($selector == 'ProfilView')$string = $string . self::renderProfilView();
+        if ($selector == 'Admin')$string = $string . self::renderAdmin();
+        if ($selector == 'NewPresation')$string = $string . self::renderNewPrestation();
         $string = $string ."</article></section><footer>".self::renderFooter()."</footer>";
         return $string;
     }
