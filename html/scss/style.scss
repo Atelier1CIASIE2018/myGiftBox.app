@@ -20,7 +20,7 @@ h1{
 }
 a{
 	color:black;
-	style:none
+	text-decoration:none;
 }
 
 /* Fin regle global */
@@ -201,39 +201,39 @@ header button{
 		@include grille(12, 1.6%, 1, 4);
 	}*/
 	
-	article > div > div > a > p{
+	#prestations > div > div > a > p{
 		@include grille(12, 1.6%, 0, 7);
 	}
-	article > div > div > a > img{
+	#prestations > div > div > a > img{
 		@include grille(12, 1.6%, 1, 3);
 	}
-	article > img:first-child{
+	#prestations > img:first-child{
 		width:100%;
 		z-index:0;
 	}
-	article > div > div > a:nth-child(3) > p{
+	#prestations > div > div > a:nth-child(3) > p{
 		@include grille(12, 1.6%, 0, 7);
 	}
-	article > div > div > a, article > div div, article div > a:last-child{
+	#prestations > div > div > a, #prestations > div div, #prestations div > a:last-child{
 		display: flex;
 		flex-direction:row;
 		flex-wrap:wrap;
 	}
-	article div div a {
+	#prestations div div a {
 		width:100%;
 	}
-	article > div div > a:nth-child(1){
+	#prestations > div div > a:nth-child(1){
 		@include grille(12, 1.6%, 1, 7);
 		text-align:center;
 	}
-	article > div > div > a:nth-child(1) > p{
+	#prestations > div > div > a:nth-child(1) > p{
 		@include grille(2, 1.6%, 0, 1);
 	}
-	article > div > div > p{
+	#prestations > div > div > p{
 		@include grille(12, 1.6%, 0, 3);
 		text-align:center;
 	}
-	article div > a:last-child > button{
+	#prestations div > a:last-child > button{
 		@include grille(12, 1.6%, 5, 2);
 		height:50px;
 	}
