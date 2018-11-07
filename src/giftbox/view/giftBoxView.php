@@ -218,11 +218,8 @@ class GiftBoxView extends \mf\view\AbstractView {
                 </form>";
     }
 
-    //NOT VERIFIED
-
     private function renderSummaryBox(){
         $res = "<div> <h1> Préstations sélectionnée : </h1>";
-        var_dump($this->data);
             foreach ($this->data["prestations"] as $value) {
             $router = new \mf\router\Router();
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -263,8 +260,17 @@ class GiftBoxView extends \mf\view\AbstractView {
         return $res;
     }
 
-    private function renderProfilView(){
+    // NOT VERIFIED
 
+    private function renderProfilView(){
+        $res = "<div><h1> Voici votre profil : </h1> <br/> 
+            Pseudo : <input type='text' nam='pseudo' value='".$_SESSION['user']['Login']."' /><br/>
+            E-mail : <input type='text' nam='email' value='".$_SESSION['user']['Email']."' /><br/>
+            Mot de passe : <input type='text' nam='mdp' value='' /><br/>
+            Confirmation mot de passe : <input type='text' nam='mdpconfirm' value='' /><br/>
+            <a href='/giftBox/main.php/profile/'><button>Valider</button></a>";
+
+        return $res;
     }
     
     protected function renderBody($selector=null){
