@@ -38,7 +38,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 </a>
             </div><hr>";
         }
-        $res = $res . " <a href='main.php/prestations/'><button>Voir plus...</button></a></div>";
+        $res = $res . " <a href='/giftBox/main.php/prestations/'><button>Voir plus...</button></a></div>";
         return $res;
     }
 
@@ -294,11 +294,10 @@ class GiftBoxView extends \mf\view\AbstractView {
         return $res;
     }
 
-    // NOT VERIFIED
-
     private function renderNewPrestation(){
         return "<h1> Ajout d'une préstation : </h1>
                 <form name='ajout' method='POST'>
+                Categorie : <input type='text' name='categ'/> <br/>
                 Nom : <input type='text' name='nom'/> <br/>
                 Description : <input type='text' name='desc'/><br/>
                 Prix : <input type='text' name='prix'/><br/>
@@ -306,6 +305,16 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <input type='submit' name='valider' value='valider'/><br/>
                 </form>
                 ";
+    }
+
+    private function renderAdminPrestation(){
+        return "<h1> Modification de la préstation </h1>
+                <form name='update' method='POST'>
+                Nom : <input type='text' name='nom' value='".$this->data['Nom']."'/> <br/>
+                Description : <input type='text' name='nom' value='".$this->data['Description']."'/> <br/>
+                Prix : <input type='text' name='nom' value='".$this->data['Prix']."'/> <br/>
+                Image : <input type='file' name='image'/><br/>
+                </form>";
     }
     
     protected function renderBody($selector=null){
@@ -326,6 +335,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'ProfilView')$string = $string . self::renderProfilView();
         if ($selector == 'Admin')$string = $string . self::renderAdmin();
         if ($selector == 'NewPrestation')$string = $string . self::renderNewPrestation();
+        if ($selector == 'AdminPrestation')$string = $string . self::renderAdminPrestation();
         $string = $string ."</article></section><footer>".self::renderFooter()."</footer>";
         return $string;
     }
