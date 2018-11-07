@@ -17,6 +17,8 @@ require_once 'vendor/autoload.php';
 
 $config = parse_ini_file("conf/config.ini");
 
+session_start();
+
 /* une instance de connexion  */
 $db = new Illuminate\Database\Capsule\Manager();
 
