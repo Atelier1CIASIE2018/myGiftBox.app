@@ -83,7 +83,12 @@ class giftBoxController extends \mf\control\AbstractController {
             array_push($idPrestations, $c->IdPrestation);
         }
         $prestations = \giftbox\model\Prestation::whereIn("Id", $idPrestations)->get();
-        $vue = new \giftbox\view\giftBoxView(array("box" => $box, "prestations" => $prestations));
+        $categories = \giftbox\model\Categorie::all();
+        $nomCategories = array();
+        foreach ($categories as $categorie){
+            array_push($nomCategories, $categorie->Nom);
+        }
+        $vue = new \giftbox\view\giftBoxView(array("box" => $box, "prestations" => $prestations, "categories" => $nomCategories));
         $vue->render('Box');
     }
 
