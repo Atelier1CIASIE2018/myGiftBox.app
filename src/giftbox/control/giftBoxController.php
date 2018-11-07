@@ -93,10 +93,18 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function newBox(){
-        
+        $vue = new \giftbox\view\giftBoxView("");
+        $vue->render('NewBox');
     }
 
     public function addBox(){
+        if(!isset($_SESSION["prestations"])){
+            $id = $_GET["Id"];
+            $_SESSION["add"]["prestations"] = array();
+            $_SESSION["add"]["id"] = $id
+        }        
+        $add = $_GET["Add"];
+        array_push($_SESSION["prestations"], $add);
         
     }
 
