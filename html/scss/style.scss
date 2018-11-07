@@ -189,17 +189,9 @@ header button{
 }
 
 /* Fin Inscription/Connection */
-/* Debut Categories */
+/* Debut Prestations */
 
 @media screen and (min-width:720px){
-	/*article div div{
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-	}
-	article > div > div > a > img{
-		@include grille(12, 1.6%, 1, 4);
-	}*/
 	
 	#prestations > div > div > a > p{
 		@include grille(12, 1.6%, 0, 7);
@@ -214,7 +206,7 @@ header button{
 	#prestations > div > div > a:nth-child(3) > p{
 		@include grille(12, 1.6%, 0, 7);
 	}
-	#prestations > div > div > a, #prestations > div div, #prestations div > a:last-child{
+	#prestations > div > div > a, #prestations > div div{
 		display: flex;
 		flex-direction:row;
 		flex-wrap:wrap;
@@ -234,7 +226,57 @@ header button{
 		text-align:center;
 	}
 	#prestations div > a:last-child > button{
-		@include grille(12, 1.6%, 5, 2);
 		height:50px;
 	}
+	#prestations > div > div > :nth-child(4){
+		@include grille(10, 1.6%, 0, 9);
+	}
+	#prestations > div > div > :nth-child(5){
+		@include grille(10, 1.6%, 0, 1);
+	}
 }
+@media screen and (max-width:720px){
+	#prestations > div > div > a > img{
+		@include grille(12, 1.6%, 0, 4);
+	}
+	#prestations > div > div > a > p{
+		@include grille(12, 1.6%, 0, 8);
+	}
+	#prestations > div > div > a:nth-child(3) > p{
+		@include grille(12, 1.6%, 0, 8);
+	}
+	#prestations > div > div > a, #prestations > div div{
+		display: flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+	}
+	#prestations > div div > a:nth-child(1){
+		@include grille(12, 1.6%, 0, 8);
+		text-align:center;
+	}
+	#prestations > div > div > a:nth-child(1) > p{
+		@include grille(2, 1.6%, 0, 1);
+	}
+	#prestations > div > div > p{
+		@include grille(3, 1.6%, 0, 1);
+		text-align:center;
+	}
+	button{
+		@include grille(12, 1.6%, 3, 6);
+		height:50px;
+	}
+	#prestations > img:first-child{
+		display:none;
+	}
+	#prestations div > a:last-child > button{
+		height:50px;
+	}
+	#prestations > div > div > :nth-child(4){
+		@include grille(10, 1.6%, 0, 7);
+	}
+	#prestations > div > div > :nth-child(5){
+		@include grille(10, 1.6%, 0, 3);
+	}
+}
+
+/* Fin prestations */

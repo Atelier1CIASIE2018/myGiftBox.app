@@ -192,16 +192,8 @@ body > footer {
   article input:last-child {
     margin-top: 20px; } }
 /* Fin Inscription/Connection */
-/* Debut Categories */
+/* Debut Prestations */
 @media screen and (min-width: 720px) {
-  /*article div div{
-  	display: flex;
-  	flex-direction: row;
-  	flex-wrap: wrap;
-  }
-  article > div > div > a > img{
-  	@include grille(12, 1.6%, 1, 4);
-  }*/
   #prestations > div > div > a > p {
     width: 55.8%;
     margin-left: 1.6%; }
@@ -218,7 +210,7 @@ body > footer {
     width: 55.8%;
     margin-left: 1.6%; }
 
-  #prestations > div > div > a, #prestations > div div, #prestations div > a:last-child {
+  #prestations > div > div > a, #prestations > div div {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; }
@@ -241,8 +233,65 @@ body > footer {
     text-align: center; }
 
   #prestations div > a:last-child > button {
-    width: 14.8%;
-    margin-left: 42.6%;
-    height: 50px; } }
+    height: 50px; }
+
+  #prestations > div > div > :nth-child(4) {
+    width: 86.96%;
+    margin-left: 1.6%; }
+
+  #prestations > div > div > :nth-child(5) {
+    width: 8.24%;
+    margin-left: 1.6%; } }
+@media screen and (max-width: 720px) {
+  #prestations > div > div > a > img {
+    width: 31.2%;
+    margin-left: 1.6%; }
+
+  #prestations > div > div > a > p {
+    width: 64%;
+    margin-left: 1.6%; }
+
+  #prestations > div > div > a:nth-child(3) > p {
+    width: 64%;
+    margin-left: 1.6%; }
+
+  #prestations > div > div > a, #prestations > div div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+
+  #prestations > div div > a:nth-child(1) {
+    width: 64%;
+    margin-left: 1.6%;
+    text-align: center; }
+
+  #prestations > div > div > a:nth-child(1) > p {
+    width: 47.6%;
+    margin-left: 1.6%; }
+
+  #prestations > div > div > p {
+    width: 31.2%;
+    margin-left: 1.6%;
+    text-align: center; }
+
+  button {
+    width: 47.6%;
+    margin-left: 26.2%;
+    height: 50px; }
+
+  #prestations > img:first-child {
+    display: none; }
+
+  #prestations div > a:last-child > button {
+    height: 50px; }
+
+  #prestations > div > div > :nth-child(4) {
+    width: 67.28%;
+    margin-left: 1.6%; }
+
+  #prestations > div > div > :nth-child(5) {
+    width: 27.92%;
+    margin-left: 1.6%; } }
+/* Fin prestations */
 
 /*# sourceMappingURL=style.css.map */
