@@ -22,7 +22,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     
     private function renderHome(){
         $res = " <img src='/giftBox/img/cadeau.jpg' >
-                <div> <h1> Nouveauté : </h1>";
+                <div> <h1> Nouveautés : </h1>";
         foreach ($this->data["prestations"] as $value) {
             $router = new \mf\router\Router();
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
