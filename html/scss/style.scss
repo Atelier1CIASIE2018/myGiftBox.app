@@ -6,6 +6,11 @@
 
 body{
 	margin:0;
+	background-color: #eaecee ;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	height:100%;
 }
 h1{
 	text-align:center;
@@ -13,10 +18,18 @@ h1{
 *{
 	font-family:sans-serif ;
 }
+a{
+	color:black;
+	style:none
+}
 
 /* Fin regle global */
 /* Debut Menu */
-
+body > footer{
+	text-align:center;
+	margin-top:50px;
+	@include grille(1, 1.6%, 0, 1);
+}
 @media screen and (max-width:720px){
 header button{
 		@include grille(12, 1.6%, 0, 6);
@@ -24,6 +37,9 @@ header button{
 	}
 }
 @media screen and (min-width:720px){
+	header{
+		background-color:DarkGray   ;
+	}
 	header a:nth-child(1){
 		@include grille(12, 1.6%, 0, 2);
 		height:50px;
@@ -57,12 +73,16 @@ header button{
 	}
 }
 
+
 /* Fin Menu */
 /* Debut Home */
 
 @media screen and (max-width:720px){
 	article > div > div > a > img{
 		@include grille(12, 1.6%, 0, 4);
+	}
+	article > div > div > a > p{
+		@include grille(12, 1.6%, 0, 8);
 	}
 	article > div > div > a:nth-child(3) > p{
 		@include grille(12, 1.6%, 0, 8);
@@ -92,8 +112,9 @@ header button{
 	}
 }
 @media screen and (min-width:720px){
-	header{
-		background-color:DarkGray   ;
+	
+	article > div > div > a > p{
+		@include grille(12, 1.6%, 0, 7);
 	}
 	article > div > div > a > img{
 		@include grille(12, 1.6%, 1, 3);
@@ -131,3 +152,41 @@ header button{
 }
 
 /* Fin home */
+/* Debut Inscription/connection */
+
+@media screen and (min-width:720px){
+	article > form {
+		display:flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		@include grille(3, 1.6%, 1, 1);
+	}
+	article > form > input, article > form > p{
+		width:100%;
+		text-align:center;
+	}
+	article input:last-child{
+		
+		width:auto;
+		margin:auto;
+		margin-top:20px;
+	}
+}
+@media screen and (max-width:720px){
+	article > form {
+		display:flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		@include grille(10, 1.6%, 1, 8);
+	}
+	article > form > input, article > form > p{
+		width:100%;
+		text-align:center;
+	}
+	article input:last-child{
+		margin-top:20px;
+	}
+}
+
+/* Fin Inscription/Connection */
+/* Debut Prestations */
