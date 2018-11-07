@@ -11,7 +11,9 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderHeader(){
-        return '<h1>My Gift Box App</h1>';
+        return "<a href='main.php/register/'><button>Inscription</button></a>
+                <a href='main.php/login/'><button>Connexion</button></a>
+                <h1>My Gift Box App</h1>";
     }
     
     private function renderFooter(){
@@ -247,20 +249,16 @@ class GiftBoxView extends \mf\view\AbstractView {
         return $res;
     }
 
-    // NOT VERIFIED
-
     private function renderProfil(){
         $res = "<div><h1> Voici votre profil : </h1> <br/> 
         Nom : ".$_SESSION['user']['Nom']."<br/> 
         Prénom : ".$_SESSION['user']['Prenom']."<br/> 
         E-mail : ".$_SESSION['user']['Email']."<br/> 
         Pseudo : ".$_SESSION['user']['Login']."<br/>
-        <a href='/giftBox/main.php/profile/view/'><button>Payer</button></a>";
+        <a href='/giftBox/main.php/profile/view/'><button>Modifier</button></a>";
 
         return $res;
     }
-
-    // NOT VERIFIED
 
     private function renderProfilView(){
         $res = "<div><h1> Voici votre profil : </h1> <br/> 
@@ -271,6 +269,27 @@ class GiftBoxView extends \mf\view\AbstractView {
             <a href='/giftBox/main.php/profile/'><button>Valider</button></a>";
 
         return $res;
+    }
+
+    private function renderAdmin(){
+        $res = "<a href='/giftBox/main.php/admin/new/'><button>Ajouter une préstation</button></a> <div>";
+            foreach ($this->data['prestations'] as $value) {
+                $router = new \mf\router\Router();
+                $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
+                $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
+                 $res = $res . "<div>
+                <a href='".$urlPrestation."'>
+                    <p>".$value['Nom']."</p>
+                    <p>".$value['Prix']." €</p>
+                </a>
+                <p><a href='".$urlCategorie."'>".$this->data["categories"][$value["IdCategorie"] - 1]."</a></p>
+                <a href='".$urlPrestation."'>
+                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
+                    <p>".$value['Description']."</p>
+                </a>
+            </div><hr>";
+            }
+
     }
     
     protected function renderBody($selector=null){
