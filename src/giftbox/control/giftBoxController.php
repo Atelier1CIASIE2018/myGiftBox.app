@@ -34,7 +34,12 @@ class giftBoxController extends \mf\control\AbstractController {
             array_push($nomCategories, $categorie->Nom);
         }
         $vue = new \giftbox\view\giftBoxView(array("prestations" => $prestations, "categories" => $nomCategories));
-        $vue->render('Prestations');
+        if($_SERVER["PATH_INFO"] == "/prestations/"){
+            $vue->render('Prestations');
+        }
+        if($_SERVER["PATH_INFO"] == "/admin/"){
+            $vue->render('Admin');
+        }
     }
 
     public function viewCategories(){
@@ -95,6 +100,9 @@ class giftBoxController extends \mf\control\AbstractController {
         if($_SERVER["PATH_INFO"] == "/box/summary/"){
             $vue->render('SummaryBox');
         }
+        if($_SERVER["PATH_INFO"] == "/box/pay/"){
+            $vue->render('PayBox');
+        }
     }
 
     public function newBox(){
@@ -143,5 +151,10 @@ class giftBoxController extends \mf\control\AbstractController {
 
     public function updateProfile(){
         
+    }
+
+    public function newPrestation(){
+        $vue = new \giftbox\view\giftBoxView("");
+        $vue->render('newPrestation');
     }
 }

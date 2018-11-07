@@ -58,8 +58,11 @@ $router->addRoute('confirmBox', '/box/confirm/', '\giftbox\control\giftBoxContro
 //page de récapitulatif avant le payement : box/summary/?id=x
 $router->addRoute('summaryBox', '/box/summary/', '\giftbox\control\giftBoxController', 'viewBox'); //GET
 
-//modifie l'état d'une box à 3 (payé) : /box/pay/?id=x
-$router->addRoute('payBox', '/box/pay/', '\giftbox\control\giftBoxController', 'payBox'); //UPDATE
+//page pour payer : /box/pay/?id=x
+$router->addRoute('payBox', '/box/pay/', '\giftbox\control\giftBoxController', 'payBox'); //GET
+
+//modifie l'état d'une box à 3 (payé) : /box/pay/send/?id=x
+$router->addRoute('payBox', '/box/pay/send/', '\giftbox\control\giftBoxController', 'viewBox'); //UPDATE
 
 //génère l'url de la box et le stocke dans la BDD et passe l'état à 4 (remis) : /box/url/?id=x
 $router->addRoute('urlBox', '/box/url/', '\giftbox\control\giftBoxController', 'urlBox'); //UPDATE
@@ -83,7 +86,7 @@ $router->addRoute('viewProfile', '/profile/view/', '\giftbox\control\giftBoxCont
 $router->addRoute('profileUpdate', '/profile/update/', '\giftbox\control\giftBoxController', 'updateProfile'); //UPDATE
 
 //page d'administration
-$router->addRoute('admin', '/admin/', '\giftbox\control\giftBoxController', 'viewAdmin'); //GET
+$router->addRoute('admin', '/admin/', '\giftbox\control\giftBoxController', 'viewPrestations'); //GET
 
 //page d'ajout d'une prestation
 $router->addRoute('newPrestation', '/admin/prestation/new/', '\giftbox\control\giftBoxController', 'newPrestation'); //GET
