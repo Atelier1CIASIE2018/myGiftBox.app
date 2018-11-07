@@ -23,7 +23,12 @@ class giftBoxController extends \mf\control\AbstractController {
         $id = $_GET['Id'];
         $prestation = \giftbox\model\Prestation::where('id', "=", $id)->first();
         $vue = new \giftbox\view\giftBoxView($prestation);
-        $vue->render('Prestation');
+        if($_SERVER["PATH_INFO"] == "/prestation/"){
+            $vue->render('Prestation');
+        }
+        if($_SERVER["PATH_INFO"] == "/admin/prestation"){
+            $vue->render('AdminPrestation');
+        }
     }
 
     public function viewPrestations(){

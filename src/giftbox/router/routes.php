@@ -95,7 +95,7 @@ $router->addRoute('newPrestation', '/admin/prestation/new/', '\giftbox\control\g
 $router->addRoute('postPrestation', '/admin/prestation/post/', '\giftbox\control\giftBoxController', 'postPrestation'); //UPDATE
 
 //page admin d'une prestation : /admin/prestation/?id=x
-$router->addRoute('prestationAdmin', '/admin/prestation/', '\giftbox\control\giftBoxController', 'viewAdminPrestation'); //GET
+$router->addRoute('prestationAdmin', '/admin/prestation/', '\giftbox\control\giftBoxController', 'viewPrestation'); //GET
 
 //modifie les données d'une prestation
 $router->addRoute('updatePrestation', '/admin/prestation/update/', '\giftbox\control\giftBoxController', 'updatePrestation'); //UPDATE

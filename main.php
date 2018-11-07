@@ -26,7 +26,7 @@ $db->addConnection( $config ); /* configuration avec nos paramètres */
 $db->setAsGlobal();            /* visible de tout fichier */
 $db->bootEloquent();           /* établir la connexion */
 
-require_once "src/mf/router/routes.php";
+require_once "src/giftbox/router/routes.php";
 
 echo ($router->run());
 
