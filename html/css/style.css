@@ -7,6 +7,7 @@ $cols: dans une grille de x colonnes
 	margin-bottom: 5px;
 	box-sizing: border-box;
 }*/
+/* Debut regle global */
 body {
   margin: 0; }
 
@@ -16,6 +17,48 @@ h1 {
 * {
   font-family: sans-serif; }
 
+/* Fin regle global */
+/* Debut Menu */
+@media screen and (max-width: 720px) {
+  header button {
+    width: 47.6%;
+    margin-left: 1.6%;
+    height: 50px; } }
+@media screen and (min-width: 720px) {
+  header a:nth-child(1) {
+    width: 14.8%;
+    margin-left: 1.6%;
+    height: 50px;
+    flex-grow: 2;
+    z-index: 1; }
+
+  header a:nth-child(2) {
+    width: 14.8%;
+    margin-left: 1.6%;
+    height: 50px;
+    flex-grow: 2;
+    z-index: 1; }
+
+  header button {
+    height: 50px;
+    width: -moz-available; }
+
+  header a:last-child {
+    width: 64%;
+    margin-left: 1.6%;
+    flex-grow: 1;
+    margin-bottom: 0;
+    margin-top: 0;
+    z-index: 1;
+    color: #00f0f0; }
+
+  header {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    align-items: center; } }
+/* Fin Menu */
+/* Debut Home */
 @media screen and (max-width: 720px) {
   article > div > div > a > img {
     width: 31.2%;
@@ -44,11 +87,6 @@ h1 {
     margin-left: 1.6%;
     text-align: center; }
 
-  header button {
-    width: 47.6%;
-    margin-left: 1.6%;
-    height: 50px; }
-
   button {
     width: 47.6%;
     margin-left: 26.2%;
@@ -72,7 +110,7 @@ h1 {
     width: 55.8%;
     margin-left: 1.6%; }
 
-  article > div > div > a, article > div div {
+  article > div > div > a, article > div div, article div > a:last-child {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; }
@@ -94,47 +132,10 @@ h1 {
     margin-left: 1.6%;
     text-align: center; }
 
-  header a:nth-child(1) {
-    width: 10.7%;
-    margin-left: 1.6%;
-    height: 50px;
-    flex-grow: 2;
-    z-index: 1; }
-
-  header a:nth-child(2) {
-    width: 10.7%;
-    margin-left: 7.75%;
-    height: 50px;
-    flex-grow: 2;
-    z-index: 1; }
-
-  header button {
-    height: 50px;
-    width: -moz-available; }
-
-  header h1 {
-    width: 59.9%;
-    margin-left: 1.6%;
-    flex-grow: 1;
-    margin-bottom: 0;
-    margin-top: 0;
-    z-index: 1;
-    color: #00f0f0; }
-
-  header {
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
-    align-items: center; }
-
-  article div > a:last-child {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; }
-
   article div > a:last-child > button {
     width: 14.8%;
     margin-left: 42.6%;
     height: 50px; } }
+/* Fin home */
 
 /*# sourceMappingURL=style.css.map */
