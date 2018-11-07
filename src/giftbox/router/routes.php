@@ -43,10 +43,13 @@ $router->addRoute('newBox', '/box/new/', '\giftbox\control\giftBoxController', '
 //post une nouvelle box
 $router->addRoute('postBox', '/box/post/', '\giftbox\control\giftBoxController', 'postBox'); //POST
 
-//ajoute une prestation à une box : box/add/?id=x&add=x
+//récupère l'action du formulaire d'une box pour éxecuter la méthode demandée
+$router->addRoute('formBox', '/box/form/', '\giftbox\control\giftBoxController', 'formBox');
+
+//ajoute une prestation à une box : box/add/?id=x
 $router->addRoute('addBox', '/box/add/', '\giftbox\control\giftBoxController', 'addPrestationBox'); //UPDATE
 
-//retire une prestation à une box : box/remove/?id=x&rm=x
+//retire une prestation à une box : box/remove/?id=x
 $router->addRoute('removeBox', '/box/remove/', '\giftbox\control\giftBoxController', 'removePrestationBox'); //DELETE
 
 //modifie les données d'une box
@@ -59,7 +62,7 @@ $router->addRoute('confirmBox', '/box/confirm/', '\giftbox\control\giftBoxContro
 $router->addRoute('summaryBox', '/box/summary/', '\giftbox\control\giftBoxController', 'viewBox'); //GET
 
 //page pour payer : /box/pay/?id=x
-$router->addRoute('payBox', '/box/pay/', '\giftbox\control\giftBoxController', 'viewBox'); //GET
+$router->addRoute('payBox', '/box/pay/', '\giftbox\control\giftBoxController', 'viewBoxes'); //GET
 
 //modifie l'état d'une box à 3 (payé) : /box/pay/send/?id=x
 $router->addRoute('payBox', '/box/pay/send/', '\giftbox\control\giftBoxController', 'viewBox'); //UPDATE

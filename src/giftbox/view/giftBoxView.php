@@ -12,8 +12,8 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderHeader(){
         return "<a href='/giftBox/main.php/register/'><button>Inscription</button></a>
-                <a href='/giftBox/main.php/login/'><button>Connexion</button></a>
-                <a href='/giftBox/main.php/home/'><h1>My Gift Box App</h1></a>";
+            <a href='/giftBox/main.php/login/'><button>Connexion</button></a>
+            <a href='/giftBox/main.php/home/'><h1>My Gift Box App</h1></a>";
     }
     
     private function renderFooter(){
@@ -209,9 +209,9 @@ class GiftBoxView extends \mf\view\AbstractView {
         return $res;    
     }
 
-    private function renderBoxNotSave(){
+    private function renderFormBox(){
         $res = "<form name='creer' method='POST' action='/giftBox/main.php/box/form/'>
-                <p> Titre : <p> <input type='text' name='titre'/>
+                <p> Titre : <p> <input type='text' name='titre' value='".$_SESSION["box"]["Nom"]."'/>
                 <p> Message : </p><textarea name='Texte' rows='10' cols='50'>";
         if(isset($_SESSION['box'])){
             if($_SESSION['box']['Message'] != ""){
@@ -246,33 +246,30 @@ class GiftBoxView extends \mf\view\AbstractView {
                 $checked2 = "checked";
                 $checked1 = "";
             }
-        }
-        
+        }        
 
-        $res .= "<input type='radio' name='choixDate' value='1' $checked1/> Aujourd'hui
-                <input type='radio' name='choixDate' value='2' $checked2/> Date précise
-                <input type='radio' name='choixDate' value='3' $checked3/> Une par une";
-
-        $res .= "<input type='submit' name='choixForm' value='Ajouter'/>";
-
-        if(isset($_SESSION['prestations'])){
+        $res .= "<div><input type='radio' name='choixDate' value='1' $checked1/> Aujourd'hui</div>
+            <div><input type='radio' name='choixDate' value='2' $checked2/> Date précise</div>
+            <div><input type='radio' name='choixDate' value='3' $checked3/> Une par une</div>
+            <input type='submit' name='choixForm' value='Ajouter'/>";   
+        if(isset($_SESSION['prestations']) && !empty($_SESSION["prestations"])){
             foreach ($_SESSION['prestations'] as $value) {
-            $router = new \mf\router\Router();
-            $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
-            $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
-            $res = $res . "<div>
-                <a href='".$urlPrestation."'>
-                    <p>".$value['Nom']."</p>
-                    <p>".$value['Prix']." €</p>
-                </a>
-                <p>".$this->data["categories"][$value["IdCategorie"] - 1]."</p>
+                $router = new \mf\router\Router();
+                $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
+                $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
+                $res = $res . "<div>
+                    <a href='".$urlPrestation."'>
+                        <p>".$value['Nom']."</p>
+                        <p>".$value['Prix']." €</p>
+                    </a>
+                    <p>".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
-            </div><hr>
-            <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'><button>X</button></a>";
+                    <p>".$_SESSION["date"][$value["Id"]]."</p>
+                </div><hr>
+                <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'><button>X</button></a>";
             }
-        } 
-
+        }
         $res .= "<input type='submit' name='choixForm' value='Valider'/> </form>";
         return $res;
     }
@@ -334,7 +331,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <input type='radio' name='test' value=''/> <img src='/giftBox/img/modePaiement/mastercard.png' width='200'> <br/> <br/>
                 <input type='radio' name='test' value=''/> <img src='/giftBox/img/modePaiement/cartebleu.jpeg' width='200'> <br/> <br/>
                 <input type='submit' name='payer' value='Payer'/>
-                </form></div>";
+            </form></div>";
         return $res;
     }
 
@@ -345,7 +342,6 @@ class GiftBoxView extends \mf\view\AbstractView {
         E-mail : ".$_SESSION['user']['Email']."<br/> 
         Pseudo : ".$_SESSION['user']['Login']."<br/>
         <a href='/giftBox/main.php/profile/view/'><button>Modifier</button></a>";
-
         return $res;
     }
 
@@ -356,12 +352,11 @@ class GiftBoxView extends \mf\view\AbstractView {
             Mot de passe : <input type='text' nam='mdp' value='' /><br/>
             Confirmation mot de passe : <input type='text' nam='mdpconfirm' value='' /><br/>
             <a href='/giftBox/main.php/profile/update/'><button>Valider</button></a>";
-
         return $res;
     }
 
     private function renderAdmin(){
-        $res = "<a href='/giftBox/main.php/admin/prestation/new/'><button>Ajouter une préstation</button></a> <div>";
+        $res = "<a href='/giftBox/main.php/admin/prestation/new/'><button>Ajouter une préstation</button></a><div>";
             foreach ($this->data['prestations'] as $value) {
                 $router = new \mf\router\Router();
                 $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -377,8 +372,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <p>".$value['Description']."</p>
                 </a>
                 <a href='/giftBox/main.php/admin/prestation/'><button>Modifier</button></a>
-                <a href='/giftBox/main.php/admin/prestation/remove/'><button>X</button></a>
-            </div><hr>";
+                <a href='/giftBox/main.php/admin/prestation/remove/'><button>X</button></a></div><hr>";
             }
         return $res;
     }
@@ -386,28 +380,26 @@ class GiftBoxView extends \mf\view\AbstractView {
     private function renderNewPrestation(){
         return "<h1> Ajout d'une préstation : </h1>
                 <form name='ajout' method='POST'>
-                Categorie : <input type='text' name='categ'/> <br/>
-                Nom : <input type='text' name='nom'/> <br/>
-                Description : <input type='text' name='desc'/><br/>
-                Prix : <input type='text' name='prix'/><br/>
-                Image : <input type='file' name='image'/><br/>
-                <input type='submit' name='valider' value='valider'/><br/>
-                </form>
-                ";
+                    <p>Categorie : </p><input type='text' name='categ'/> <br/>
+                    <p>Nom : </p><input type='text' name='nom'/> <br/>
+                    <p>Description : </p><input type='text' name='desc'/><br/>
+                    <p>Prix : </p><input type='text' name='prix'/><br/>
+                    <p>Image : </p><input type='file' name='image'/><br/>
+                    <input type='submit' name='valider' value='valider'/><br/>
+                </form>";
     }
 
     private function renderAdminPrestation(){
         return "<h1> Modification de la préstation </h1>
                 <form name='update' method='POST'>
-                Nom : <input type='text' name='nom' value='".$this->data['Nom']."'/> <br/>
-                Description : <input type='text' name='nom' value='".$this->data['Description']."'/> <br/>
-                Prix : <input type='text' name='nom' value='".$this->data['Prix']."'/> <br/>
-                Image : <input type='file' name='image'/><br/>
+                    <p>Nom : </p><input type='text' name='nom' value='".$this->data['Nom']."'/> <br/>
+                    <p>Description : </p><input type='text' name='nom' value='".$this->data['Description']."'/> <br/>
+                    <p>Prix : </p><input type='text' name='nom' value='".$this->data['Prix']."'/> <br/>
+                    <p>Image : </p><input type='file' name='image'/><br/>
                 </form>";
     }
     
     protected function renderBody($selector=null){
-
         $string = "<header>".self::renderHeader()."</header><section><article>";
         if ($selector == 'Home')$string = $string . self::renderHome();
         if ($selector == 'Prestation')$string = $string . self::renderPrestation();
@@ -418,7 +410,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'Register')$string = $string . self::renderRegister();
         if ($selector == 'Boxes')$string = $string . self::renderBoxes();
         if ($selector == 'Box')$string = $string . self::renderBox();
-        if ($selector == 'NewBox')$string = $string . self::renderBoxNotSave();
+        if ($selector == 'FormBox')$string = $string . self::renderFormBox();
         if ($selector == 'SummaryBox')$string = $string . self::renderSummaryBox();
         if ($selector == 'PayBox')$string = $string . self::renderBoxPay();
         if ($selector == 'Profil')$string = $string . self::renderProfil();
