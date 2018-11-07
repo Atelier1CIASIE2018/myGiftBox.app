@@ -59,7 +59,7 @@ $router->addRoute('confirmBox', '/box/confirm/', '\giftbox\control\giftBoxContro
 $router->addRoute('summaryBox', '/box/summary/', '\giftbox\control\giftBoxController', 'viewBox'); //GET
 
 //page pour payer : /box/pay/?id=x
-$router->addRoute('payBox', '/box/pay/', '\giftbox\control\giftBoxController', 'payBox'); //GET
+$router->addRoute('payBox', '/box/pay/', '\giftbox\control\giftBoxController', 'viewBox'); //GET
 
 //modifie l'état d'une box à 3 (payé) : /box/pay/send/?id=x
 $router->addRoute('payBox', '/box/pay/send/', '\giftbox\control\giftBoxController', 'viewBox'); //UPDATE
