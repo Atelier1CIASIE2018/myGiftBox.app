@@ -1,5 +1,4 @@
 <?php
-
 $router = new \mf\router\Router();
 
 //page d'accueil
@@ -57,7 +56,7 @@ $router->addRoute('updateBox', '/box/update/', '\giftbox\control\giftBoxControll
 $router->addRoute('confirmBox', '/box/confirm/', '\giftbox\control\giftBoxController', 'confirmBox'); //UPDATE
 
 //page de récapitulatif avant le payement : box/summary/?id=x
-$router->addRoute('summaryBox', '/box/summary/', '\giftbox\control\giftBoxController', 'summaryBox'); //GET
+$router->addRoute('summaryBox', '/box/summary/', '\giftbox\control\giftBoxController', 'viewBox'); //GET
 
 //modifie l'état d'une box à 3 (payé) : /box/pay/?id=x
 $router->addRoute('payBox', '/box/pay/', '\giftbox\control\giftBoxController', 'payBox'); //UPDATE
