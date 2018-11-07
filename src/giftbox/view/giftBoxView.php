@@ -53,7 +53,8 @@ class GiftBoxView extends \mf\view\AbstractView {
         return $res;
     }
 
-    private function renderPrestations(){        $res = "<div>";
+    private function renderPrestations(){
+        $res = "<div>";
         foreach ($this->data["prestations"] as $value) {
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
@@ -104,21 +105,21 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderLogin(){
         return "<h1> Connexion </h1>
-                <form name='connexion' method='POST' action='/loginPost/'>
-                Login : <input tpye='text' name='login'/><br/>
-                Mot de passe : <input type='text' name='mdp'/><br/>
+                <form name='connexion' method='POST' action='/giftBox/main.php/loginPost/'>
+                <p>Login : </p><input tpye='text' name='login'/><br/>
+                <p>Mot de passe : </p><input type='text' name='mdp'/><br/>
                 <input type='submit' name='valider' value='Valider'/>
                 </form>";
     }
 
     private function renderRegister(){
         return "<h1> Inscription </h1>
-                <form name='inscription' method='POST' action='/registerPost/'>
-                Prénom : <input tpye='text' name='prenom'/><br/>
-                Nom : <input type='text' name='nom'/><br/>
-                Login : <input type='text' name='log'/><br/>
-                Mot de passe : <input type='text' name='mdp'/><br/>
-                E-mail : <input type='text' name='mail'/><br/>
+                <form name='inscription' method='POST' action='/giftBox/main.php/registerPost/'>
+                <p>Prénom : </p><input tpye='text' name='prenom'/><br/>
+                <p>Nom : </p><input type='text' name='nom'/><br/>
+                <p>Login : </p><input type='text' name='log'/><br/>
+                <p>Mot de passe : </p><input type='text' name='mdp'/><br/>
+                <p>E-mail : </p><input type='text' name='mail'/><br/>
                 <input type='submit' name='valider' value='Valider'/>
                 </form>";
     }
@@ -210,7 +211,9 @@ class GiftBoxView extends \mf\view\AbstractView {
         return "<form name='creer' method='POST'>
                 <p> Titre : <p>
                 <textarea name='Texte' rows='10' cols='50'>
-                Écrire votre message ici
+                "
+                if($_SESSION['new'])
+                "Écrire votre message ici
                 </textarea>
                 <h2> Tarif : 00,00 € </h2>
                 <input type='radio' name='test' value='Maintenant' checked /> Maintenant
@@ -244,7 +247,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             $res .= "<p> URL </p>";
         }
         else{
-            $res .= "<a href='/giftBox/main.php/box/pay/'><button>Payer</button></a>";      
+            $res .= "<a href='/giftBox/main.php/box/confirm/?Id=".$this->data['box']['Id']."'><button>Payer</button></a>";      
         }
         $res .= "</div>";
         return $res;
@@ -272,7 +275,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         }
 
         $res .= "Tarif total : " . $total . " € <br/><br/>
-            <form name='acheter' method='POST'>
+            <form name='acheter' method='POST' action='/giftBox/main.php/box/pay/send/?Id=".$this->data['box']['Id']."'>
                 <input type='radio' name='test' value='' checked /> <img src='/giftBox/img/modePaiement/paypal.jpg' width='200'> <br/>
                 <input type='radio' name='test' value=''/> <img src='/giftBox/img/modePaiement/visa.png' width='200'> <br/>
                 <input type='radio' name='test' value=''/> <img src='/giftBox/img/modePaiement/mastercard.png' width='200'> <br/> <br/>
@@ -299,7 +302,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             E-mail : <input type='text' nam='email' value='".$_SESSION['user']['Email']."' /><br/>
             Mot de passe : <input type='text' nam='mdp' value='' /><br/>
             Confirmation mot de passe : <input type='text' nam='mdpconfirm' value='' /><br/>
-            <a href='/giftBox/main.php/profile/'><button>Valider</button></a>";
+            <a href='/giftBox/main.php/profile/update/'><button>Valider</button></a>";
 
         return $res;
     }
