@@ -155,6 +155,6 @@ class giftBoxController extends \mf\control\AbstractController {
 
     public function newPrestation(){
         $vue = new \giftbox\view\giftBoxView("");
-        $vue->render('newPrestation');
+        $vue->render('NewPrestation');
     }
 }
