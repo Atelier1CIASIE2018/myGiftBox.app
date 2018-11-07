@@ -211,9 +211,9 @@ class GiftBoxView extends \mf\view\AbstractView {
         return "<form name='creer' method='POST'>
                 <p> Titre : <p>
                 <textarea name='Texte' rows='10' cols='50'>
-                "
-                if($_SESSION['new'])
-                "Écrire votre message ici
+                
+                
+                Écrire votre message ici
                 </textarea>
                 <h2> Tarif : 00,00 € </h2>
                 <input type='radio' name='test' value='Maintenant' checked /> Maintenant
