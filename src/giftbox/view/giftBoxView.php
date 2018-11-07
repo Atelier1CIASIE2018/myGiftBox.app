@@ -21,7 +21,8 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
     
     private function renderHome(){
-        $res = "<div> <h1> Nouveauté : </h1>";
+        $res = " <img src='/giftBox/img/cadeau.jpg' >
+                <div> <h1> Nouveauté : </h1>";
         foreach ($this->data["prestations"] as $value) {
             $router = new \mf\router\Router();
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -249,6 +250,38 @@ class GiftBoxView extends \mf\view\AbstractView {
         return $res;
     }
 
+    private function renderBoxPay(){
+        $res = "<div> <h1> Préstations sélectionnée : </h1>";
+        $total = 0;
+        foreach ($this->data["prestations"] as $value) {
+            $total += $value['Prix'];
+            $router = new \mf\router\Router();
+            $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
+            $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
+            $res = $res . "<div>
+                <a href='".$urlPrestation."'>
+                    <p>".$value['Nom']."</p>
+                    <p>".$value['Prix']." €</p>
+                </a>
+                <p><a href='".$urlCategorie."'>".$this->data["categories"][$value["IdCategorie"] - 1]."</a></p>
+                <a href='".$urlPrestation."'>
+                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
+                    <p>".$value['Description']."</p>
+                </a>
+            </div><hr>";
+        }
+
+        $res .= "Tarif total : " . $total . " € <br/><br/>
+            <form name='acheter' method='POST'>
+                <input type='radio' name='test' value='' checked /> <img src='/giftBox/img/modePaiement/paypal.jpg' width='200'> <br/>
+                <input type='radio' name='test' value=''/> <img src='/giftBox/img/modePaiement/visa.png' width='200'> <br/>
+                <input type='radio' name='test' value=''/> <img src='/giftBox/img/modePaiement/mastercard.png' width='200'> <br/> <br/>
+                <input type='radio' name='test' value=''/> <img src='/giftBox/img/modePaiement/cartebleu.jpeg' width='200'> <br/> <br/>
+                <input type='submit' name='payer' value='Payer'/>
+                </form></div>";
+        return $res;
+    }
+
     private function renderProfil(){
         $res = "<div><h1> Voici votre profil : </h1> <br/> 
         Nom : ".$_SESSION['user']['Nom']."<br/> 
@@ -331,6 +364,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'Box')$string = $string . self::renderBox();
         if ($selector == 'NewBox')$string = $string . self::renderNewBox();
         if ($selector == 'SummaryBox')$string = $string . self::renderSummaryBox();
+        if ($selector == 'PayBox')$string = $string . self::renderBoxPay();
         if ($selector == 'Profil')$string = $string . self::renderProfil();
         if ($selector == 'ProfilView')$string = $string . self::renderProfilView();
         if ($selector == 'Admin')$string = $string . self::renderAdmin();
