@@ -101,11 +101,11 @@ class giftBoxController extends \mf\control\AbstractController {
         if(!isset($_SESSION["prestations"])){
             $id = $_GET["Id"];
             $_SESSION["add"]["prestations"] = array();
-            $_SESSION["add"]["id"] = $id
+            $_SESSION["add"]["id"] = $id;
         }        
         $add = $_GET["Add"];
         array_push($_SESSION["prestations"], $add);
-        
+
     }
 
     public function removeBox(){
