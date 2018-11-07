@@ -26,7 +26,7 @@ class giftBoxController extends \mf\control\AbstractController {
         if($_SERVER["PATH_INFO"] == "/prestation/"){
             $vue->render('Prestation');
         }
-        if($_SERVER["PATH_INFO"] == "/admin/prestation"){
+        if($_SERVER["PATH_INFO"] == "/admin/prestation/"){
             $vue->render('AdminPrestation');
         }
     }
