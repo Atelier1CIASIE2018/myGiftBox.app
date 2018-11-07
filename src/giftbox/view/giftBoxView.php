@@ -11,7 +11,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderHeader(){
-        return '<head> <link rel="stylesheet" type="text/css" href="/html/css/style.css"> </head>
+        return '<link rel="stylesheet" type="text/css" href="/giftBox/html/css/style.css">
                 <h1>My Gift Box App</h1>';
     }
     
@@ -214,6 +214,8 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <input type='radio' name='maintenant' value='Maintenant' checked /> Maintenant
                 <input type='radio' name='datePrecise' value='Maintenant'/> Date précise
                 <input type='radio' name='uneParUne' value='Maintenant'/> Une par une
+                <br/>
+                <a href='main.php/prestations'><button>Ajouter</button></a>
                 </form>";
     }
     
