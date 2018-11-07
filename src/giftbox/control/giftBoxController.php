@@ -89,7 +89,12 @@ class giftBoxController extends \mf\control\AbstractController {
             array_push($nomCategories, $categorie->Nom);
         }
         $vue = new \giftbox\view\giftBoxView(array("box" => $box, "prestations" => $prestations, "categories" => $nomCategories));
-        $vue->render('Box');
+        if($_SERVER["PATH_INFO"] == "/box/"){
+            $vue->render('Box');
+        }
+        if($_SERVER["PATH_INFO"] == "/box/summary/"){
+            $vue->render('SummaryBox');
+        }
     }
 
     public function newBox(){
