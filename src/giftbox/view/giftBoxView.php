@@ -271,10 +271,8 @@ class GiftBoxView extends \mf\view\AbstractView {
         return $res;
     }
 
-    // NOT VERIFIED
-
     private function renderAdmin(){
-        $res = "<a href='/giftBox/main.php/admin/new/'><button>Ajouter une préstation</button></a> <div>";
+        $res = "<a href='/giftBox/main.php/admin/prestation/new/'><button>Ajouter une préstation</button></a> <div>";
             foreach ($this->data['prestations'] as $value) {
                 $router = new \mf\router\Router();
                 $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -301,11 +299,11 @@ class GiftBoxView extends \mf\view\AbstractView {
     private function renderNewPrestation(){
         return "<h1> Ajout d'une préstation : </h1>
                 <form name='ajout' method='POST'>
-                Nom : <input type='text' name='nom'/>
-                Description : <input type='text' name='desc'/>
-                Prix : <input type='text' name='prix'/>
-                Image : <input type='file' name='image'/>
-                <input type='submit' name='valider' value='valider'/>
+                Nom : <input type='text' name='nom'/> <br/>
+                Description : <input type='text' name='desc'/><br/>
+                Prix : <input type='text' name='prix'/><br/>
+                Image : <input type='file' name='image'/><br/>
+                <input type='submit' name='valider' value='valider'/><br/>
                 </form>
                 ";
     }
@@ -327,7 +325,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'Profil')$string = $string . self::renderProfil();
         if ($selector == 'ProfilView')$string = $string . self::renderProfilView();
         if ($selector == 'Admin')$string = $string . self::renderAdmin();
-        if ($selector == 'NewPresation')$string = $string . self::renderNewPrestation();
+        if ($selector == 'NewPrestation')$string = $string . self::renderNewPrestation();
         $string = $string ."</article></section><footer>".self::renderFooter()."</footer>";
         return $string;
     }
