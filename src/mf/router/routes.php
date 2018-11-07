@@ -35,7 +35,7 @@ $router->addRoute('registerPost', '/registerPost/', '\giftbox\control\giftBoxCon
 //liste des boxes du profil
 $router->addRoute('boxes', '/boxes/', '\giftbox\control\giftBoxController', 'viewBoxes'); //GET
 
-//détails d'une box : /box/?id=x
+//détails d'une box : /box/?id=x avec ou sans &update
 $router->addRoute('box', '/box/', '\giftbox\control\giftBoxController', 'viewBox'); //GET
 
 //page d'ajout d'une box
