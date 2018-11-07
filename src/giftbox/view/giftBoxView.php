@@ -11,7 +11,8 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderHeader(){
-        return '<h1>My Gift Box App</h1>';
+        return '<head> <link rel="stylesheet" type="text/css" href="/html/css/style.css"> </head>
+                <h1>My Gift Box App</h1>';
     }
     
     private function renderFooter(){
@@ -36,7 +37,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 </a>
             </div><hr>";
         }
-        $res = $res . " <a href='main.php/prestations/'><button>Voir plus..</button></a></div>";
+        $res = $res . " <a href='main.php/prestations/'><button>Voir plus...</button></a></div>";
         return $res;
     }
 
@@ -204,14 +205,15 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderNewBox(){
-        return "<p> Titre : <p>
-                <form name='inscription' method='POST' action='/registerPost/'>
-                Prénom : <input tpye='text' name='prenom'/><br/>
-                Nom : <input type='text' name='nom'/><br/>
-                Login : <input type='text' name='log'/><br/>
-                Mot de passe : <input type='text' name='mdp'/><br/>
-                E-mail : <input type='text' name='mail'/><br/>
-                <input type='submit' name='valider' value='Valider'/>
+        return "<form name='creer' method='POST'>
+                <p> Titre : <p>
+                <textarea name='Texte' rows='10' cols='50'>
+                Écrire votre message ici
+                </textarea>
+                <h2> Tarif : 00,00 € </h2>
+                <input type='radio' name='maintenant' value='Maintenant' checked /> Maintenant
+                <input type='radio' name='datePrecise' value='Maintenant'/> Date précise
+                <input type='radio' name='uneParUne' value='Maintenant'/> Une par une
                 </form>";
     }
     
