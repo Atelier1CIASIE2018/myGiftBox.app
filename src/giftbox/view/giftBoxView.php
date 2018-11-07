@@ -13,7 +13,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     private function renderHeader(){
         return "<a href='/giftBox/main.php/register/'><button>Inscription</button></a>
                 <a href='/giftBox/main.php/login/'><button>Connexion</button></a>
-                <h1>My Gift Box App</h1>";
+                <a href='/giftBox/main.php/home/'><h1>My Gift Box App</h1></a>";
     }
     
     private function renderFooter(){
