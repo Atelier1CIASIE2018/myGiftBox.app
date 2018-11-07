@@ -69,6 +69,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
                 </a>
+                <a href='/giftBox/main.php/box/add/?Id=".$value['Id']."'><button>+</button></a>
             </div><hr>";
         }
         $res .= "</div>";
@@ -264,8 +265,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
             </div><hr>
-            <input type='submit' name='choixForm' value='X'/>";
-
+            <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'><button>X</button></a>";
         }
 
         $res .= "<input type='submit' name='choixForm' value='Valider'/> </form>";
