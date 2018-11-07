@@ -19,7 +19,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
     
     private function renderHome(){
-        $res = "<div>";
+        $res = "<div> <h1> Nouveauté : </h1>";
         foreach ($this->data["prestations"] as $value) {
             $router = new \mf\router\Router();
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -36,7 +36,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 </a>
             </div><hr>";
         }
-        $res = $res . "</div>";
+        $res = $res . " <a href='main.php/prestations/'><button>Voir plus..</button></a></div>";
         return $res;
     }
 
@@ -202,6 +202,18 @@ class GiftBoxView extends \mf\view\AbstractView {
         $res .= "</div><br>";
         return $res;
     }
+
+    private function renderNewBox(){
+        return "<p> Titre : <p>
+                <form name='inscription' method='POST' action='/registerPost/'>
+                Prénom : <input tpye='text' name='prenom'/><br/>
+                Nom : <input type='text' name='nom'/><br/>
+                Login : <input type='text' name='log'/><br/>
+                Mot de passe : <input type='text' name='mdp'/><br/>
+                E-mail : <input type='text' name='mail'/><br/>
+                <input type='submit' name='valider' value='Valider'/>
+                </form>";
+    }
     
     protected function renderBody($selector=null){
 
@@ -215,7 +227,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'Register')$string = $string . self::renderRegister();
         if ($selector == 'Boxes')$string = $string . self::renderBoxes();
         if ($selector == 'Box')$string = $string . self::renderBox();
-        //if ($selector == '')$string = $string . self::();
+        if ($selector == 'NewBox')$string = $string . self::renderNewBox();
         $string = $string ."</article></section><footer>".self::renderFooter()."</footer>";
         return $string;
     }
