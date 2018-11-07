@@ -222,6 +222,7 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderSummaryBox(){
         $res = "<div> <h1> Préstations sélectionnée : </h1>";
+        var_dump($this->data);
             foreach ($this->data["prestations"] as $value) {
             $router = new \mf\router\Router();
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -253,13 +254,17 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderProfil(){
         $res = "<div><h1> Voici votre profil : </h1> <br/> 
-        Nom : ".$this->data[0]."<br/> 
-        Prénom : ".$this->data[1]."<br/> 
-        E-mail : ".$this->data[2]."<br/> 
-        Pseudo : ".$this->data[3]."<br/>
+        Nom : ".$_SESSION['user']['Nom']."<br/> 
+        Prénom : ".$_SESSION['user']['Prenom']."<br/> 
+        E-mail : ".$_SESSION['user']['Email']."<br/> 
+        Pseudo : ".$_SESSION['user']['Login']."<br/>
         <a href='/giftBox/main.php/profile/view/'><button>Payer</button></a>";
 
         return $res;
+    }
+
+    private function renderProfilView(){
+
     }
     
     protected function renderBody($selector=null){
@@ -275,7 +280,9 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'Boxes')$string = $string . self::renderBoxes();
         if ($selector == 'Box')$string = $string . self::renderBox();
         if ($selector == 'NewBox')$string = $string . self::renderNewBox();
+        if ($selector == 'SummaryBox')$string = $string . self::renderSummaryBox();
         if ($selector == 'Profil')$string = $string . self::renderProfil();
+        if ($selector == 'ProfilView')$string = $string . self::renderProfilView();
         $string = $string ."</article></section><footer>".self::renderFooter()."</footer>";
         return $string;
     }
