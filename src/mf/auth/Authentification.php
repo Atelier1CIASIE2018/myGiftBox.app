@@ -6,8 +6,8 @@ class authentification extends AbstractAuthentification{
 	function __construct(){
 
 	    if(isset($_SESSION['user_login'])){
-	        $this->user_login = $_SESSION['user_login'];
-	        $this->access_level = $_SESSION['level'];	
+	        $this->user_login = $_SESSION['user_login']->login;
+	        $this->access_level = $_SESSION['user_login']->Level;	
 	        $this->logged_in = true;
 	    }
 	    else{
@@ -22,14 +22,14 @@ class authentification extends AbstractAuthentification{
 		$this->user_login = $username;
 		$this->access_level = $access_level;
 		$this->logged_in = true;
-		$_SESSION['user_login'] = $username;
-     	$_SESSION['access_level'] = $level;
+		$_SESSION['user_login']->login = $username;
+     	$_SESSION['user_login']->Level = $level;
 	}
 
 	function logout()
     {
-        $_SESSION['user_login'] = null;
-        $_SESSION['access_level'] = -9999;
+        $_SESSION['user_login']->login = null;
+        $_SESSION['user_login']->Level = -9999;
         $this->user_login = null;
         $this->access_level = -9999;
         $this->logged_in = false;

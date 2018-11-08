@@ -27,47 +27,27 @@ body > footer{
 	margin-top:50px;
 	@include grille(1, 1.6%, 0, 1);
 }
-@media screen and (max-width:720px){
-header button{
-		@include grille(12, 1.6%, 0, 6);
-		height:50px;
-	}
-	#home > img:first-child{
-		display:none;
-	}
-}
-@media screen and (min-width:720px){
-	header{
+@media all and (max-width:720px){
+header{
 		background-color:DarkGray   ;
 	}
-	header a:nth-child(1){
-		@include grille(12, 1.6%, 0, 2);
+	header div{
+		@include grille(2, 1.6%, 0, 1);
 		height:50px;
-		flex-grow:2;
-		z-index:1;
-	}
-	header a:nth-child(2){
-		@include grille(12, 1.6%, 0, 2);
-		height:50px;
-		flex-grow:2;
-		z-index:1;
-		
 	}
 	header button{
 		height:50px;
 		width:-moz-available
 	}
-	header a:last-child{
-		@include grille(12, 1.6%, 0, 8);
+	header a:first-child{
+		@include grille(1, 1.6%, 0, 1);
 		flex-grow:1;
-		margin-bottom:0;
-		margin-top:0;
 		z-index:1;
 		color:darken(Aqua, 3%) ;
 	}
 	header{
 		display:flex;
-		flex-direction:row-reverse;
+		flex-direction:row;
 		flex-wrap:wrap;
 		align-items: center;
 	}
@@ -75,13 +55,63 @@ header button{
 		width:100%;
 		z-index:0;
 	}
+	header > div:nth-child(4) > a > button{
+		font-size:13px;
+	}
+	#home > img:first-child{
+		display:none;
+	}
+	header > div:nth-child(2){
+		order:1
+	}
+	header > div:nth-child(3){
+		order:4
+	}
+	header > div:nth-child(4){
+		order:3
+	}
+	header > div:nth-child(5){
+		order:2
+	}
+}
+@media all and (min-width:720px){
+	header{
+		background-color:DarkGray   ;
+	}
+	header div{
+		@include grille(14, 1.6%, 0, 2);
+		height:50px;
+	}
+	header button{
+		height:50px;
+		width:-moz-available
+	}
+	header a:first-child{
+		@include grille(14, 1.6%, 0, 6);
+		flex-grow:1;
+		z-index:1;
+		color:darken(Aqua, 3%) ;
+	}
+	header{
+		display:flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+		align-items: center;
+	}
+	#home > img:first-child{
+		width:100%;
+		z-index:0;
+	}
+	header > div:nth-child(4) > a > button{
+		font-size:13px;
+	}
 }
 
 
 /* Fin Menu */
 /* Debut Home */
 
-@media screen and (max-width:720px){
+@media all and (max-width:1100px){
 	#home > div{
 		@include prestationMobile();
 	}
@@ -91,7 +121,7 @@ header button{
 	}
 }
 
-@media screen and (min-width:720px){
+@media all and(min-width:1100px){
 	#home > div{
 		@include prestationPC();
 	}
@@ -104,35 +134,35 @@ header button{
 /* Fin home */
 /* Debut Inscription/connection */
 
-@media screen and (min-width:720px){
-	article > form {
+@media all and (min-width:720px){
+	#log {
 		display:flex;
 		flex-direction: row;
 		flex-wrap: wrap;
 		@include grille(3, 1.6%, 1, 1);
 	}
-	article > form > input, article > form > p{
+	#log > input, #log > p{
 		width:100%;
 		text-align:center;
 	}
-	article input:last-child{
+	#log input:last-child{
 		width:auto;
 		margin:auto;
 		margin-top:20px;
 	}
 }
-@media screen and (max-width:720px){
-	article > form {
+@media all and (max-width:720px){
+	#log > form {
 		display:flex;
 		flex-direction: row;
 		flex-wrap: wrap;
 		@include grille(10, 1.6%, 1, 8);
 	}
-	article > form > input, article > form > p{
+	#log > input, #log > p{
 		width:100%;
 		text-align:center;
 	}
-	article input:last-child{
+	#log input:last-child{
 		margin-top:20px;
 	}
 }
@@ -140,12 +170,12 @@ header button{
 /* Fin Inscription/Connection */
 /* Debut Prestations */
 
-@media screen and (min-width:720px){
+@media all and (min-width:720px){
 	#prestations > div{
 		@include prestationPC();
 	}
 }
-@media screen and (max-width:720px){
+@media all and (max-width:720px){
 	#prestations > div{
 		@include prestationMobile();
 	}
@@ -154,7 +184,7 @@ header button{
 /* Fin categorie */
 /* Debut prestation */
 
-@media screen and (min-width:720px){
+@media all and (min-width:720px){
 	#prestation {
 		display:flex;
 		flex-direction:row;
@@ -186,7 +216,7 @@ header button{
 		width:100%;
 	}
 }
-@media screen and (max-width:720px){
+@media all and (max-width:720px){
 	#prestation {
 		display:flex;
 		flex-direction:row;
@@ -222,12 +252,12 @@ header button{
 /* Fin prestation */
 /* Debut categorie */
 
-@media screen and (min-width:720px){
+@media all and (min-width:720px){
 	#categorie {
 		@include prestationPC();
 	}
 }
-@media screen and (max-width:720px){
+@media all and (max-width:720px){
 	#categorie {
 		@include prestationMobile();
 	}
@@ -235,3 +265,81 @@ header button{
 }
 
 /* Fin prestation */
+/* Debut box */
+
+@media all and (min-width:720px){
+	#box, #box > div > a, #box > div{
+		display:flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+	}
+	#box > p, #box > textarea, #box > h2{
+		@include grille(12, 1.6%, 1, 10);
+		text-align:center;
+	}
+	#box > input{
+		@include grille(12, 1.6%, 4, 4);
+	}
+	#box > div{
+		@include grille(12, 1.6%, 1, 10);
+		border: 2px black solid;
+		margin-top:20px;
+	}
+	#box > div > p:nth-child(1), #box > div > p:nth-child(2), #box > div > p:nth-child(3){
+		@include grille(20, 1.6%, 0, 5);
+		text-align:center;
+	}
+	#box > div > a{
+		@include grille(20, 1.6%, 4, 1);
+		text-align:right;
+		font-size:30px;
+	}
+	#box > div > img{
+		@include grille(10, 1.6%, 0, 3);
+	}
+	#box > div > p:last-child{
+		@include grille(10, 1.6%, 0, 7);
+	}
+	#box > div > a:nth-child(2){
+		@include grille(10, 1.6%, 0, 1);
+	}
+}
+@media all and (max-width:720px){
+	#box, #box > div > a, #box > div{
+		display:flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+	}
+	#box > p, #box > textarea, #box > h2{
+		@include grille(1, 1.6%, 0, 1);
+		text-align:center;
+	}
+	#box > input{
+		@include grille(12, 1.6%, 4, 4);
+	}
+	#box > div{
+		@include grille(1, 1.6%, 0, 1);
+		border: 2px black solid;
+		margin-top:20px;
+	}
+	#box > div > p:nth-child(1), #box > div > p:nth-child(2), #box > div > p:nth-child(3){
+		@include grille(20, 1.6%, 0, 5);
+		text-align:center;
+	}
+	#box > div > a{
+		@include grille(20, 1.6%, 4, 1);
+		text-align:right;
+		font-size:30px;
+	}
+	#box > div > img{
+		@include grille(10, 1.6%, 0, 3);
+	}
+	#box > div > p:last-child{
+		@include grille(10, 1.6%, 0, 7);
+	}
+	#box > div > a:nth-child(2){
+		@include grille(10, 1.6%, 0, 1);
+	}
+}
+
+/* Fin box */
