@@ -7,10 +7,6 @@
 body{
 	margin:0;
 	background-color: #eaecee ;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	height:100%;
 }
 h1{
 	text-align:center;
@@ -158,7 +154,70 @@ header button{
 /* Fin categorie */
 /* Debut prestation */
 
-
+@media screen and (min-width:720px){
+	#prestation {
+		display:flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+	}
+	#prestation > p:first-child{
+		@include grille(12, 1.6%, 2, 4);
+		text-align:left;
+		font-size:30px;
+		margin-top: 50px;
+	}
+	#prestation > p:nth-child(2){
+		@include grille(12, 1.6%, 0, 4);
+		text-align:right;
+		font-size:30px;
+		margin-top: 50px;
+	}
+	#prestation img{
+		@include grille(12, 1.6%, 2, 8);
+	}
+	#prestation > p {
+		@include grille(12, 1.6%, 2, 8);
+		text-align:justify;
+	}
+	#prestation a:last-child {
+		@include grille(12, 1.6%, 2, 8);
+	}
+	#prestation a:last-child > button{
+		width:100%;
+	}
+}
+@media screen and (max-width:720px){
+	#prestation {
+		display:flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+	}
+	#prestation > p:first-child{
+		@include grille(2, 1.6%, 0, 1);
+		text-align:left;
+		font-size:30px;
+		margin-top: 50px;
+	}
+	#prestation > p:nth-child(2){
+		@include grille(2, 1.6%, 0, 1);
+		text-align:right;
+		font-size:30px;
+		margin-top: 50px;
+	}
+	#prestation img{
+		@include grille(1, 1.6%, 0, 1);
+	}
+	#prestation > p {
+		@include grille(1, 1.6%, 0, 1);
+		text-align:justify;
+	}
+	#prestation a:last-child {
+		@include grille(1, 1.6%, 0, 1);
+	}
+	#prestation a:last-child > button{
+		width:100%;
+	}
+}
 
 /* Fin prestation */
 /* Debut categorie */
@@ -174,3 +233,5 @@ header button{
 	}
 	
 }
+
+/* Fin prestation */

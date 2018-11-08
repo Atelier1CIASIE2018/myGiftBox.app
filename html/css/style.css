@@ -10,11 +10,7 @@ $cols: dans une grille de x colonnes
 /* Debut regle global */
 body {
   margin: 0;
-  background-color: #eaecee;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  height: 100%; }
+  background-color: #eaecee; }
 
 h1 {
   text-align: center; }
@@ -274,6 +270,76 @@ body > footer {
     margin-left: 1.6%; } }
 /* Fin categorie */
 /* Debut prestation */
+@media screen and (min-width: 720px) {
+  #prestation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+
+  #prestation > p:first-child {
+    width: 31.2%;
+    margin-left: 18%;
+    text-align: left;
+    font-size: 30px;
+    margin-top: 50px; }
+
+  #prestation > p:nth-child(2) {
+    width: 31.2%;
+    margin-left: 1.6%;
+    text-align: right;
+    font-size: 30px;
+    margin-top: 50px; }
+
+  #prestation img {
+    width: 64%;
+    margin-left: 18%; }
+
+  #prestation > p {
+    width: 64%;
+    margin-left: 18%;
+    text-align: justify; }
+
+  #prestation a:last-child {
+    width: 64%;
+    margin-left: 18%; }
+
+  #prestation a:last-child > button {
+    width: 100%; } }
+@media screen and (max-width: 720px) {
+  #prestation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+
+  #prestation > p:first-child {
+    width: 47.6%;
+    margin-left: 1.6%;
+    text-align: left;
+    font-size: 30px;
+    margin-top: 50px; }
+
+  #prestation > p:nth-child(2) {
+    width: 47.6%;
+    margin-left: 1.6%;
+    text-align: right;
+    font-size: 30px;
+    margin-top: 50px; }
+
+  #prestation img {
+    width: 96.8%;
+    margin-left: 1.6%; }
+
+  #prestation > p {
+    width: 96.8%;
+    margin-left: 1.6%;
+    text-align: justify; }
+
+  #prestation a:last-child {
+    width: 96.8%;
+    margin-left: 1.6%; }
+
+  #prestation a:last-child > button {
+    width: 100%; } }
 /* Fin prestation */
 /* Debut categorie */
 @media screen and (min-width: 720px) {
@@ -348,5 +414,6 @@ body > footer {
   #categorie div > :last-child {
     width: 18.08%;
     margin-left: 1.6%; } }
+/* Fin prestation */
 
 /*# sourceMappingURL=style.css.map */
