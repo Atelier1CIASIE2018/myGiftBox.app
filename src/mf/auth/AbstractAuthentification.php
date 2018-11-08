@@ -1,5 +1,5 @@
 <?php
-
+namespace mf\auth;
 
 abstract class AbstractAuthentification {
 
@@ -36,7 +36,6 @@ abstract class AbstractAuthentification {
     public function __toString(){
         return json_encode(get_object_vars($this));
     } 
-
 
     /* Le constructeur: 
      * 
@@ -100,7 +99,6 @@ abstract class AbstractAuthentification {
       */
     
     abstract public function logout();
-
 
     /* La méthode checkAccessRight:
      * 

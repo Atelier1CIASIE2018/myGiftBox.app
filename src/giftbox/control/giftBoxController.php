@@ -79,7 +79,7 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function postRegister(){
-        $data = json_decode(file_get_contents('php://input'));
+        
     }
 
     public function viewBoxes(){

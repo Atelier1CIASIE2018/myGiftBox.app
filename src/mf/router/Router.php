@@ -10,8 +10,8 @@ class Router Extends AbstractRouter{
 		parent::__construct();
 	}
 
-	public function addRoute($name, $url, $ctrl, $mth){
-		self::$routes[$url]=[$ctrl, $mth];
+	public function addRoute($name, $url, $ctrl, $mth, $acces=""){
+		self::$routes[$url]=[$ctrl, $mth, $acces];
 		self::$aliases[$name]=$url;
 
 	}
@@ -22,7 +22,7 @@ class Router Extends AbstractRouter{
 
     public function run(){
     	$path_info = $this->http_req->path_info;
-    	if (array_key_exists($path_info, self::$routes)) {
+    	if (array_key_exists($path_info, self::$routes) && checkAccessRight(self::$routes[$url][3])) {
     		$route = self::$routes[$path_info];
     	}
     	else{
