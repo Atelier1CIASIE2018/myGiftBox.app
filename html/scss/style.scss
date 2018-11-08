@@ -287,6 +287,7 @@ header{
 		@include grille(100, 1.6%, 22, 3);
 		text-align:right;
 		font-size:30px;
+
 	}
 	#box > div > img{
 		@include grille(10, 1.6%, 0, 3);
@@ -368,6 +369,9 @@ header{
 	#viewBox > div:nth-child(7) >a > button{
 		width:100%;
 	}
+	#viewBox > div > a{
+		margin: auto;
+	}
 }
 @media all and (max-width:720px){
 	#viewBox > p, #viewBox > div{
@@ -397,6 +401,9 @@ header{
 	}
 	#viewBox > div:nth-child(7) >a > button{
 		width:100%;
+	}
+	#viewBox > div > a{
+		margin: auto;
 	}
 }
 /* Fin viewBox */

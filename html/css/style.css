@@ -562,7 +562,10 @@ body > footer {
     margin-left: 1.6%; }
 
   #viewBox > div:nth-child(7) > a > button {
-    width: 100%; } }
+    width: 100%; }
+
+  #viewBox > div > a {
+    margin: auto; } }
 @media all and (max-width: 720px) {
   #viewBox > p, #viewBox > div {
     width: 96.8%;
@@ -596,7 +599,10 @@ body > footer {
     margin-left: 1.6%; }
 
   #viewBox > div:nth-child(7) > a > button {
-    width: 100%; } }
+    width: 100%; }
+
+  #viewBox > div > a {
+    margin: auto; } }
 /* Fin viewBox */
 
 /*# sourceMappingURL=style.css.map */
