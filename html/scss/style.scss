@@ -84,7 +84,7 @@ header{
 	}
 	header button{
 		height:50px;
-		width:-moz-available
+		width:100%;
 	}
 	header a:first-child{
 		@include grille(14, 1.6%, 0, 6);
