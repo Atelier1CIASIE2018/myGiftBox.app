@@ -12,7 +12,7 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderHeader(){
         $res = "<a href='/giftBox/main.php/home/'><h1>My Gift Box App</h1></a>";
-        if(isset($_SESSION["user"])){
+        if(isset($_SESSION["user_login"])){
             $res .= "<div><a href='".$this->router->urlFor("/profile/", [])."'><button>Mon Profil</button></a></div>
             <div><a href='".$this->router->urlFor("/boxes/", [])."'><button>Mes coffrets</button></a></div>
             <div><a href='".$this->router->urlFor("/box/new/", [])."'><button>Créer coffret</button></a></div>
@@ -200,12 +200,12 @@ class GiftBoxView extends \mf\view\AbstractView {
             $urlConfirm = $this->router->urlfor('/box/confirm/', ['Id'=>$_SESSION["box"]["Id"]]);
             switch($_SESSION["box"]["Etat"]){
                 case 1:
-                    $res .= "<a href='".$urlBox."&update'><button>Modifier</button></a>
+                    $res .= "<div><a href='".$urlBox."&update'><button>Modifier</button></a>
                     <a href='".$urlConfirm."'><button>Valider</button></a>
-                    <a href='".$urlSummaryBox."'><button>Payer</button></a>";
+                    <a href='".$urlSummaryBox."'><button>Payer</button></a><div>";
                     break;
                 case 2:
-                    $res .= "<a href='".$urlSummaryBox."'><button>Payer</button></a>";
+                    $res .= "<div><a href='".$urlSummaryBox."'><button>Payer</button></a><div>";
                     break;
                 default:
                     switch($_SESSION["box"]["Etat"]){
@@ -241,20 +241,8 @@ class GiftBoxView extends \mf\view\AbstractView {
         else{
             $res .= " placeholder='Veuillez entrer votre message pour le destinataire'>";
         }
-        $res .= "</textarea>";
-
-        if(isset($_SESSION['prestations'][0])){
-            $total = 0;
-            foreach ($_SESSION['prestations'] as $value) {
-                $total += $value['Prix'];
-            }
-            $res .= "<h2> Tarif : ".$total." € </h2>";
-        }
-        else{
-            $res .= "<h2> Tarif : 00,00 € </h2>";
-        }       
-
-        $res .= "<p>Choix de la date d'activation du coffret, la date d'aujourd'hui activera le coffret lors de la validation</p>
+        $res .= "</textarea>
+            <p>Choix de la date d'activation du coffret, la date d'aujourd'hui activera le coffret lors de la validation</p>
             <input type='date' name='date' min='".date("Y-m-d")."' value='";
         if(isset($_SESSION["box"]) && $_SESSION["box"]["Date"] != null){
             $res .= $_SESSION["box"]["Date"]."'>";
@@ -262,6 +250,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         else{
             $res .= date("Y-m-d")."'>";
         }
+        $res .= "<input type='submit' name='choixForm' value='Ajouter'/>";
         if(isset($_SESSION['prestations']) && !empty($_SESSION["prestations"])){
             foreach ($_SESSION['prestations'] as $value) {
                 $res .= "<div>
@@ -273,6 +262,16 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <p>".$value['Description']."</p>
                 </div>";
             }
+        }
+        if(isset($_SESSION['prestations'][0])){
+            $total = 0;
+            foreach ($_SESSION['prestations'] as $value) {
+                $total += $value['Prix'];
+            }
+            $res .= "<h2> Tarif : ".$total." € </h2>";
+        }
+        else{
+            $res .= "<h2> Tarif : 00,00 € </h2>";
         }
         $res .= "<input type='submit' name='choixForm' value='Sauvegarder'/>";
         if(isset($_SESSION["box"]["Id"])){

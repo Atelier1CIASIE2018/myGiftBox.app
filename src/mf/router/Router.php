@@ -41,10 +41,10 @@ class Router Extends AbstractRouter{
             $url .= $route_name;
         }
         if ($param_list != null) {
-            $url = $url . "?";
+            $url .= "?";
             foreach ($param_list as $key => $value) {
-                if(substr($url, 0, -1) == "?"){
-                    $url .= $key."=".$value."&";
+                if(substr($url, strlen($url) - 1, 1) == "?"){
+                    $url .= $key."=".$value;
                 }
                 else{
                     $url .= "&".$key."=".$value;
