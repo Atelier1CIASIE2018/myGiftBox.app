@@ -38,7 +38,10 @@ body > footer {
   header button {
     width: 47.6%;
     margin-left: 1.6%;
-    height: 50px; } }
+    height: 50px; }
+
+  #home > img:first-child {
+    display: none; } }
 @media screen and (min-width: 720px) {
   header {
     background-color: DarkGray; }
@@ -74,88 +77,92 @@ body > footer {
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: wrap;
-    align-items: center; } }
+    align-items: center; }
+
+  #home > img:first-child {
+    width: 100%;
+    z-index: 0; } }
 /* Fin Menu */
 /* Debut Home */
 @media screen and (max-width: 720px) {
-  #home > div > div > a > img {
+  #home > div div > a > img {
     width: 31.2%;
     margin-left: 1.6%; }
-
-  #home > div > div > a > p {
+  #home > div div > a > p {
     width: 64%;
     margin-left: 1.6%; }
-
-  #home > div > div > a:nth-child(3) > p {
+  #home > div div > a:nth-child(3) > p {
     width: 64%;
     margin-left: 1.6%; }
-
-  #home > div > div > a, #home > div div {
+  #home > div div > a, #home > div div {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; }
-
   #home > div div > a:nth-child(1) {
     width: 64%;
     margin-left: 1.6%;
     text-align: center; }
-
-  #home > div > div > a:nth-child(1) > p {
+  #home > div div > a:nth-child(1) > p {
     width: 47.6%;
     margin-left: 1.6%; }
-
-  #home > div > div > p {
+  #home > div div > p {
     width: 31.2%;
     margin-left: 1.6%;
     text-align: center; }
-
-  button {
+  #home > div button {
     width: 47.6%;
     margin-left: 26.2%;
     height: 50px; }
+  #home > div a:last-child > button {
+    height: 50px;
+    width: 50px; }
+  #home > div div > :nth-last-child(2) {
+    width: 77.12%;
+    margin-left: 1.6%; }
+  #home > div div > :last-child {
+    width: 18.08%;
+    margin-left: 1.6%; }
 
-  #home > img:first-child {
-    display: none; } }
+  #home > div:nth-child(2) > a:nth-child(8) > button:nth-child(1) {
+    width: 31.2%;
+    margin-left: 34.4%;
+    height: 50px; } }
 @media screen and (min-width: 720px) {
-  #home > div > div > a > p {
-    width: 55.8%;
-    margin-left: 1.6%; }
-
-  #home > div > div > a > img {
-    width: 23%;
-    margin-left: 9.8%; }
-
-  #home > img:first-child {
-    width: 100%;
-    z-index: 0; }
-
-  #home > div > div > a:nth-child(3) > p {
-    width: 55.8%;
-    margin-left: 1.6%; }
-
-  #home > div > div > a, #home > div div, #home div > a:last-child {
+  #home > div div, #home > div div > a, #home > div a:last-child {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; }
-
-  #home div div a {
-    width: 100%; }
-
+  #home > div div > a > p {
+    width: 64%;
+    margin-left: 1.6%; }
+  #home > div div > a > img {
+    width: 23%;
+    margin-left: 9.8%; }
+  #home > div div > a:nth-child(3) > p {
+    width: 55.8%;
+    margin-left: 1.6%; }
   #home > div div > a:nth-child(1) {
     width: 55.8%;
     margin-left: 9.8%;
     text-align: center; }
-
-  #home > div > div > a:nth-child(1) > p {
+  #home > div div > a:nth-child(1) > p {
     width: 47.6%;
     margin-left: 1.6%; }
-
-  #home > div > div > p {
+  #home > div div > p {
     width: 23%;
     margin-left: 1.6%;
     text-align: center; }
+  #home > div a:last-child > button {
+    height: 50px;
+    width: 50px; }
+  #home > div div > :nth-last-child(2) {
+    width: 86.96%;
+    margin-left: 1.6%; }
+  #home > div div > :last-child {
+    width: 8.24%;
+    margin-left: 1.6%; }
 
-  #home div > a:last-child > button {
+  #home > div:nth-child(2) > a:nth-child(8) > button:nth-child(1) {
     width: 14.8%;
     margin-left: 42.6%;
     height: 50px; } }
@@ -194,104 +201,152 @@ body > footer {
 /* Fin Inscription/Connection */
 /* Debut Prestations */
 @media screen and (min-width: 720px) {
-  #prestations > div > div > a > p {
-    width: 55.8%;
-    margin-left: 1.6%; }
-
-  #prestations > div > div > a > img {
-    width: 23%;
-    margin-left: 9.8%; }
-
-  #prestations > img:first-child {
-    width: 100%;
-    z-index: 0; }
-
-  #prestations > div > div > a:nth-child(3) > p {
-    width: 55.8%;
-    margin-left: 1.6%; }
-
-  #prestations > div > div > a, #prestations > div div {
+  #prestations > div div, #prestations > div div > a, #prestations > div a:last-child {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; }
-
-  #prestations div div a {
-    width: 100%; }
-
+  #prestations > div div > a > p {
+    width: 64%;
+    margin-left: 1.6%; }
+  #prestations > div div > a > img {
+    width: 23%;
+    margin-left: 9.8%; }
+  #prestations > div div > a:nth-child(3) > p {
+    width: 55.8%;
+    margin-left: 1.6%; }
   #prestations > div div > a:nth-child(1) {
     width: 55.8%;
     margin-left: 9.8%;
     text-align: center; }
-
-  #prestations > div > div > a:nth-child(1) > p {
+  #prestations > div div > a:nth-child(1) > p {
     width: 47.6%;
     margin-left: 1.6%; }
-
-  #prestations > div > div > p {
+  #prestations > div div > p {
     width: 23%;
     margin-left: 1.6%;
     text-align: center; }
-
-  #prestations div > a:last-child > button {
-    height: 50px; }
-
-  #prestations > div > div > :nth-child(4) {
+  #prestations > div a:last-child > button {
+    height: 50px;
+    width: 50px; }
+  #prestations > div div > :nth-last-child(2) {
     width: 86.96%;
     margin-left: 1.6%; }
-
-  #prestations > div > div > :nth-child(5) {
+  #prestations > div div > :last-child {
     width: 8.24%;
     margin-left: 1.6%; } }
 @media screen and (max-width: 720px) {
-  #prestations > div > div > a > img {
+  #prestations > div div > a > img {
     width: 31.2%;
     margin-left: 1.6%; }
-
-  #prestations > div > div > a > p {
+  #prestations > div div > a > p {
     width: 64%;
     margin-left: 1.6%; }
-
-  #prestations > div > div > a:nth-child(3) > p {
+  #prestations > div div > a:nth-child(3) > p {
     width: 64%;
     margin-left: 1.6%; }
-
-  #prestations > div > div > a, #prestations > div div {
+  #prestations > div div > a, #prestations > div div {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; }
-
   #prestations > div div > a:nth-child(1) {
     width: 64%;
     margin-left: 1.6%;
     text-align: center; }
-
-  #prestations > div > div > a:nth-child(1) > p {
+  #prestations > div div > a:nth-child(1) > p {
     width: 47.6%;
     margin-left: 1.6%; }
-
-  #prestations > div > div > p {
+  #prestations > div div > p {
     width: 31.2%;
     margin-left: 1.6%;
     text-align: center; }
-
-  button {
+  #prestations > div button {
     width: 47.6%;
     margin-left: 26.2%;
     height: 50px; }
-
-  #prestations > img:first-child {
-    display: none; }
-
-  #prestations div > a:last-child > button {
-    height: 50px; }
-
-  #prestations > div > div > :nth-child(4) {
-    width: 67.28%;
+  #prestations > div a:last-child > button {
+    height: 50px;
+    width: 50px; }
+  #prestations > div div > :nth-last-child(2) {
+    width: 77.12%;
     margin-left: 1.6%; }
-
-  #prestations > div > div > :nth-child(5) {
-    width: 27.92%;
+  #prestations > div div > :last-child {
+    width: 18.08%;
     margin-left: 1.6%; } }
-/* Fin prestations */
+/* Fin categorie */
+/* Debut prestation */
+/* Fin prestation */
+/* Debut categorie */
+@media screen and (min-width: 720px) {
+  #categorie div, #categorie div > a, #categorie a:last-child {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+  #categorie div > a > p {
+    width: 64%;
+    margin-left: 1.6%; }
+  #categorie div > a > img {
+    width: 23%;
+    margin-left: 9.8%; }
+  #categorie div > a:nth-child(3) > p {
+    width: 55.8%;
+    margin-left: 1.6%; }
+  #categorie div > a:nth-child(1) {
+    width: 55.8%;
+    margin-left: 9.8%;
+    text-align: center; }
+  #categorie div > a:nth-child(1) > p {
+    width: 47.6%;
+    margin-left: 1.6%; }
+  #categorie div > p {
+    width: 23%;
+    margin-left: 1.6%;
+    text-align: center; }
+  #categorie a:last-child > button {
+    height: 50px;
+    width: 50px; }
+  #categorie div > :nth-last-child(2) {
+    width: 86.96%;
+    margin-left: 1.6%; }
+  #categorie div > :last-child {
+    width: 8.24%;
+    margin-left: 1.6%; } }
+@media screen and (max-width: 720px) {
+  #categorie div > a > img {
+    width: 31.2%;
+    margin-left: 1.6%; }
+  #categorie div > a > p {
+    width: 64%;
+    margin-left: 1.6%; }
+  #categorie div > a:nth-child(3) > p {
+    width: 64%;
+    margin-left: 1.6%; }
+  #categorie div > a, #categorie div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+  #categorie div > a:nth-child(1) {
+    width: 64%;
+    margin-left: 1.6%;
+    text-align: center; }
+  #categorie div > a:nth-child(1) > p {
+    width: 47.6%;
+    margin-left: 1.6%; }
+  #categorie div > p {
+    width: 31.2%;
+    margin-left: 1.6%;
+    text-align: center; }
+  #categorie button {
+    width: 47.6%;
+    margin-left: 26.2%;
+    height: 50px; }
+  #categorie a:last-child > button {
+    height: 50px;
+    width: 50px; }
+  #categorie div > :nth-last-child(2) {
+    width: 77.12%;
+    margin-left: 1.6%; }
+  #categorie div > :last-child {
+    width: 18.08%;
+    margin-left: 1.6%; } }
 
 /*# sourceMappingURL=style.css.map */
