@@ -112,7 +112,7 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderLogin(){
         return "<h1> Connexion </h1>
-                <form name='connexion' method='POST' action='/giftBox/main.php/loginPost/'>
+                <form id='log' name='connexion' method='POST' action='/giftBox/main.php/loginPost/'>
                 <p>Login : </p><input tpye='text' name='login'/>
                 <p>Mot de passe : </p><input type='text' name='mdp'/>
                 <input type='submit' name='valider' value='Valider'/>
@@ -121,7 +121,7 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderRegister(){
         return "<h1> Inscription </h1>
-                <form name='inscription' method='POST' action='/giftBox/main.php/registerPost/'>
+                <form id='log' name='inscription' method='POST' action='/giftBox/main.php/registerPost/'>
                 <p>Prénom : </p><input tpye='text' name='prenom'/>
                 <p>Nom : </p><input type='text' name='nom'/>
                 <p>Login : </p><input type='text' name='log'/>
@@ -224,7 +224,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderFormBox(){
-        $res = "<form name='creer' method='POST' action='/giftBox/main.php/box/form/'>
+        $res = "<form id='box' name='creer' method='POST' action='/giftBox/main.php/box/form/'>
                 <p> Nom : <p> <input type='text' name='nom' value='";
         if(isset($_SESSION["box"]["Nom"])){
             $res .= $_SESSION["box"]["Nom"];
@@ -248,46 +248,9 @@ class GiftBoxView extends \mf\view\AbstractView {
         }
         else{
             $res .= "<h2> Tarif : 00,00 € </h2>";
-        }
+        }       
 
-        $checked1 = "checked";
-        $checked2 = "";
-        $checked3 = "";
-
-        if(isset($_SESSION['date'])){
-            $bool = false;
-            if(count($_SESSION['date']) > 1)
-            {
-                for ($i=0; $i < count($_SESSION['date']) - 1; $i++) 
-                { 
-
-                    if($_SESSION['date'][$i]["Date"] != $_SESSION['date'][$i + 1]["Date"])
-                    {
-                        $checked3 = "checked";
-                        $checked1 = "";
-                    }
-                    else if(date("Y-m-d") == $_SESSION['date'][$i]["Date"] || $_SESSION['date'][$i]["Date"] != $_SESSION['date'][$i+1]["Date"])
-                    {
-                        $bool = true;
-                    }
-                }
-
-                if(!$bool)
-                {
-                    $checked2 = "checked";
-                    $checked1 = "";
-                }
-            }
-            else if(count($_SESSION['date']) == 1 && date("Y-m-d") != $_SESSION["date"][0]["Date"]){
-                $checked2 = "checked";
-                $checked1 = "";
-            }            
-        }        
-
-        $res .= "<div><input type='radio' name='choixDate' value='1' $checked1/> Aujourd'hui</div>
-            <div><input type='radio' name='choixDate' value='2' $checked2/> Date précise</div>
-            <div><input type='radio' name='choixDate' value='3' $checked3/> Une par une</div>
-            <input type='submit' name='choixForm' value='Ajouter'/>"; 
+        $res .= "<input type='date' name='date'>"; 
 
         if(isset($_SESSION['prestations']) && !empty($_SESSION["prestations"])){
             foreach ($_SESSION['prestations'] as $value) {

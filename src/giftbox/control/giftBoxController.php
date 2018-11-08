@@ -219,17 +219,18 @@ class giftBoxController extends \mf\control\AbstractController {
         $box->Message = $_POST["Texte"];
         $box->save();
         if(is_array($_SESSION["date"])){
-            foreach ($_SESSION["date"] as $key => $value) {
-                $composer = \giftbox\model\Composer::where("IdBox", "=", $box->Id)->where("IdPrestation", "=", $key);
-                $composer->Date = $_SESSION["date"][$key];
-                $composer->save();
+            foreach ($_SESSION["date"] as $element) {
+                $composer = \giftbox\model\Composer::where("IdBox", "=", $box->Id)->where("IdPrestation", "=", $element["IdPrestation"])->first();
+                var_dump($composer);
+                //$composer->Date = $element["Date"];                
+                //$composer->save();
+                unset($_SESSION["box"]);
+                unset($_SESSION["prestations"]);
+                unset($_SESSION["date"]);
+                unset($_SESSION["categories"]);
+                //header("Location: ".$this->router->urlFor("/boxes/", [])."/");
             }
-        }
-        unset($_SESSION["box"]);
-        unset($_SESSION["prestations"]);
-        unset($_SESSION["date"]);
-        unset($_SESSION["categories"]);
-        header("Location: ".$this->router->urlFor("/boxes/", [])."/");
+        }        
     }
 
     public function postBox(){
