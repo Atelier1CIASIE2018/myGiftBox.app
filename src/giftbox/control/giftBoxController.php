@@ -135,13 +135,13 @@ class giftBoxController extends \mf\control\AbstractController {
         if(isset($_POST["choixForm"])){
             if($_POST["choixForm"] == "Ajouter"){
                 if(isset($_SESSION["box"])){
-                    $_SESSION["box"]->Nom = $_POST["titre"];
+                    $_SESSION["box"]->Nom = $_POST["nom"];
                     $_SESSION["box"]->IdUser = $_SESSION["user"]->Id;
                     $_SESSION["box"]->Message = $_POST["Texte"];
                 }
                 else{
                     $box = new \giftBox\model\Box();
-                    $box->Nom = $_POST["titre"];
+                    $box->Nom = $_POST["nom"];
                     $box->IdUser = $_SESSION["user"]->Id;
                     $_SESSION["box"]->Message = $_POST["Texte"];
                     if($_POST["choixDate"] == 1){
@@ -163,13 +163,13 @@ class giftBoxController extends \mf\control\AbstractController {
             }
             if($_POST["choixForm"] == "Sauvegarder"){
                 if(isset($_SESSION["box"])){
-                    $_SESSION["box"]->Nom = $_POST["titre"];
+                    $_SESSION["box"]->Nom = $_POST["nom"];
                     $_SESSION["box"]->IdUser = $_SESSION["user"]->Id;
                     $_SESSION["box"]->Message = $_POST["Texte"];
                 }
                 else{
                     $box = new \giftBox\model\Box();
-                    $box->Nom = $_POST["titre"];
+                    $box->Nom = $_POST["nom"];
                     $box->IdUser = $_SESSION["user"]->Id;
                     $box->Message = $_POST["Texte"];
                     $_SESSION["box"] = $box;
@@ -189,6 +189,9 @@ class giftBoxController extends \mf\control\AbstractController {
                     }
                 }
                 $this->router->executeRoute("updateBox");
+            }
+            if($_POST["choixForm"] == "Valider"){
+                header("Location: ".$this->router->urlFor("/box/confirm/", [])."/?Id=".$_SESSION["box"]["Id"]);
             }
         }
     }
@@ -211,7 +214,11 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function updateBox(){
-        echo "updateBox";
+        $box = \giftbox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
+        $box->Nom = $_POST["nom"];
+        $box->Message = $_POST["Texte"];
+        $box->save();
+        header("Location: ".$this->router->urlFor("/boxes/", [])."/");
     }
 
     public function postBox(){
@@ -220,9 +227,26 @@ class giftBoxController extends \mf\control\AbstractController {
 
     public function confirmBox(){
         $id = $_GET["Id"];
+        $save = false;
         $box = \giftbox\model\Box::find($id);
-        $box->Etat = 3;
-        $box->save();
+        $composer = \giftbox\model\Composer::where("IdBox", "=", $box->Id)->get();
+        $idPrestations = array();
+        foreach ($composer as $c) {
+            array_push($idPrestations, $c->IdPrestation);
+        }
+        $prestations = \giftbox\model\Prestation::whereIn("Id", $idPrestations)->get();
+        if($prestations->count() >= 2){
+            $idCategorieTest = $prestations[0]["IdCategorie"];
+            $i = 1;
+            while($save == false && $i < $prestations->count()){
+                if($prestations[$i]["IdCategorie"] != $idCategorieTest){
+                    $save = true;
+                    $box->Etat = 2;
+                    $box->save();
+                }
+                $i++;
+            }
+        }
         header("Location: ".$this->router->urlFor("/boxes/", [])."/");
     }
 
