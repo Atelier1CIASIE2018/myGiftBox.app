@@ -25,19 +25,19 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <img src='/giftBox/img/cadeau.jpg' >
                 <div> <h1> Nouveautés : </h1>";
         foreach ($this->data["prestations"] as $value) {
-            $router = new \mf\router\Router();
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
-            $res = $res . "<div>
+            $res .="<div>
                 <a href='".$urlPrestation."'>
                     <p>".$value['Nom']."</p>
                     <p>".$value['Prix']." €</p>
                 </a>
-                <p><a href='".$urlCategorie."'>".$this->data["categories"][$value["IdCategorie"] - 1]."</a></p>
+                <p><a href='".$urlCategorie."'>".$this->data["categories"][$value["IdCategorie"] - 1]."</p>
                 <a href='".$urlPrestation."'>
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
                 </a>
+                <a href='/giftBox/main.php/box/add/?Id=".$value['Id']."'><button>+</button></a>
             </div><hr>";
         }
         $res = $res . " <a href='/giftBox/main.php/prestations/'><button>Voir plus...</button></a></div></div>";
@@ -91,14 +91,19 @@ class GiftBoxView extends \mf\view\AbstractView {
     private function renderCategorie(){
         $res = "<div id='categorie'>";
         foreach ($this->data as $value1) {            
-            $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value1['Id']]);
-            $res = $res . "<div>
+            $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
+            $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
+            $res .="<div>
                 <a href='".$urlPrestation."'>
-                    <p>".$value1['Nom']."</p>
-                    <p>".$value1['Prix']." €</p>
-                    <img src ='/giftBox/img/".$value1['Img']."' width='200'>
-                    <p>".$value1['Description']."</p>
+                    <p>".$value['Nom']."</p>
+                    <p>".$value['Prix']." €</p>
                 </a>
+                <p><a href='".$urlCategorie."'>".$this->data["categories"][$value["IdCategorie"] - 1]."</p>
+                <a href='".$urlPrestation."'>
+                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
+                    <p>".$value['Description']."</p>
+                </a>
+                <a href='/giftBox/main.php/box/add/?Id=".$value['Id']."'><button>+</button></a>
             </div><hr>";
         }
         $res = $res."</div>";
