@@ -268,9 +268,9 @@ class GiftBoxView extends \mf\view\AbstractView {
                         <p>".$value['Prix']." €</p>
                     </a>
                     <p>".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
-                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
-                    <p>".$value['Description']."</p>                
                     <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'>X</a>
+                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
+                    <p>".$value['Description']."</p>
                 </div>";
             }
         }
