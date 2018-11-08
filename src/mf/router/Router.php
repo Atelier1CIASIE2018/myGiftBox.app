@@ -21,8 +21,9 @@ class Router Extends AbstractRouter{
     }
 
     public function run(){
+        $auth = new \mf\auth\Authentification();
     	$path_info = $this->http_req->path_info;
-    	if (array_key_exists($path_info, self::$routes) && checkAccessRight(self::$routes[$url][3])) {
+    	if (array_key_exists($path_info, self::$routes) && $auth->checkAccessRight(self::$routes[$path_info][2])) {
     		$route = self::$routes[$path_info];
     	}
     	else{

@@ -86,14 +86,14 @@ class giftBoxAuthentification extends \mf\auth\Authentification {
      */
     
     public function loginUser($username, $password){
-    }
 
-    $res = \giftbox\model\User::where('Login', "=", $username)->where('Mdp', '=', $password)->first();
-
-    if($res == null){
-        echo "erreur";
-    }
-    else{
-        $this->login($username,$res['Mdp'],$password,$res['Level']);
+        $res = \giftbox\model\User::where('Login', "=", $username)->where('Mdp', '=', $password)->first();
+        echo $res;
+        if($res == null){
+            echo "erreur";
+        }
+        else{
+            $this->login($username,$res['Mdp'],$password,$res['Level']);
+        }
     }
 }

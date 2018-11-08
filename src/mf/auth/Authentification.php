@@ -3,20 +3,19 @@ namespace mf\auth;
 require_once "AbstractAuthentification.php";
 class authentification extends AbstractAuthentification{
 
+	function __construct(){
 
-	function __construct($user_login){
-
-    if(isset($_SESSION['user_login'])){
-        $this->user_login = $user_login;
-        $this->access_level = $_SESSION['level'];
-        $this->logged_in = true;
-    }
-    else{
-        $this->user_login = null;
-        $this->access_level = -9999;
-        $this->logged_in = false;
-    }
-
+	    if(isset($_SESSION['user_login'])){
+	        $this->user_login = $_SESSION['user_login'];
+	        $this->access_level = $_SESSION['level'];	
+	        $this->logged_in = true;
+	    }
+	    else{
+	        $this->user_login = null;
+	        $this->access_level = -9999;
+	        $this->logged_in = false;
+	    }
+	}
 
 	function updateSession($username, $level)
 	{
@@ -48,7 +47,7 @@ class authentification extends AbstractAuthentification{
         }
     }
 
-	public function login($username, $db_pass, $pass, $level)
+	function login($username, $db_pass, $pass, $level)
     {
         if(password_verify($pass, $db_pass))
         {
@@ -70,4 +69,3 @@ class authentification extends AbstractAuthentification{
 		return password_verify ($password,$hach);
 	}
 }
-?>
