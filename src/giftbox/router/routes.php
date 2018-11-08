@@ -105,5 +105,5 @@ $router->addRoute('prestationAdmin', '/admin/prestation/', '\giftbox\control\gif
 $router->addRoute('updatePrestation', '/admin/prestation/update/', '\giftbox\control\giftBoxController', 'updatePrestation', \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_ADMIN); //UPDATE
 
 //retire une prestation du catalogue : /admin/prestation/remove/
-$router->addRoute('removePrestation', '/admin/prestation/remove/', '\giftbox\control\giftBoxController', ''); //DELETE
+$router->addRoute('removePrestation', '/admin/prestation/remove/', '\giftbox\control\giftBoxController', '',\giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_ADMIN); //DELETE
 ?>
