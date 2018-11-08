@@ -89,7 +89,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderCategorie(){
-        $res = "<div>";
+        $res = "<div id='categorie'>";
         foreach ($this->data as $value1) {            
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value1['Id']]);
             $res = $res . "<div>
@@ -247,20 +247,48 @@ class GiftBoxView extends \mf\view\AbstractView {
         $checked3 = "";
 
         if(isset($_SESSION['date'])){
-            if(is_array($_SESSION['date'])){
-                $checked3 = "checked";
-                $checked1 = "";
+
+            $bool = false;
+
+            if(count($_SESSION['date'] > 1))
+            {
+                for ($i=1; $i < count($_SESSION['date']); $i++) 
+                { 
+
+                    if($_SESSION['date'][$i] != $_SESSION['date'][$i + 1])
+                    {
+                        $checked3 = "checked";
+                        $checked1 = "";
+                    }
+                    else if(date("Y-m-d") == $_SESSION['date'] || $_SESSION['date'][$i] != $_SESSION['date'][$i+1])
+                    {
+                        $bool = true;
+                    }
+                }
+
+                if(!$bool)
+                {
+                    $checked2 = "checked";
+                    $checked1 = "";
+                }
             }
-            else if(date("Y-m-d") != $_SESSION['date'] && $_SESSION['date'] != "1970-01-01"){
-                $checked2 = "checked";
-                $checked1 = "";
+            else if(count($_SESSION['date'] == 1)){
+
+                if(date("Y-m-d") != $_SESSION['date']){
+                    $checked2 = "checked";
+                    $checked1 = "";
+                }
             }
+            
+
+            
         }        
 
         $res .= "<div><input type='radio' name='choixDate' value='1' $checked1/> Aujourd'hui</div>
             <div><input type='radio' name='choixDate' value='2' $checked2/> Date précise</div>
             <div><input type='radio' name='choixDate' value='3' $checked3/> Une par une</div>
-            <input type='submit' name='choixForm' value='Ajouter'/>";   
+            <input type='submit' name='choixForm' value='Ajouter'/>"; 
+
         if(isset($_SESSION['prestations']) && !empty($_SESSION["prestations"])){
             foreach ($_SESSION['prestations'] as $value) {
                 $router = new \mf\router\Router();
