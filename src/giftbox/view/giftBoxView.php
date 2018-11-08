@@ -180,7 +180,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderBox(){
-        $res = "<div>
+        $res = "<div id='viewBox'>
             <p>Nom : ".$_SESSION["box"]["Nom"]."</p>
             <p>Message : ".$_SESSION["box"]["Message"]."</p>";
         if(!empty($_SESSION["prestations"])){
@@ -188,9 +188,9 @@ class GiftBoxView extends \mf\view\AbstractView {
                 $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
                 $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
                 $res .= "<div>
-                        <p>".$value['Nom']."</p>
-                        <p>".$value['Prix']." €</p>
-                        <p>".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
+                        <p>Nom: ".$value['Nom']."</p>
+                        <p>Prix: ".$value['Prix']." €</p>
+                        <p>Catégorie: ".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
                         <img src ='/giftBox/img/".$value['Img']."'width='200'>
                         <p>".$value['Description']."</p>
                     </div><hr>";
