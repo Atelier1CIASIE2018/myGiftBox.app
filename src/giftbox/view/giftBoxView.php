@@ -268,7 +268,7 @@ class GiftBoxView extends \mf\view\AbstractView {
 
                 if(!$bool)
                 {
-                    $checked2 = "checked"; 
+                    $checked2 = "checked";
                     $checked1 = "";
                 }
             }
