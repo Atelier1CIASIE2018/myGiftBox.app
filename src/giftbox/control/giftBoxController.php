@@ -1,8 +1,12 @@
 <?php
 namespace giftbox\control;
 
-$_SESSION["user"] = new \giftbox\model\User();
-$_SESSION["user"]->Id = 1;
+$_SESSION["user_login"] = new \giftbox\model\User();
+$_SESSION["user_login"]->Id = 1;
+$_SESSION["user_login"]->Prenom = "Test";
+$_SESSION["user_login"]->Nom = "Test";
+$_SESSION["user_login"]->Login = "TTest";
+$_SESSION["user_login"]->Level = 200;
 
 class giftBoxController extends \mf\control\AbstractController {
     private $router;
