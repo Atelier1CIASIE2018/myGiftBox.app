@@ -45,10 +45,10 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderPrestation(){
-        $res = "<div>
+        $res = "<div id='prestation'>
             <p>".$this->data['Nom']."</p>
             <p>".$this->data['Prix']." €</p>
-            <img src ='/giftBox/img/".$this->data['Img']."' width='200'>
+            <img src ='/giftBox/img/".$this->data['Img']."'>
             <p>".$this->data['Description']."</p>
             <a href='/giftBox/main.php/box/add/?Id=".$this->data['Id']."'><button>+</button></a>
         </div>";
