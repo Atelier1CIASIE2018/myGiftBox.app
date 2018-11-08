@@ -235,7 +235,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         }
         $res .= "'/>
             <p> Message : </p><textarea name='Texte' rows='10' cols='50'";
-        if(isset($_SESSION['box']) && $_SESSION['box']['Message'] != ""){
+        if(isset($_SESSION['box']["Message"]) && $_SESSION['box']['Message'] != ""){
             $res .= ">".$_SESSION['box']['Message'];
         }
         else{
@@ -244,7 +244,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         $res .= "</textarea>
             <p>Choix de la date d'activation du coffret, la date d'aujourd'hui activera le coffret lors de la validation</p>
             <input type='date' name='date' min='".date("Y-m-d")."' value='";
-        if(isset($_SESSION["box"]) && $_SESSION["box"]["Date"] != null){
+        if(isset($_SESSION["box"]["Date"]) && $_SESSION["box"]["Date"] != null){
             $res .= $_SESSION["box"]["Date"]."'>";
         }
         else{
