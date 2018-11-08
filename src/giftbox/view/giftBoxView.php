@@ -50,6 +50,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             <p>".$this->data['Prix']." €</p>
             <img src ='/giftBox/img/".$this->data['Img']."' width='200'>
             <p>".$this->data['Description']."</p>
+            <a href='/giftBox/main.php/box/add/?Id=".$this->data['Id']."'><button>+</button></a>
         </div>";
         return $res;  // FINI
     }
