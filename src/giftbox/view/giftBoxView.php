@@ -98,7 +98,6 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <p>".$value['Nom']."</p>
                     <p>".$value['Prix']." €</p>
                 </a>
-                <p></p>
                 <a href='".$urlPrestation."'>
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
