@@ -224,17 +224,21 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderFormBox(){
+        var_dump($_SESSION);
         $res = "<form name='creer' method='POST' action='/giftBox/main.php/box/form/'>
-                <p> Nom : <p> <input type='text' name='nom' value='".$_SESSION["box"]["Nom"]."'/>
-                <p> Message : </p><textarea name='Texte' rows='10' cols='50'>";
-        if(isset($_SESSION['box'])){
-            if($_SESSION['box']['Message'] != ""){
-            $res .= $_SESSION['box']['Message'] . "</textarea>";
-            } 
+                <p> Nom : <p> <input type='text' name='nom' value='";
+        if(isset($_SESSION["box"]["Nom"])){
+            $res .= $_SESSION["box"]["Nom"];
+        }
+        $res .= "'/>
+            <p> Message : </p><textarea name='Texte' rows='10' cols='50'";
+        if(isset($_SESSION['box']) && $_SESSION['box']['Message'] != ""){
+            $res .= ">".$_SESSION['box']['Message'];
         }
         else{
-            $res .= "Veuillez saisir un message </textarea>";
+            $res .= " placeholder='Veuillez entrer votre message pour le destinataire'>";
         }
+        $res .= "</textarea>";
 
         if(isset($_SESSION['prestations'][0])){
             $total = 0;
@@ -252,12 +256,11 @@ class GiftBoxView extends \mf\view\AbstractView {
         $checked3 = "";
 
         if(isset($_SESSION['date'])){
-
             $bool = false;
 
-            if(count($_SESSION['date'] > 1))
+            if(count($_SESSION['date']) > 1)
             {
-                for ($i=1; $i < count($_SESSION['date']); $i++) 
+                for ($i=1; $i <= count($_SESSION['date']) - 1; $i++) 
                 { 
 
                     if($_SESSION['date'][$i] != $_SESSION['date'][$i + 1])
@@ -318,9 +321,11 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'>X</a>";
             }
         }
-        $res .= "<input type='submit' name='choixForm' value='Sauvegarder'/>
-            <input type='submit' name='choixForm' value='Valider'/>
-            </form>";
+        $res .= "<input type='submit' name='choixForm' value='Sauvegarder'/>;";
+        if(isset($_SESSION["box"]["Id"])){
+            $res .= "<input type='submit' name='choixForm' value='Valider'/>";
+        }
+        $res .= "</form>";
         return $res;
     }
 

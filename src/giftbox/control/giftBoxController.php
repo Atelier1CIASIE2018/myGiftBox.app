@@ -145,14 +145,14 @@ class giftBoxController extends \mf\control\AbstractController {
                     $box->IdUser = $_SESSION["user"]->Id;
                     $_SESSION["box"]->Message = $_POST["Texte"];
                     if($_POST["choixDate"] == 1){
-                        $_SESSION["date"] = date("Y-m-d");
+                        $_SESSION["date"] = array(date("Y-m-d"));
                     }
                     if($_POST["choixDate"] == 2){
                         if($_POST["date"] > date("Y-m-d")){
-                            $_SESSION["date"] = $_POST["date"];
+                            $_SESSION["date"] = array($_POST["date"]);
                         } 
                         else{
-                            $_SESSION["date"] = 0;
+                            $_SESSION["date"] = array("1970-01-01");
                         }                          
                     }
                     if($_POST["choixDate"] == 3){
@@ -177,7 +177,7 @@ class giftBoxController extends \mf\control\AbstractController {
                         $_SESSION["date"] = date("Y-m-d");
                     }
                     if($_POST["choixDate"] == 2){
-                        if($_POST["date"] > date("Y-m-d")){
+                        if(date("Y-m-d", strtotime($_POST["date"])) > date("Y-m-d")){
                             $_SESSION["date"] = $_POST["date"];
                         } 
                         else{
@@ -218,6 +218,17 @@ class giftBoxController extends \mf\control\AbstractController {
         $box->Nom = $_POST["nom"];
         $box->Message = $_POST["Texte"];
         $box->save();
+        if(is_array($_SESSION["date"])){
+            foreach ($_SESSION["date"] as $key => $value) {
+                $composer = \giftbox\model\Composer::where("IdBox", "=", $box->Id)->where("IdPrestation", "=", $key);
+                $composer->Date = $_SESSION["date"][$key];
+                $composer->save();
+            }
+        }
+        unset($_SESSION["box"]);
+        unset($_SESSION["prestations"]);
+        unset($_SESSION["date"]);
+        unset($_SESSION["categories"]);
         header("Location: ".$this->router->urlFor("/boxes/", [])."/");
     }
 
@@ -247,6 +258,10 @@ class giftBoxController extends \mf\control\AbstractController {
                 $i++;
             }
         }
+        unset($_SESSION["box"]);
+        unset($_SESSION["prestations"]);
+        unset($_SESSION["date"]);
+        unset($_SESSION["categories"]);
         header("Location: ".$this->router->urlFor("/boxes/", [])."/");
     }
 
