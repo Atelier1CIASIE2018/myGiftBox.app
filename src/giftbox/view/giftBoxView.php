@@ -90,7 +90,7 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderCategorie(){
         $res = "<div id='categorie'>";
-        foreach ($this->data as $value1) {            
+        foreach ($this->data as $value) {            
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
             $res .="<div>
