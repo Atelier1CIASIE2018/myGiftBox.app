@@ -15,8 +15,8 @@ class GiftBoxView extends \mf\view\AbstractView {
         if(isset($_SESSION["user"])){
             $res .= "<div><a href='".$this->router->urlFor("/profile/", [])."'><button>Mon Profil</button></a></div>
             <div><a href='".$this->router->urlFor("/boxes/", [])."'><button>Mes coffrets</button></a></div>
-            <div><a href='".$this->router->urlFor("/box/new/", [])."'><button>Créer un coffret</button></a></div>
-            <div><a href='".$this->router->urlFor("/profile/logout/", [])."'><button>Mes coffrets</button></a></div>";
+            <div><a href='".$this->router->urlFor("/box/new/", [])."'><button>Créer coffret</button></a></div>
+            <div><a href='".$this->router->urlFor("/profile/logout/", [])."'><button>Déconnexion</button></a></div>";
         }
         else{
             $res .= "<div><a href='/giftBox/main.php/register/'><button>Inscription</button></a></div>
