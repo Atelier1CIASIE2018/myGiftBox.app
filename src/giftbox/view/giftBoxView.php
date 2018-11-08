@@ -250,24 +250,18 @@ class GiftBoxView extends \mf\view\AbstractView {
             $res .= "<h2> Tarif : 00,00 € </h2>";
         }       
 
-        $res .= "<input type='date' name='date'>"; 
-
+        $res .= "<input type='date' name='date' min='".date("Y-m-d")."' value='";
+        if($_SESSION["box"]["Date"] != null){
+            $res .= $_SESSION["date"]["Date"]."'>";
+        }
+        else{
+            $res .= date("Y-m-d")."'>";
+        }
         if(isset($_SESSION['prestations']) && !empty($_SESSION["prestations"])){
             foreach ($_SESSION['prestations'] as $value) {
                 $router = new \mf\router\Router();
                 $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
                 $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
-                foreach ($_SESSION["date"] as $element) {
-                    if($element["IdPrestation"] == $value["Id"]){
-                        $composer = $element;
-                    }
-                }
-                if($element["Date"] == "1970-01-01"){
-                    $date = "";
-                }
-                else{
-                    $date = $element["Date"];
-                }
                 $res = $res . "<div>
                     <a href='".$urlPrestation."'>
                         <p>".$value['Nom']."</p>
@@ -276,12 +270,11 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <p>".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
-                    <p>".$date."</p>
-                </div><hr>
+                </div>
                 <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'>X</a>";
             }
         }
-        $res .= "<input type='submit' name='choixForm' value='Sauvegarder'/>;";
+        $res .= "<input type='submit' name='choixForm' value='Sauvegarder'/>";
         if(isset($_SESSION["box"]["Id"])){
             $res .= "<input type='submit' name='choixForm' value='Valider'/>";
         }

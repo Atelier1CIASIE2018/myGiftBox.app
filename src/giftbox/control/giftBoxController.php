@@ -94,10 +94,8 @@ class giftBoxController extends \mf\control\AbstractController {
         $box = \giftbox\model\Box::where('Id', "=", $id)->first();
         $composer = \giftbox\model\Composer::where("IdBox", "=", $box->Id)->get();
         $idPrestations = array();
-        $dates = array();
         foreach ($composer as $c) {
             array_push($idPrestations, $c->IdPrestation);
-            array_push($dates, array("IdPrestation" => $c->IdPrestation, "Date" => $c->Date));
         }
         $prestations = \giftbox\model\Prestation::whereIn("Id", $idPrestations)->get();
         $categories = \giftbox\model\Categorie::all();
@@ -108,7 +106,6 @@ class giftBoxController extends \mf\control\AbstractController {
         $_SESSION["box"] = $box;
         $_SESSION["prestations"] = $prestations;
         $_SESSION["categories"] = $nomCategories;
-        $_SESSION["date"] = $dates;  
         $vue = new \giftbox\view\giftBoxView("");
         if($_SERVER["PATH_INFO"] == "/box/"){
             if(isset($_GET["update"])){
