@@ -206,7 +206,7 @@ class giftBoxController extends \mf\control\AbstractController {
         unset($_SESSION["box"]);
         unset($_SESSION["prestations"]);
         unset($_SESSION["categories"]);
-        //header("Location: ".$this->router->urlFor("/boxes/", [])."/");      
+        header("Location: ".$this->router->urlFor("/boxes/", [])."/");      
     }
 
     public function postBox(){

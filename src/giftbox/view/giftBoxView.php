@@ -250,7 +250,8 @@ class GiftBoxView extends \mf\view\AbstractView {
             $res .= "<h2> Tarif : 00,00 € </h2>";
         }       
 
-        $res .= "<input type='date' name='date' min='".date("Y-m-d")."' value='";
+        $res .= "<p>Date d'activation du coffret, la date d'aujourd'hui activera le coffret lors de la validation</p>
+            <input type='date' name='date' min='".date("Y-m-d")."' value='";
         if($_SESSION["box"]["Date"] != null){
             $res .= $_SESSION["box"]["Date"]."'>";
         }
@@ -259,14 +260,9 @@ class GiftBoxView extends \mf\view\AbstractView {
         }
         if(isset($_SESSION['prestations']) && !empty($_SESSION["prestations"])){
             foreach ($_SESSION['prestations'] as $value) {
-                $router = new \mf\router\Router();
-                $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
-                $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
-                $res = $res . "<div>
-                    <a href='".$urlPrestation."'>
-                        <p>".$value['Nom']."</p>
-                        <p>".$value['Prix']." €</p>
-                    </a>
+                $res .= "<div>
+                    <p>".$value['Nom']."</p>
+                    <p>".$value['Prix']." €</p>
                     <p>".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
                     <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'>X</a>
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
