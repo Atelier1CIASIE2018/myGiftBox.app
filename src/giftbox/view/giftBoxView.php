@@ -223,7 +223,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderFormBox(){
-        var_dump($_SESSION);
         $res = "<form name='creer' method='POST' action='/giftBox/main.php/box/form/'>
                 <p> Nom : <p> <input type='text' name='nom' value='";
         if(isset($_SESSION["box"]["Nom"])){
@@ -256,18 +255,17 @@ class GiftBoxView extends \mf\view\AbstractView {
 
         if(isset($_SESSION['date'])){
             $bool = false;
-
             if(count($_SESSION['date']) > 1)
             {
-                for ($i=1; $i <= count($_SESSION['date']) - 1; $i++) 
+                for ($i=0; $i < count($_SESSION['date']) - 1; $i++) 
                 { 
 
-                    if($_SESSION['date'][$i] != $_SESSION['date'][$i + 1])
+                    if($_SESSION['date'][$i]["Date"] != $_SESSION['date'][$i + 1]["Date"])
                     {
                         $checked3 = "checked";
                         $checked1 = "";
                     }
-                    else if(date("Y-m-d") == $_SESSION['date'] || $_SESSION['date'][$i] != $_SESSION['date'][$i+1])
+                    else if(date("Y-m-d") == $_SESSION['date'][$i]["Date"] || $_SESSION['date'][$i]["Date"] != $_SESSION['date'][$i+1]["Date"])
                     {
                         $bool = true;
                     }
@@ -279,16 +277,10 @@ class GiftBoxView extends \mf\view\AbstractView {
                     $checked1 = "";
                 }
             }
-            else if(count($_SESSION['date'] == 1)){
-
-                if(date("Y-m-d") != $_SESSION['date']){
-                    $checked2 = "checked";
-                    $checked1 = "";
-                }
-            }
-            
-
-            
+            else if(count($_SESSION['date']) == 1 && date("Y-m-d") != $_SESSION["date"][0]["Date"]){
+                $checked2 = "checked";
+                $checked1 = "";
+            }            
         }        
 
         $res .= "<div><input type='radio' name='choixDate' value='1' $checked1/> Aujourd'hui</div>
@@ -301,11 +293,16 @@ class GiftBoxView extends \mf\view\AbstractView {
                 $router = new \mf\router\Router();
                 $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
                 $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
-                if($_SESSION["date"][$value["Id"]] == "1970-01-01"){
+                foreach ($_SESSION["date"] as $element) {
+                    if($element["IdPrestation"] == $value["Id"]){
+                        $composer = $element;
+                    }
+                }
+                if($element["Date"] == "1970-01-01"){
                     $date = "";
                 }
                 else{
-                    $date = $_SESSION["date"][$value["Id"]];
+                    $date = $element["Date"];
                 }
                 $res = $res . "<div>
                     <a href='".$urlPrestation."'>

@@ -97,7 +97,7 @@ class giftBoxController extends \mf\control\AbstractController {
         $dates = array();
         foreach ($composer as $c) {
             array_push($idPrestations, $c->IdPrestation);
-            $dates[$c->IdPrestation] = $c->Date;
+            array_push($dates, array("IdPrestation" => $c->IdPrestation, "Date" => $c->Date));
         }
         $prestations = \giftbox\model\Prestation::whereIn("Id", $idPrestations)->get();
         $categories = \giftbox\model\Categorie::all();
