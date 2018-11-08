@@ -163,27 +163,15 @@ class giftBoxController extends \mf\control\AbstractController {
                     $_SESSION["box"]->Nom = $_POST["nom"];
                     $_SESSION["box"]->IdUser = $_SESSION["user"]->Id;
                     $_SESSION["box"]->Message = $_POST["Texte"];
+                    $_SESSION["box"]->Date = $_POST["date"];
                 }
                 else{
                     $box = new \giftBox\model\Box();
                     $box->Nom = $_POST["nom"];
                     $box->IdUser = $_SESSION["user"]->Id;
                     $box->Message = $_POST["Texte"];
+                    $box->Date = $_POST["date"];
                     $_SESSION["box"] = $box;
-                    if($_POST["choixDate"] == 1){
-                        $_SESSION["date"] = date("Y-m-d");
-                    }
-                    if($_POST["choixDate"] == 2){
-                        if(date("Y-m-d", strtotime($_POST["date"])) > date("Y-m-d")){
-                            $_SESSION["date"] = $_POST["date"];
-                        } 
-                        else{
-                            $_SESSION["date"] = "1970-01-01";
-                        }                          
-                    }
-                    if($_POST["choixDate"] == 3){
-                        $_SESSION["date"] = array();
-                    }
                 }
                 $this->router->executeRoute("updateBox");
             }
@@ -215,19 +203,10 @@ class giftBoxController extends \mf\control\AbstractController {
         $box->Nom = $_POST["nom"];
         $box->Message = $_POST["Texte"];
         $box->save();
-        if(is_array($_SESSION["date"])){
-            foreach ($_SESSION["date"] as $element) {
-                $composer = \giftbox\model\Composer::where("IdBox", "=", $box->Id)->where("IdPrestation", "=", $element["IdPrestation"])->first();
-                var_dump($composer);
-                //$composer->Date = $element["Date"];                
-                //$composer->save();
-                unset($_SESSION["box"]);
-                unset($_SESSION["prestations"]);
-                unset($_SESSION["date"]);
-                unset($_SESSION["categories"]);
-                //header("Location: ".$this->router->urlFor("/boxes/", [])."/");
-            }
-        }        
+        unset($_SESSION["box"]);
+        unset($_SESSION["prestations"]);
+        unset($_SESSION["categories"]);
+        //header("Location: ".$this->router->urlFor("/boxes/", [])."/");      
     }
 
     public function postBox(){

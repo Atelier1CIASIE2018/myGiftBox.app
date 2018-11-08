@@ -252,7 +252,7 @@ class GiftBoxView extends \mf\view\AbstractView {
 
         $res .= "<input type='date' name='date' min='".date("Y-m-d")."' value='";
         if($_SESSION["box"]["Date"] != null){
-            $res .= $_SESSION["date"]["Date"]."'>";
+            $res .= $_SESSION["box"]["Date"]."'>";
         }
         else{
             $res .= date("Y-m-d")."'>";
@@ -269,9 +269,9 @@ class GiftBoxView extends \mf\view\AbstractView {
                     </a>
                     <p>".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
-                    <p>".$value['Description']."</p>
-                </div>
-                <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'>X</a>";
+                    <p>".$value['Description']."</p>                
+                    <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'>X</a>
+                </div>";
             }
         }
         $res .= "<input type='submit' name='choixForm' value='Sauvegarder'/>";
