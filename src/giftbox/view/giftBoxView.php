@@ -11,9 +11,18 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderHeader(){
-        return "<a href='/giftBox/main.php/register/'><button>Inscription</button></a>
-            <a href='/giftBox/main.php/login/'><button>Connexion</button></a>
-            <a href='/giftBox/main.php/home/'><h1>My Gift Box App</h1></a>";
+        $res = "<a href='/giftBox/main.php/home/'><h1>My Gift Box App</h1></a>";
+        if(isset($_SESSION["user"])){
+            $res .= "<div><a href='".$this->router->urlFor("/profile/", [])."'><button>Mon Profil</button></a></div>
+            <div><a href='".$this->router->urlFor("/boxes/", [])."'><button>Mes coffrets</button></a></div>
+            <div><a href='".$this->router->urlFor("/box/new/", [])."'><button>Créer un coffret</button></a></div>
+            <div><a href='".$this->router->urlFor("/profile/logout/", [])."'><button>Mes coffrets</button></a></div>";
+        }
+        else{
+            $res .= "<div><a href='/giftBox/main.php/register/'><button>Inscription</button></a></div>
+            <div><a href='/giftBox/main.php/login/'><button>Connexion</button></a></div>";
+        }
+        return $res;
     }
     
     private function renderFooter(){
@@ -27,7 +36,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         foreach ($this->data["prestations"] as $value) {
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
-            $res .="<div>
+            $res .= "<div>
                 <a href='".$urlPrestation."'>
                     <p>".$value['Nom']."</p>
                     <p>".$value['Prix']." €</p>
@@ -40,7 +49,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <a href='/giftBox/main.php/box/add/?Id=".$value['Id']."'><button>+</button></a>
             </div><hr>";
         }
-        $res = $res . " <a href='/giftBox/main.php/prestations/'><button>Voir plus...</button></a></div></div>";
+        $res .= " <a href='/giftBox/main.php/prestations/'><button>Voir plus...</button></a></div></div>";
         return $res;   // FINI
     }
 
@@ -112,7 +121,7 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderLogin(){
         return "<h1> Connexion </h1>
-                <form name='connexion' method='POST' action='/giftBox/main.php/loginPost/'>
+                <form id='log' name='connexion' method='POST' action='/giftBox/main.php/loginPost/'>
                 <p>Login : </p><input tpye='text' name='login'/>
                 <p>Mot de passe : </p><input type='text' name='mdp'/>
                 <input type='submit' name='valider' value='Valider'/>
@@ -121,7 +130,7 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderRegister(){
         return "<h1> Inscription </h1>
-                <form name='inscription' method='POST' action='/giftBox/main.php/registerPost/'>
+                <form id='log' name='inscription' method='POST' action='/giftBox/main.php/registerPost/'>
                 <p>Prénom : </p><input tpye='text' name='prenom'/>
                 <p>Nom : </p><input type='text' name='nom'/>
                 <p>Login : </p><input type='text' name='log'/>
@@ -224,7 +233,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderFormBox(){
-        $res = "<form name='creer' method='POST' action='/giftBox/main.php/box/form/'>
+        $res = "<form id='box' name='creer' method='POST' action='/giftBox/main.php/box/form/'>
                 <p> Nom : <p> <input type='text' name='nom' value='";
         if(isset($_SESSION["box"]["Nom"])){
             $res .= $_SESSION["box"]["Nom"];
@@ -248,77 +257,29 @@ class GiftBoxView extends \mf\view\AbstractView {
         }
         else{
             $res .= "<h2> Tarif : 00,00 € </h2>";
+        }       
+
+        $res .= "<p>Choix de la date d'activation du coffret, la date d'aujourd'hui activera le coffret lors de la validation</p>
+            <input type='date' name='date' min='".date("Y-m-d")."' value='";
+        if($_SESSION["box"]["Date"] != null){
+            $res .= $_SESSION["box"]["Date"]."'>";
         }
-
-        $checked1 = "checked";
-        $checked2 = "";
-        $checked3 = "";
-
-        if(isset($_SESSION['date'])){
-            $bool = false;
-            if(count($_SESSION['date']) > 1)
-            {
-                for ($i=0; $i < count($_SESSION['date']) - 1; $i++) 
-                { 
-
-                    if($_SESSION['date'][$i]["Date"] != $_SESSION['date'][$i + 1]["Date"])
-                    {
-                        $checked3 = "checked";
-                        $checked1 = "";
-                    }
-                    else if(date("Y-m-d") == $_SESSION['date'][$i]["Date"] || $_SESSION['date'][$i]["Date"] != $_SESSION['date'][$i+1]["Date"])
-                    {
-                        $bool = true;
-                    }
-                }
-
-                if(!$bool)
-                {
-                    $checked2 = "checked";
-                    $checked1 = "";
-                }
-            }
-            else if(count($_SESSION['date']) == 1 && date("Y-m-d") != $_SESSION["date"][0]["Date"]){
-                $checked2 = "checked";
-                $checked1 = "";
-            }            
-        }        
-
-        $res .= "<div><input type='radio' name='choixDate' value='1' $checked1/> Aujourd'hui</div>
-            <div><input type='radio' name='choixDate' value='2' $checked2/> Date précise</div>
-            <div><input type='radio' name='choixDate' value='3' $checked3/> Une par une</div>
-            <input type='submit' name='choixForm' value='Ajouter'/>"; 
-
+        else{
+            $res .= date("Y-m-d")."'>";
+        }
         if(isset($_SESSION['prestations']) && !empty($_SESSION["prestations"])){
             foreach ($_SESSION['prestations'] as $value) {
-                $router = new \mf\router\Router();
-                $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
-                $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
-                foreach ($_SESSION["date"] as $element) {
-                    if($element["IdPrestation"] == $value["Id"]){
-                        $composer = $element;
-                    }
-                }
-                if($element["Date"] == "1970-01-01"){
-                    $date = "";
-                }
-                else{
-                    $date = $element["Date"];
-                }
-                $res = $res . "<div>
-                    <a href='".$urlPrestation."'>
-                        <p>".$value['Nom']."</p>
-                        <p>".$value['Prix']." €</p>
-                    </a>
-                    <p>".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
+                $res .= "<div>
+                    <p>Titre: ".$value['Nom']."</p>
+                    <p>Prix: ".$value['Prix']." €</p>
+                    <p>Catégorie: ".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
+                    <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'>X</a>
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
-                    <p>".$date."</p>
-                </div><hr>
-                <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'>X</a>";
+                </div>";
             }
         }
-        $res .= "<input type='submit' name='choixForm' value='Sauvegarder'/>;";
+        $res .= "<input type='submit' name='choixForm' value='Sauvegarder'/>";
         if(isset($_SESSION["box"]["Id"])){
             $res .= "<input type='submit' name='choixForm' value='Valider'/>";
         }
