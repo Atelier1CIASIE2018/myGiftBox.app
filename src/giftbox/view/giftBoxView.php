@@ -187,18 +187,13 @@ class GiftBoxView extends \mf\view\AbstractView {
             foreach ($_SESSION['prestations'] as $value) {
                 $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
                 $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
-                $res .= "<a href='".$urlPrestation."'><div>
+                $res .= "<div>
                         <p>".$value['Nom']."</p>
                         <p>".$value['Prix']." €</p>
-                    </a>
-                    <a href='".$urlCategorie."'>
                         <p>".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
-                    </a>
-                    <a href='".$urlPrestation."'>
                         <img src ='/giftBox/img/".$value['Img']."'width='200'>
                         <p>".$value['Description']."</p>
-                    </a></div>";
-                $res .= "<hr>";
+                    </div><hr>";
             }
             $urlBox =  $this->router->urlfor('/box/', ['Id'=>$_SESSION["box"]['Id']]);
             $urlSummaryBox = $this->router->urlfor('/box/summary/', ['Id'=>$_SESSION["box"]['Id']]);
@@ -261,7 +256,7 @@ class GiftBoxView extends \mf\view\AbstractView {
 
         $res .= "<p>Choix de la date d'activation du coffret, la date d'aujourd'hui activera le coffret lors de la validation</p>
             <input type='date' name='date' min='".date("Y-m-d")."' value='";
-        if($_SESSION["box"]["Date"] != null){
+        if(isset($_SESSION["box"]) && $_SESSION["box"]["Date"] != null){
             $res .= $_SESSION["box"]["Date"]."'>";
         }
         else{
