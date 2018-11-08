@@ -280,11 +280,11 @@ header{
 		margin-top:20px;
 	}
 	#box > div > p:nth-child(1), #box > div > p:nth-child(2), #box > div > p:nth-child(3){
-		@include grille(20, 1.6%, 0, 5);
+		@include grille(100, 1.6%, 0, 25);
 		text-align:center;
 	}
 	#box > div > a{
-		@include grille(20, 1.6%, 4, 1);
+		@include grille(100, 1.6%, 22, 3);
 		text-align:right;
 		font-size:30px;
 	}
@@ -337,3 +337,66 @@ header{
 }
 
 /* Fin box */
+/*  Debut viewBox */
+
+@media all and (min-width:720px){
+	#viewBox > p, #viewBox > div{
+		@include grille(12, 1.6%, 1, 10);
+		text-align:center;
+	}
+	#viewBox > div{
+		display:flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+	}
+	#viewBox > div > p:nth-child(1), #viewBox > div > p:nth-child(2), #viewBox > div > p:nth-child(3){
+		@include grille(12, 1.6%, 0, 4);
+	}
+	#viewBox > div > img{
+		@include grille(12, 1.6%, 0, 3);
+	}
+	#viewBox > div > p:nth-child(5){
+		@include grille(12, 1.6%, 0, 8);
+	}
+	#viewBox > div:nth-child(7){
+		@include grille(5, 1.6%, 1, 3);
+		text-align:center;
+	}
+	#viewBox > div:nth-child(7) >a {
+		@include grille(3, 1.6%, 0, 1);
+	}
+	#viewBox > div:nth-child(7) >a > button{
+		width:100%;
+	}
+}
+@media all and (max-width:720px){
+	#viewBox > p, #viewBox > div{
+		@include grille(1, 1.6%, 0, 1);
+		text-align:center;
+	}
+	#viewBox > div{
+		display:flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+	}
+	#viewBox > div > p:nth-child(1), #viewBox > div > p:nth-child(2), #viewBox > div > p:nth-child(3){
+		@include grille(12, 1.6%, 0, 4);
+	}
+	#viewBox > div > img{
+		@include grille(12, 1.6%, 0, 3);
+	}
+	#viewBox > div > p:nth-child(5){
+		@include grille(12, 1.6%, 0, 8);
+	}
+	#viewBox > div:nth-child(7){
+		@include grille(3, 1.6%, 0, 3);
+		text-align:center;
+	}
+	#viewBox > div:nth-child(7) >a {
+		@include grille(3, 1.6%, 0, 1);
+	}
+	#viewBox > div:nth-child(7) >a > button{
+		width:100%;
+	}
+}
+/* Fin viewBox */

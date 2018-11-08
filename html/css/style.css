@@ -468,8 +468,8 @@ body > footer {
     text-align: center; }
 
   #box > div > a {
-    width: 3.32%;
-    margin-left: 21.28%;
+    width: 1.352%;
+    margin-left: 23.248%;
     text-align: right;
     font-size: 30px; }
 
@@ -528,5 +528,75 @@ body > footer {
     width: 8.24%;
     margin-left: 1.6%; } }
 /* Fin box */
+/*  Debut viewBox */
+@media all and (min-width: 720px) {
+  #viewBox > p, #viewBox > div {
+    width: 80.4%;
+    margin-left: 9.8%;
+    text-align: center; }
+
+  #viewBox > div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+
+  #viewBox > div > p:nth-child(1), #viewBox > div > p:nth-child(2), #viewBox > div > p:nth-child(3) {
+    width: 31.2%;
+    margin-left: 1.6%; }
+
+  #viewBox > div > img {
+    width: 23%;
+    margin-left: 1.6%; }
+
+  #viewBox > div > p:nth-child(5) {
+    width: 64%;
+    margin-left: 1.6%; }
+
+  #viewBox > div:nth-child(7) {
+    width: 57.44%;
+    margin-left: 21.28%;
+    text-align: center; }
+
+  #viewBox > div:nth-child(7) > a {
+    width: 31.2%;
+    margin-left: 1.6%; }
+
+  #viewBox > div:nth-child(7) > a > button {
+    width: 100%; } }
+@media all and (max-width: 720px) {
+  #viewBox > p, #viewBox > div {
+    width: 96.8%;
+    margin-left: 1.6%;
+    text-align: center; }
+
+  #viewBox > div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+
+  #viewBox > div > p:nth-child(1), #viewBox > div > p:nth-child(2), #viewBox > div > p:nth-child(3) {
+    width: 31.2%;
+    margin-left: 1.6%; }
+
+  #viewBox > div > img {
+    width: 23%;
+    margin-left: 1.6%; }
+
+  #viewBox > div > p:nth-child(5) {
+    width: 64%;
+    margin-left: 1.6%; }
+
+  #viewBox > div:nth-child(7) {
+    width: 96.8%;
+    margin-left: 1.6%;
+    text-align: center; }
+
+  #viewBox > div:nth-child(7) > a {
+    width: 31.2%;
+    margin-left: 1.6%; }
+
+  #viewBox > div:nth-child(7) > a > button {
+    width: 100%; } }
+/* Fin viewBox */
 
 /*# sourceMappingURL=style.css.map */
