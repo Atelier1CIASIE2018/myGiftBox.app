@@ -202,6 +202,7 @@ class giftBoxController extends \mf\control\AbstractController {
         $box = \giftbox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
         $box->Nom = $_POST["nom"];
         $box->Message = $_POST["Texte"];
+        $box->Date = $_POST["Date"];
         $box->save();
         unset($_SESSION["box"]);
         unset($_SESSION["prestations"]);
