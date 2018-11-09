@@ -344,7 +344,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderProfil(){
-        $res = "<div><h1> Voici votre profil : </h1> <br/> 
+        $res = "<div id='profile'><h1> Voici votre profil : </h1> <br/> 
         Nom : ".$_SESSION['user_login']['Nom']."<br/> 
         Prénom : ".$_SESSION['user_login']['Prenom']."<br/> 
         E-mail : ".$_SESSION['user_login']['Email']."<br/> 
@@ -354,7 +354,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderProfilView(){
-        $res = "<div><h1> Voici votre profil : </h1> <br/> 
+        $res = "<div id='viewProfile'><h1> Voici votre profil : </h1> <br/> 
             Pseudo : <input type='text' nam='pseudo' value='".$_SESSION['user_login']['Login']."' /><br/>
             E-mail : <input type='text' nam='email' value='".$_SESSION['user_login']['Email']."' /><br/>
             Mot de passe : <input type='password' nam='mdp' value='' /><br/>
