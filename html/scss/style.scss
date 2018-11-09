@@ -241,8 +241,12 @@ header{
 	margin-top:10px;
 }
 @media all and (min-width:720px){
-	#viewProfile > p, #viewProfile > input, #viewProfile > a > button {
+	#viewProfile{
 		@include grille(3, 1.6%, 1, 1);
+	}
+	#viewProfile > *{
+		width:100%;
+		text-align:center;
 	}
 }
 @media all and (max-width:720px){

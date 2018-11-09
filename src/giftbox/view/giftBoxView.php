@@ -354,12 +354,12 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderProfilView(){
-        $res = "<form method='POST' action='/profile/update' id='viewProfile'><h1> Voici votre profil : </h1> 
+        $res = "<form method='POST' action='/giftBox/main.php/profile/update' id='viewProfile'><h1> Voici votre profil : </h1> 
             <p>Pseudo : </p><input type='text' nam='pseudo' value='".$_SESSION['user_login']['Login']."' />
             <p>E-mail : </p><input type='text' nam='email' value='".$_SESSION['user_login']['Email']."' />
             <p>Mot de passe : </p><input type='password' nam='mdp' value='' />
             <p>Confirmation mot de passe : </p><input type='text' nam='mdpconfirm' value='' />
-            <a href='/giftBox/main.php/profile/update/'><button>Valider</button></a></form>";
+            <input type='submit' name='envoyer'/></form>";
         return $res;
     }
 
