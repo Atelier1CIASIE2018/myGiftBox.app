@@ -166,7 +166,6 @@ class giftBoxController extends \mf\control\AbstractController {
                 header("Location: ".$this->router->urlFor("/prestations/", []));
             }
             if($_POST["choixForm"] == "Sauvegarder"){
-                var_dump($_SESSION);
                 if(isset($_SESSION["box"]) && !empty($_SESSION["box"])){
                     $_SESSION["box"]->Nom = $_POST["nom"];
                     $_SESSION["box"]->IdUser = $_SESSION["user_login"]->Id;

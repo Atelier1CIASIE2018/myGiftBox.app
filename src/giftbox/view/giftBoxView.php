@@ -147,26 +147,26 @@ class GiftBoxView extends \mf\view\AbstractView {
             $res .= "<p>".$value['Nom'];
             switch ($value['Etat']){
                 case 1:
-                    $res .= ": </p><div>
+                    $res .= "</p><div>
                     <a href='".$urlBox."'><button>Aperçu</button></a>
                     <a href='".$urlBox."&update'><button>Modifier</button></a>
                     <a href='".$urlConfirm."'><button>Valider</button></a>
                     <a href='".$urlSummaryBox."'><button>Payer</button></a></div>";
                     break;
                 case 2:
-                    $res .= " (Validé) : </p><div>
+                    $res .= " (Validé)</p><div>
                     <a href='".$urlBox."'><button>Aperçu</button></a>
                     <a href='".$urlSummaryBox."'><button>Payer</button></a></div>";
                     break;
                 default:                    
                     if($value["Etat"] == 3){
-                        $res .= " (Payé) : </p>";
+                        $res .= " (Payé)</p>";
                     }
                     if($value["Etat"] == 4){
-                        $res .= " (Transmis) : </p>";
+                        $res .= " (Transmis)</p>";
                     }
                     if($value["Etat"] == 5){
-                        $res .= " (Ouvert) : </p>";
+                        $res .= " (Ouvert)</p>";
                     }
                     $res .= "<div><a href='".$urlBox."'><button>Aperçu</button></a></div>";
                     break;
@@ -179,7 +179,8 @@ class GiftBoxView extends \mf\view\AbstractView {
     private function renderBox(){
         $res = "<div id='viewBox'>
             <p>Nom : ".$_SESSION["box"]["Nom"]."</p>
-            <p>Message : ".$_SESSION["box"]["Message"]."</p>";
+            <p>Message : ".$_SESSION["box"]["Message"]."</p>
+            <p>Date : ".$_SESSION["box"]["Date"]."</p>";
         if(!empty($_SESSION["prestations"])){
             foreach ($_SESSION['prestations'] as $value) {
                 $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
