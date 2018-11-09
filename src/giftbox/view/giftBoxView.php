@@ -141,7 +141,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <p>".$value['Description']."</p>
                 </a>";
             if($_SESSION["user_login"] != null){
-                $res .= "<div><a href='".$this->router->urlFor("/box/add/",['Id' => $this->data['Id']])."'><button>+</button></a></div>";
+                $res .= "<div><a href='".$this->router->urlFor("/box/add/",['Id' => $value['Id']])."'><button>+</button></a></div>";
             }
             else{
                 $res .= "<div></div>";
