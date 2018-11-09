@@ -146,7 +146,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             $urlBox =  $this->router->urlfor('/box/', ['Id'=>$value['Id']]);
             $urlSummaryBox = $this->router->urlfor('/box/summary/', ['Id'=>$value["Id"]]);
             $urlConfirm = $this->router->urlfor('/box/confirm/', ['Id'=>$value["Id"]]);
-            $res .= $value['Nom'];
+            $res .= "<p>".$value['Nom']."</p>";
             switch ($value['Etat']){
                 case 1:
                     $res .= ": <div>
@@ -172,8 +172,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                     }
                     $res .= "<div><a href='".$urlBox."'><button>Aperçu</button></a></div>";
                     break;
-            }    
-            $res .= "<br/><br/>";            
+            }          
         }
         $res .= "</div>";
         return $res;    // FINI
@@ -354,8 +353,8 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderProfilView(){
         $res = "<div><h1> Voici votre profil : </h1> <br/> 
-            Pseudo : <input type='text' nam='pseudo' value='".$_SESSION['user']['Login']."' /><br/>
-            E-mail : <input type='text' nam='email' value='".$_SESSION['user']['Email']."' /><br/>
+            Pseudo : <input type='text' nam='pseudo' value='".$_SESSION['user_login']['Login']."' /><br/>
+            E-mail : <input type='text' nam='email' value='".$_SESSION['user_login']['Email']."' /><br/>
             Mot de passe : <input type='text' nam='mdp' value='' /><br/>
             Confirmation mot de passe : <input type='text' nam='mdpconfirm' value='' /><br/>
             <a href='/giftBox/main.php/profile/update/'><button>Valider</button></a>";

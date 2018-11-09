@@ -88,7 +88,7 @@ class giftBoxController extends \mf\control\AbstractController {
 
     public function viewBoxes(){
         $id = $_SESSION["user_login"]->Id;
-        $boxes = \giftbox\model\Box::select('*')->where('IdUser', "=", $id)->get();
+        $boxes = \giftbox\model\Box::select('*')->where('IdUser', "=", $id)->where("Etat", "!=", 0)->get();
         $vue = new \giftbox\view\giftBoxView($boxes);
         $vue->render('Boxes');
     }
@@ -132,6 +132,7 @@ class giftBoxController extends \mf\control\AbstractController {
         $_SESSION["prestations"] = "";
         $box = new \giftbox\model\Box();
         $box->IdUser = $_SESSION["user_login"]->Id;
+        $box->Etat = 0;
         $box->save();
         $_SESSION["box"] = $box;
         $vue = new \giftbox\view\giftBoxView("");
@@ -147,6 +148,7 @@ class giftBoxController extends \mf\control\AbstractController {
                     $box->IdUser = $_SESSION["user_login"]->Id;
                     $box->Message = $_POST["Texte"];
                     $box->Date = $_POST["date"];
+                    $box->Etat = 1;
                 }
                 else{
                     $box = new \giftBox\model\Box();
@@ -154,6 +156,7 @@ class giftBoxController extends \mf\control\AbstractController {
                     $box->IdUser = $_SESSION["user_login"]->Id;
                     $box->Message = $_POST["Texte"];
                     $box->Date = $_POST["date"];
+                    $box->Etat = 1;
                 }
                 $box->save();
                 $_SESSION["box"] = $box;
