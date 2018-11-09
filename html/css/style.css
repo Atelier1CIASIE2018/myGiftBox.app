@@ -200,84 +200,82 @@ button, input {
     margin-left: 11.44%; } }
 /* Fin Inscription/Connection */
 /* Debut Prestations */
-#prestations > div > div > div {
-  width: 96.8%;
-  margin-left: 1.6%; }
-
+/*#prestations > div > div > div {
+	@include grille(1, 1.6%, 0, 1);
+}
 #prestations > div > div > div > a {
-  width: 96.8%;
-  margin-left: 1.6%; }
-
+	@include grille(10, 1.6%, 0, 10);
+}*/
 @media all and (min-width: 720px) {
-  #prestations > div div, #prestations > div div > a, #prestations > div a:last-child {
+  #prestations div, #prestations div > a, #prestations a:last-child {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; }
-  #prestations > div div > a > p {
+  #prestations div > a > p {
     width: 64%;
     margin-left: 1.6%; }
-  #prestations > div div > a > img {
+  #prestations div > a > img {
     width: 23%;
     margin-left: 9.8%; }
-  #prestations > div div > a:nth-child(3) > p {
+  #prestations div > a:nth-child(3) > p {
     width: 55.8%;
     margin-left: 1.6%; }
-  #prestations > div div > a:nth-child(1) {
+  #prestations div > a:nth-child(1) {
     width: 55.8%;
     margin-left: 9.8%;
     text-align: center; }
-  #prestations > div div > a:nth-child(1) > p {
+  #prestations div > a:nth-child(1) > p {
     width: 47.6%;
     margin-left: 1.6%; }
-  #prestations > div div > p {
+  #prestations div > p {
     width: 23%;
     margin-left: 1.6%;
     text-align: center; }
-  #prestations > div a:last-child > button {
+  #prestations a:last-child > button {
     height: 50px;
     width: 50px; }
-  #prestations > div div > :nth-last-child(2) {
+  #prestations div > :nth-last-child(2) {
     width: 86.96%;
     margin-left: 1.6%; } }
 @media all and (max-width: 720px) {
-  #prestations > div div > a > img {
+  #prestations div > a > img {
     width: 31.2%;
     margin-left: 1.6%; }
-  #prestations > div div > a > p {
+  #prestations div > a > p {
     width: 64%;
     margin-left: 1.6%; }
-  #prestations > div div > a:nth-child(3) > p {
+  #prestations div > a:nth-child(3) > p {
     width: 64%;
     margin-left: 1.6%; }
-  #prestations > div div > a, #prestations > div div {
+  #prestations div > a, #prestations div {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; }
-  #prestations > div div > a:nth-child(1) {
+  #prestations div > a:nth-child(1) {
     width: 64%;
     margin-left: 1.6%;
     text-align: center; }
-  #prestations > div div > a:nth-child(1) > p {
+  #prestations div > a:nth-child(1) > p {
     width: 47.6%;
     margin-left: 1.6%; }
-  #prestations > div div > p {
+  #prestations div > p {
     width: 31.2%;
     margin-left: 1.6%;
     text-align: center; }
-  #prestations > div button {
+  #prestations button {
     width: 47.6%;
     margin-left: 26.2%;
     height: 50px; }
-  #prestations > div a:last-child > button {
+  #prestations a:last-child > button {
     height: 50px;
     width: 50px; }
-  #prestations > div div > :nth-last-child(2) {
+  #prestations div > :nth-last-child(2) {
     width: 77.12%;
     margin-left: 1.6%; }
-  #prestations > div div > :last-child {
+  #prestations div > :last-child {
     width: 18.08%;
     margin-left: 1.6%; } }
-/* Fin categorie */
+/* Fin Prestations */
 /* Debut prestation */
 #prestation, #prestation > div {
   display: flex;
@@ -343,77 +341,6 @@ button, input {
 
   #prestation a:last-child {
     width: 96.8%;
-    margin-left: 1.6%; } }
-/* Fin prestation */
-/* Debut categorie */
-@media all and (min-width: 720px) {
-  #categorie div, #categorie div > a, #categorie a:last-child {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; }
-  #categorie div > a > p {
-    width: 64%;
-    margin-left: 1.6%; }
-  #categorie div > a > img {
-    width: 23%;
-    margin-left: 9.8%; }
-  #categorie div > a:nth-child(3) > p {
-    width: 55.8%;
-    margin-left: 1.6%; }
-  #categorie div > a:nth-child(1) {
-    width: 55.8%;
-    margin-left: 9.8%;
-    text-align: center; }
-  #categorie div > a:nth-child(1) > p {
-    width: 47.6%;
-    margin-left: 1.6%; }
-  #categorie div > p {
-    width: 23%;
-    margin-left: 1.6%;
-    text-align: center; }
-  #categorie a:last-child > button {
-    height: 50px;
-    width: 50px; }
-  #categorie div > :nth-last-child(2) {
-    width: 86.96%;
-    margin-left: 1.6%; } }
-@media all and (max-width: 720px) {
-  #categorie div > a > img {
-    width: 31.2%;
-    margin-left: 1.6%; }
-  #categorie div > a > p {
-    width: 64%;
-    margin-left: 1.6%; }
-  #categorie div > a:nth-child(3) > p {
-    width: 64%;
-    margin-left: 1.6%; }
-  #categorie div > a, #categorie div {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; }
-  #categorie div > a:nth-child(1) {
-    width: 64%;
-    margin-left: 1.6%;
-    text-align: center; }
-  #categorie div > a:nth-child(1) > p {
-    width: 47.6%;
-    margin-left: 1.6%; }
-  #categorie div > p {
-    width: 31.2%;
-    margin-left: 1.6%;
-    text-align: center; }
-  #categorie button {
-    width: 47.6%;
-    margin-left: 26.2%;
-    height: 50px; }
-  #categorie a:last-child > button {
-    height: 50px;
-    width: 50px; }
-  #categorie div > :nth-last-child(2) {
-    width: 77.12%;
-    margin-left: 1.6%; }
-  #categorie div > :last-child {
-    width: 18.08%;
     margin-left: 1.6%; } }
 /* Fin prestation */
 /* Debut box */

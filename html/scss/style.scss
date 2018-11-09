@@ -103,20 +103,20 @@ button, input{
 /* Fin Inscription/Connection */
 /* Debut Prestations */
 
-#prestations > div > div > div {
+/*#prestations > div > div > div {
 	@include grille(1, 1.6%, 0, 1);
 }
 #prestations > div > div > div > a {
 	@include grille(10, 1.6%, 0, 10);
-}
+}*/
 @media all and (min-width:720px){
-	#prestations > div{@include prestationPC();}
+	#prestations {@include prestationPC();}
 }
 @media all and (max-width:720px){
-	#prestations > div{@include prestationMobile();}
+	#prestations {@include prestationMobile();}
 }
 
-/* Fin categorie */
+/* Fin Prestations */
 /* Debut prestation */
 
 #prestation, #prestation > div {@include flex();}
@@ -147,16 +147,6 @@ button, input{
 	#prestation img{@include grille(1, 1.6%, 0, 1);}
 	#prestation > p {@include grille(1, 1.6%, 0, 1);}
 	#prestation a:last-child {@include grille(1, 1.6%, 0, 1);}
-}
-
-/* Fin prestation */
-/* Debut categorie */
-
-@media all and (min-width:720px){
-	#categorie {@include prestationPC();}
-}
-@media all and (max-width:720px){
-	#categorie {@include prestationMobile();}
 }
 
 /* Fin prestation */
