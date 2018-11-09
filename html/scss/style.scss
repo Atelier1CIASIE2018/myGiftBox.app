@@ -103,6 +103,12 @@ button, input{
 /* Fin Inscription/Connection */
 /* Debut Prestations */
 
+#prestations > div > div > div {
+	@include grille(1, 1.6%, 0, 1);
+}
+#prestations > div > div > div > a {
+	@include grille(10, 1.6%, 0, 10);
+}
 @media all and (min-width:720px){
 	#prestations > div{@include prestationPC();}
 }

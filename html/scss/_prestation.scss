@@ -32,7 +32,7 @@
 		@include grille(10, 1.6%, 0, 9);
 	}
 	div > :last-child{
-		@include grille(10, 1.6%, 0, 1);
+		//@include grille(10, 1.6%, 0, 1);
 	}
 }
 

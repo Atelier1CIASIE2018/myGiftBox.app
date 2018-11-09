@@ -170,9 +170,6 @@ button, input {
   #home > div div > :nth-last-child(2) {
     width: 86.96%;
     margin-left: 1.6%; }
-  #home > div div > :last-child {
-    width: 8.24%;
-    margin-left: 1.6%; }
 
   #home > div:nth-child(2) > a:nth-child(8) > button:nth-child(1) {
     width: 14.8%;
@@ -203,6 +200,14 @@ button, input {
     margin-left: 11.44%; } }
 /* Fin Inscription/Connection */
 /* Debut Prestations */
+#prestations > div > div > div {
+  width: 96.8%;
+  margin-left: 1.6%; }
+
+#prestations > div > div > div > a {
+  width: 96.8%;
+  margin-left: 1.6%; }
+
 @media all and (min-width: 720px) {
   #prestations > div div, #prestations > div div > a, #prestations > div a:last-child {
     display: flex;
@@ -233,9 +238,6 @@ button, input {
     width: 50px; }
   #prestations > div div > :nth-last-child(2) {
     width: 86.96%;
-    margin-left: 1.6%; }
-  #prestations > div div > :last-child {
-    width: 8.24%;
     margin-left: 1.6%; } }
 @media all and (max-width: 720px) {
   #prestations > div div > a > img {
@@ -374,9 +376,6 @@ button, input {
     width: 50px; }
   #categorie div > :nth-last-child(2) {
     width: 86.96%;
-    margin-left: 1.6%; }
-  #categorie div > :last-child {
-    width: 8.24%;
     margin-left: 1.6%; } }
 @media all and (max-width: 720px) {
   #categorie div > a > img {
