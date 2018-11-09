@@ -563,7 +563,7 @@ header {
   text-align: center;
   margin-top: 20px; }
 
-#viewProfile > a > button {
+#viewProfile > input {
   margin-top: 10px; }
 
 @media all and (min-width: 720px) {
@@ -571,8 +571,10 @@ header {
     width: 31.2%;
     margin-left: 34.4%; }
 
-  #viewProfile > * {
-    width: 100%;
+  #viewProfile input {
+    width: 100%; }
+
+  #viewProfile > :last-child {
     text-align: center; } }
 @media all and (max-width: 720px) {
   #viewProfile > p, #viewProfile > input, #viewProfile > a > button {

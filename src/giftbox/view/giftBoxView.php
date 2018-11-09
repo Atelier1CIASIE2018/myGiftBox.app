@@ -344,11 +344,11 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderProfil(){
-        $res = "<div id='profile'><h1> Voici votre profil : </h1> <br/> 
-        <p>Nom : ".$_SESSION['user_login']['Nom']."</p><br/> 
-        <p>Prénom : ".$_SESSION['user_login']['Prenom']."</p><br/> 
-        <p>E-mail : ".$_SESSION['user_login']['Email']."</p><br/> 
-        <p>Pseudo : ".$_SESSION['user_login']['Login']."</p><br/>
+        $res = "<div id='profile'><h1> Voici votre profil : </h1>
+        <p>Nom : ".$_SESSION['user_login']['Nom']."</p>
+        <p>Prénom : ".$_SESSION['user_login']['Prenom']."</p>
+        <p>E-mail : ".$_SESSION['user_login']['Email']."</p>
+        <p>Pseudo : ".$_SESSION['user_login']['Login']."</p>
         <a href='/giftBox/main.php/profile/view/'><button>Modifier</button></a>";
         return $res;
     }

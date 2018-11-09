@@ -237,15 +237,17 @@ header{
 	text-align:center;
 	margin-top:20px;
 }
-#viewProfile > a > button{
+#viewProfile > input{
 	margin-top:10px;
 }
 @media all and (min-width:720px){
 	#viewProfile{
 		@include grille(3, 1.6%, 1, 1);
 	}
-	#viewProfile > *{
+	#viewProfile input{
 		width:100%;
+	}
+	#viewProfile >:last-child{
 		text-align:center;
 	}
 }
