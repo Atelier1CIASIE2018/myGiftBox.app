@@ -141,7 +141,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderBoxes(){
-        $res = "<div>";
+        $res = "<div id='boxes'>";
         foreach ($this->data as $value) {
             $urlBox =  $this->router->urlfor('/box/', ['Id'=>$value['Id']]);
             $urlSummaryBox = $this->router->urlfor('/box/summary/', ['Id'=>$value["Id"]]);
@@ -149,16 +149,16 @@ class GiftBoxView extends \mf\view\AbstractView {
             $res .= $value['Nom'];
             switch ($value['Etat']){
                 case 1:
-                    $res .= ": 
+                    $res .= ": <div>
                     <a href='".$urlBox."'><button>Aperçu</button></a>
                     <a href='".$urlBox."&update'><button>Modifier</button></a>
                     <a href='".$urlConfirm."'><button>Valider</button></a>
-                    <a href='".$urlSummaryBox."'><button>Payer</button></a>";
+                    <a href='".$urlSummaryBox."'><button>Payer</button></a></div>";
                     break;
                 case 2:
-                    $res .= " (Validé) : 
+                    $res .= " (Validé) : <div>
                     <a href='".$urlBox."'><button>Aperçu</button></a>
-                    <a href='".$urlSummaryBox."'><button>Payer</button></a>";
+                    <a href='".$urlSummaryBox."'><button>Payer</button></a></div>";
                     break;
                 default:                    
                     if($value["Etat"] == 3){

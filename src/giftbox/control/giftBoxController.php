@@ -133,28 +133,31 @@ class giftBoxController extends \mf\control\AbstractController {
         $box = new \giftbox\model\Box();
         $box->IdUser = $_SESSION["user_login"]->Id;
         $box->save();
-        $_SESSION["user_login"]->Id = $box->Id;
-        $vue = new \giftbox\view\giftBoxView("");
-        $vue->render('FormBox');
+        $_SESSION["box"] = $box;
+        var_dump($_SESSION);
+        /*$vue = new \giftbox\view\giftBoxView("");
+        $vue->render('FormBox');*/
     }
 
     public function formBox(){
         if(isset($_POST["choixForm"])){
             if($_POST["choixForm"] == "Ajouter"){
                 if(isset($_SESSION["box"])){
-                    $_SESSION["box"]["Nom"] = $_POST["nom"];
-                    $_SESSION["box"]["IdUser"] = $_SESSION["user_login"]->Id;
-                    $_SESSION["box"]["Message"] = $_POST["Texte"];
-                    $_SESSION["box"]["Date"] = $_POST["date"];
+                    $box = \giftBox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
+                    $box->Nom = $_POST["nom"];
+                    $box->IdUser = $_SESSION["user_login"]->Id;
+                    $box->Message = $_POST["Texte"];
+                    $box->Date = $_POST["date"];
                 }
                 else{
                     $box = new \giftBox\model\Box();
                     $box->Nom = $_POST["nom"];
-                    $box->IdUser = $_SESSION["user"]->Id;
+                    $box->IdUser = $_SESSION["user_login"]->Id;
                     $box->Message = $_POST["Texte"];
                     $box->Date = $_POST["date"];
-                    $_SESSION["box"] = $box;
                 }
+                $box->save();
+                $_SESSION["box"] = $box;
                 header("Location: ".$this->router->urlFor("/prestations/", []));
             }
             if($_POST["choixForm"] == "Sauvegarder"){
@@ -187,8 +190,13 @@ class giftBoxController extends \mf\control\AbstractController {
         $composer = new \giftbox\model\Composer();
         $composer->IdBox = $_SESSION["box"]["Id"];
         $composer->IdPrestation = $_GET["Id"];
-        $composer->save();
-        header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
+        try{
+            $composer->save();
+            header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
+        }
+        catch (\Exception $e){
+            header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
+        }        
     }
 
     public function removePrestationBox(){
