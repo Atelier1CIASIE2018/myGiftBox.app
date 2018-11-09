@@ -69,8 +69,7 @@ class giftBoxController extends \mf\control\AbstractController {
     public function postLogin(){
         $auth = new \giftbox\auth\giftBoxAuthentification();
         $auth->loginUser($_POST["login"], $_POST["mdp"]);
-        var_dump($_SESSION);
-        //header("Location: ".$this->router->urlFor("/home/", []));
+        header("Location: ".$this->router->urlFor("/home/", []));
     }
 
     public function viewRegister(){
@@ -82,6 +81,12 @@ class giftBoxController extends \mf\control\AbstractController {
         $auth = new \giftbox\auth\giftBoxAuthentification();
         $auth->createUser($_POST["nom"], $_POST["prenom"], $_POST["mail"], $_POST["log"], $_POST["mdp"]);
         header("Location: ".$this->router->urlFor("/login/", []));
+    }
+
+    public function logout(){
+        $auth = new \giftbox\auth\giftBoxAuthentification();
+        $auth->logout();
+        header("Location: ".$this->router->urlFor("/home/", []));
     }
 
     public function viewBoxes(){

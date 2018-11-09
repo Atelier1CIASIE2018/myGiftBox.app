@@ -1,7 +1,5 @@
 <?php
-
 namespace giftbox\view;
-
 class GiftBoxView extends \mf\view\AbstractView {
     private $router;
 
@@ -16,7 +14,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             $res .= "<div><a href='".$this->router->urlFor("/profile/", [])."'><button>Mon Profil</button></a></div>
             <div><a href='".$this->router->urlFor("/boxes/", [])."'><button>Mes coffrets</button></a></div>
             <div><a href='".$this->router->urlFor("/box/new/", [])."'><button>Créer coffret</button></a></div>
-            <div><a href='".$this->router->urlFor("/profile/logout/", [])."'><button>Déconnexion</button></a></div>";
+            <div><a href='".$this->router->urlFor("/logout/", [])."'><button>Déconnexion</button></a></div>";
         }
         else{
             $res .= "<div><a href='/giftBox/main.php/register/'><button>Inscription</button></a></div>

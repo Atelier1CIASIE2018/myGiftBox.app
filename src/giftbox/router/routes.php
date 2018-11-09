@@ -32,6 +32,9 @@ $router->addRoute('register', '/register/', '\giftbox\control\giftBoxController'
 //post pour s'inscrire
 $router->addRoute('registerPost', '/registerPost/', '\giftbox\control\giftBoxController', 'postRegister',\giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_NONE); //POST
 
+//déconnexion de l'utilisateur
+$router->addRoute('logout', '/logout/', '\giftbox\control\giftBoxController', 'logout',\giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_USER);
+
 //liste des boxes du profil
 $router->addRoute('boxes', '/boxes/', '\giftbox\control\giftBoxController', 'viewBoxes', \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_USER); //GET   // TEST AUTHENTIFICATION
 
