@@ -93,7 +93,7 @@ class giftBoxAuthentification extends \mf\auth\Authentification {
             echo "erreur";
         }
         else{
-            $this->login($username,$res['Mdp'],$password,$res['Level']);
+            $this->login($username,$res['Mdp'],$password,$res['Level'],$res['Id']);
         }
     }
 }

@@ -17,13 +17,14 @@ class authentification extends AbstractAuthentification{
 	    }
 	}
 
-	function updateSession($username, $level)
+	function updateSession($username, $level, $id)
 	{
 		$this->user_login = $username;
-		$this->access_level = $access_level;
+		$this->access_level = $level;
 		$this->logged_in = true;
-		$_SESSION['user_login']->login = $username;
+		$_SESSION['user_login']->Login = $username;
      	$_SESSION['user_login']->Level = $level;
+     	$_SESSION['user_login']->Id = $id;
 	}
 
 	function logout()
@@ -47,11 +48,11 @@ class authentification extends AbstractAuthentification{
         }
     }
 
-	function login($username, $db_pass, $pass, $level)
+	function login($username, $db_pass, $pass, $level, $id)
     {
         if(password_verify($pass, $db_pass))
         {
-            $this->updateSession($username, $level);
+            $this->updateSession($username, $level, $id);
         }
         else
         {
