@@ -46,7 +46,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
                 </a>
-                <a href='".$this->router->urlFor("/register/",['Id' => $value['Id']])."'><button>+</button></a>
+                <a href='".$this->router->urlFor("/box/add/",['Id' => $value['Id']])."'><button>+</button></a>
             </div><hr>";
         }
         $res .= " <a href='".$this->router->urlFor("/prestations/",[])."'><button>Voir plus...</button></a></div></div>";
@@ -269,7 +269,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <p>Titre: ".$value['Nom']."</p>
                     <p>Prix: ".$value['Prix']." €</p>
                     <p>Catégorie: ".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
-                    <a href='/giftBox/main.php/box/remove/?Id=".$value['Id']."'>X</a>
+                    <a href='".$this->router->urlFor("/box/add/",['Id' =>$value['Id']])."'>X</a>
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
                 </div>";
