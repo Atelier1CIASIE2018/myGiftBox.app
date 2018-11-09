@@ -24,7 +24,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 Connexion
         */
 
-        $res = "<a href='".$this->router->urlFor("/home/", [])."'><h1>My Gift Box App</h1></a>";
+        $res = "<div><a href='".$this->router->urlFor("/home/", [])."'><h1>My Gift Box App</h1></a>";
 
         if(isset($_SESSION["user_login"])){
             $res .= "
