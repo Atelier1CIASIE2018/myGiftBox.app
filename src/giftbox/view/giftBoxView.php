@@ -82,12 +82,12 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <p>".$value['Nom']."</p>
                     <p>".$value['Prix']." €</p>
                 </a>
-                <p><a href='".$urlCategorie."'>".$this->data["categories"][$value["IdCategorie"] - 1]."</p>
+                <a href='".$urlCategorie."'><p>".$this->data["categories"][$value["IdCategorie"] - 1]."</p></a>
                 <a href='".$urlPrestation."'>
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
                 </a>
-                <a href='".$this->router->urlFor("/box/add/",['Id' => $value['Id']])."'><button>+</button></a>
+                
             </div><hr>";
         }
         $res .= " <a href='".$this->router->urlFor("/prestations/",[])."'><button>Voir plus...</button></a></div></div>";
@@ -111,7 +111,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             <p>".$this->data['Prix']." €</p>
             <img src ='/giftBox/img/".$this->data['Img']."'>
             <p>".$this->data['Description']."</p>
-            <a href='".$this->router->urlFor("/box/add/",['Id' => $this->data['Id']])."'><button>+</button></a>
+            <div><a href='".$this->router->urlFor("/box/add/",['Id' => $this->data['Id']])."'><button>+</button></a></div>
         </div>";
         return $res;  // FINI
     }
@@ -147,7 +147,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
                 </a>
-                <a href='".$this->router->urlFor("/box/add/",['Id' => $value['Id']])."'><button>+</button></a>
+                <div><a href='".$this->router->urlFor("/box/add/",['Id' => $value['Id']])."'><button>+</button></a></div>
             </div><hr>";
         }
         $res .= "</div></div>";
