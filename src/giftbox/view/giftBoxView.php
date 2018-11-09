@@ -285,19 +285,19 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderSummaryBox(){
-        $res = "<div><h1>Prestations sélectionnées : </h1><div>";
+        $res = "<div><h1>Prestations sélectionnées : </h1><div id='summary'>";
         $total = 0;
         foreach ($_SESSION["prestations"] as $value) {
             $router = new \mf\router\Router();
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
             $res = $res . "<div>
-                <p>".$value['Nom']."</p>
-                <p>".$value['Prix']." €</p>
-            </div><hr>";
+                <p>Nom : ".$value['Nom']."</p>
+                <p>Prix : ".$value['Prix']." €</p>
+            </div>";
             $total += $value["Prix"];
         }
-        $res .= "Total: ".$total." €</div>";
+        $res .= "<p>Total: ".$total." €</p></div>";
         if($_SESSION['box']['Etat'] > 2){
             $res .= "<p>Url du coffret pour le destinataire: ".$_SESSION["box"]["Url"]."</p>";
         }
