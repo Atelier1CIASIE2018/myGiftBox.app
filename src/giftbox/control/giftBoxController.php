@@ -147,7 +147,7 @@ class giftBoxController extends \mf\control\AbstractController {
 
     public function formBox(){
         if(isset($_POST["choixForm"])){
-            if($_POST["choixForm"] == "Ajouter"){
+            if($_POST["choixForm"] == "Ajouter une prestation"){
                 if(isset($_SESSION["box"])){
                     $box = \giftBox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
                     $box->Nom = $_POST["nom"];
