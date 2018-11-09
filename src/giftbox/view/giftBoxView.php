@@ -274,8 +274,10 @@ class GiftBoxView extends \mf\view\AbstractView {
         else{
             $res .= "<h2> Tarif : 00,00 € </h2>";
         }
-        $res .= "<input type='submit' name='choixForm' value='Sauvegarder'/>";
         if(isset($_SESSION["box"]["Id"])){
+            $res .= "<input type='submit' name='choixForm' value='Sauvegarder'/>";
+        }
+        if(isset($_SESSION["box"]["Etat"]) && $_SESSION["box"]["Etat"] != 0){
             $res .= "<input type='submit' name='choixForm' value='Valider'/>";
         }
         $res .= "</form>";
@@ -283,29 +285,24 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderSummaryBox(){
-        $res = "<div> <h1> Préstations sélectionnée : </h1>";
-            foreach ($this->data["prestations"] as $value) {
+        $res = "<div><h1>Prestations sélectionnées : </h1><div>";
+        $total = 0;
+        foreach ($_SESSION["prestations"] as $value) {
             $router = new \mf\router\Router();
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
             $res = $res . "<div>
-                <a href='".$urlPrestation."'>
-                    <p>".$value['Nom']."</p>
-                    <p>".$value['Prix']." €</p>
-                </a>
-                <p><a href='".$urlCategorie."'>".$this->data["categories"][$value["IdCategorie"] - 1]."</a></p>
-                <a href='".$urlPrestation."'>
-                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
-                    <p>".$value['Description']."</p>
-                </a>
+                <p>".$value['Nom']."</p>
+                <p>".$value['Prix']." €</p>
             </div><hr>";
+            $total += $value["Prix"];
         }
-
-        if($this->data['box']['Etat'] > 2){
-            $res .= "<p> URL </p>";
+        $res .= "Total: ".$total." €</div>";
+        if($_SESSION['box']['Etat'] > 2){
+            $res .= "<p>Url du coffret pour le destinataire: ".$_SESSION["box"]["Url"]."</p>";
         }
         else{
-            $res .= "<a href='/giftBox/main.php/box/confirm/?Id=".$this->data['box']['Id']."'><button>Payer</button></a>";      
+            $res .= "<a href='/giftBox/main.php/box/pay/?Id=".$_SESSION['box']['Id']."'><button>Passer au paiement</button></a>";      
         }
         $res .= "</div>";
         return $res;
@@ -314,26 +311,19 @@ class GiftBoxView extends \mf\view\AbstractView {
     private function renderBoxPay(){
         $res = "<div> <h1> Préstations sélectionnée : </h1>";
         $total = 0;
-        foreach ($this->data["prestations"] as $value) {
+        foreach ($_SESSION["prestations"] as $value) {
             $total += $value['Prix'];
             $router = new \mf\router\Router();
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
             $res = $res . "<div>
-                <a href='".$urlPrestation."'>
-                    <p>".$value['Nom']."</p>
-                    <p>".$value['Prix']." €</p>
-                </a>
-                <p><a href='".$urlCategorie."'>".$this->data["categories"][$value["IdCategorie"] - 1]."</a></p>
-                <a href='".$urlPrestation."'>
-                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
-                    <p>".$value['Description']."</p>
-                </a>
+                <p>".$value['Nom']."</p>
+                <p>".$value['Prix']." €</p>
             </div><hr>";
         }
 
         $res .= "Tarif total : " . $total . " € <br/><br/>
-            <form name='acheter' method='POST' action='/giftBox/main.php/box/pay/send/?Id=".$this->data['box']['Id']."'>
+            <form name='acheter' method='POST' action='/giftBox/main.php/box/pay/send/?Id=".$_SESSION['box']['Id']."'>
                 <input type='radio' name='test' value='' checked /> <img src='/giftBox/img/modePaiement/paypal.jpg' width='200'> <br/>
                 <input type='radio' name='test' value=''/> <img src='/giftBox/img/modePaiement/visa.png' width='200'> <br/>
                 <input type='radio' name='test' value=''/> <img src='/giftBox/img/modePaiement/mastercard.png' width='200'> <br/> <br/>

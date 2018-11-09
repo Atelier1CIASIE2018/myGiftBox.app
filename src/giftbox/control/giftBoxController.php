@@ -171,6 +171,7 @@ class giftBoxController extends \mf\control\AbstractController {
                     $_SESSION["box"]->IdUser = $_SESSION["user_login"]->Id;
                     $_SESSION["box"]->Message = $_POST["Texte"];
                     $_SESSION["box"]->Date = $_POST["date"];
+                    $_SESSION["box"]->Etat = 1;
                     $this->router->executeRoute("updateBox");
                 }
                 else{
@@ -259,6 +260,19 @@ class giftBoxController extends \mf\control\AbstractController {
         unset($_SESSION["date"]);
         unset($_SESSION["categories"]);
         header("Location: ".$this->router->urlFor("/boxes/", []));
+    }
+
+    public function payBox(){
+        $vue = new \giftbox\view\giftBoxView("");
+        $vue->render('PayBox');
+    }
+
+    public function payBoxSend(){
+        $id = $_GET["id"];
+        $box = \giftBox\model\Box::where("Id", "=", $id)->first();
+        $box->Etat = 3;
+        $box->save();
+        //header("Location: ".$this->router->urlFor("/box/", ["Id"=>$id]));
     }
 
     public function urlBox(){
