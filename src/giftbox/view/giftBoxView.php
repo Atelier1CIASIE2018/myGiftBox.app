@@ -407,7 +407,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderBoxPay(){
-        $res = "<div id='achat' >";
+        $res = "<div id='achat'>";
         $total = 0;
         foreach ($_SESSION["prestations"] as $value) {
             $total += $value['Prix'];

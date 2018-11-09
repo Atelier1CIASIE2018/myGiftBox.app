@@ -133,6 +133,8 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function newBox(){
+        $_SESSION["box"] = null;
+        $_SESSION["prestations"] = null;
         $box = new \giftbox\model\Box();
         $box->IdUser = $_SESSION["user_login"]->Id;
         $box->Etat = 0;
@@ -265,6 +267,7 @@ class giftBoxController extends \mf\control\AbstractController {
         }
         $box->Etat = 3;
         $box->save();
+        $this->router->executeRoute("urlBox");
         header("Location: ".$this->router->urlFor("/box/", ["Id"=>$id]));
     }
 
