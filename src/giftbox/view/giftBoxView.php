@@ -353,10 +353,10 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderProfilView(){
         $res = "<form method='POST' action='".$this->router->urlFor("/profile/update/", [])."' id='viewProfile'><h1>Modification de votre profil : </h1> 
-            <p>Nom : </p><input type='text' nam='nom' value='".$this->data->Nom."' />
-            <p>Prénom : </p><input type='text' nam='prenom!' value='".$this->data->Prenom."' />
-            <p>Pseudo : </p><input type='text' nam='pseudo' value='".$this->data->Login."' />
-            <p>E-mail : </p><input type='text' nam='email' value='".$this->data->Email."' />
+            <p>Nom : </p><input type='text' name='nom' value='".$this->data->Nom."' />
+            <p>Prénom : </p><input type='text' name='prenom' value='".$this->data->Prenom."' />
+            <p>Pseudo : </p><input type='text' name='login' value='".$this->data->Login."' />
+            <p>E-mail : </p><input type='email' name='email' value='".$this->data->Email."' />
             <p>Mot de passe : </p><input type='password' nam='mdp' value='' />
             <p>Confirmation mot de passe : </p><input type='text' nam='mdpconfirm' value='' />
             <input type='submit' name='envoyer'/></form>";

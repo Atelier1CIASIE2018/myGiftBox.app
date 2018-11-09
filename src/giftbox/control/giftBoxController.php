@@ -315,7 +315,24 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function updateProfile(){
-        
+        $user = \giftBox\model\User::where("Id", "=", $_SESSION["user_login"]["Id"])->first();
+        if($_POST["nom"] != ""){
+            $user->Nom = $_POST["nom"];
+        }
+        if($_POST["prenom"] != ""){
+            $user->Prenom = $_POST["prenom"];
+        }
+        if($_POST["email"] != ""){
+            $user->Email = $_POST["email"];
+        }
+        if($_POST["login"] != "" && \giftBox\model\User::where("Login", "=", $_POST["login"])){
+            $user->Login = $_POST["login"];
+        }
+        if($_POST["mdp"] != "" && $_POST["confirmmdp"]  != "" && $_POST["mdp"] == $_POST["mdpconfirm"]){
+            $user->Mdp = password_hash($_POST["mdp"], PASSWORD_DEFAULT);
+        }
+        $user->save();
+        header("Location: ".$this->router->urlFor("/profile/", []));
     }
 
     public function newPrestation(){
