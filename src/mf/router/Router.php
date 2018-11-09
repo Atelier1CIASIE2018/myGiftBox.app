@@ -27,6 +27,12 @@ class Router Extends AbstractRouter{
     		$route = self::$routes[$path_info];
     	}
     	else{
+            if(substr($path_info, 0,9) == "/box/add/"){
+                header('Location: '.$this->urlFor('/home/',[]));
+            }
+            else{
+
+            }
     		$url = self::$aliases['default'];
     		$route = self::$routes[$url];
     	}
