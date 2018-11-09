@@ -55,7 +55,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
     
     private function renderHome(){
-
         /*
         Initialise les variable session box et prestations a ""
 
@@ -69,8 +68,6 @@ class GiftBoxView extends \mf\view\AbstractView {
         possibilité d'ajouter une préstation a un coffret a l'aide du boutton "+"
 
         */
-        $_SESSION["box"] = "";
-        $_SESSION["prestations"] = "";
         $res = "<div id='home'> 
                 <img src='/giftBox/img/cadeau.jpg' >
                 <div> <h1> Nouveautés : </h1>";
@@ -87,7 +84,6 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
                 </a>
-                
             </div><hr>";
         }
         $res .= " <a href='".$this->router->urlFor("/prestations/",[])."'><button>Voir plus...</button></a></div></div>";
@@ -95,7 +91,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderPrestation(){
-
         /*
         initialise les variables session box et prestations a ""
 
@@ -103,9 +98,6 @@ class GiftBoxView extends \mf\view\AbstractView {
 
         possibilité d'ajouter une préstation a un coffret a l'aide du boutton "+"
         */
-
-        $_SESSION["box"] = "";
-        $_SESSION["prestations"] = "";
         $res = "<div id='prestation'>
             <p>".$this->data['Nom']."</p>
             <p>".$this->data['Prix']." €</p>
@@ -117,7 +109,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderPrestations(){
-
         /*
         initialise les variables session box et prestations a ""
         
@@ -130,9 +121,6 @@ class GiftBoxView extends \mf\view\AbstractView {
         possibilité d'ajouter une préstation a un coffret a l'aide du boutton "+"
 
         */
-
-        $_SESSION["box"] = "";
-        $_SESSION["prestations"] = "";
         $res = "<div id='prestations'><div>";
         foreach ($this->data["prestations"] as $value) {
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -171,7 +159,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderCategorie(){
-
         /*
         initialise les variables session box et prestations a ""
 
@@ -180,10 +167,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         possibilité de cliquer sur nom - prix - image - description pour afficher les détails d'une préstation
 
         possibilité d'ajouter une préstation a un coffret a l'aide du boutton "+"
-        */
-
-        $_SESSION["box"] = "";
-        $_SESSION["prestations"] = "";
+        */;
         $res = "<div id='categorie'>";
         foreach ($this->data as $value) {            
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -365,9 +349,6 @@ class GiftBoxView extends \mf\view\AbstractView {
         /*if(isset($_SESSION["messageErreur"]) && $_SESSION["messageErreur"] != ""){
             echo "<p>".$_SESSION["messageErreur"]."</p>";
         }*/
-        if(isset($_SESSION["prestationTemp"])){
-            header("Location: ".$this->router->urlFor("/box/add/", ["Id"=>$_SESSION["prestationTemp"]]));
-        }
         if(isset($_SESSION['prestations']) && !empty($_SESSION["prestations"])){
             foreach ($_SESSION['prestations'] as $value) {
                 $res .= "<div>
