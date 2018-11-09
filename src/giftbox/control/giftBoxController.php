@@ -78,7 +78,7 @@ class giftBoxController extends \mf\control\AbstractController {
 
     public function postRegister(){
         $auth = new \giftbox\auth\giftBoxAuthentification();
-        $auth->createUser($_POST["nom"], $_POST["prenom"], $_POST["mail"], $_POST["log"], $_POST["mdp"]);
+        $auth->createUser($_POST["nom"], $_POST["prenom"], $_POST["mail"], $_POST["mdp"]);
         header("Location: ".$this->router->urlFor("/login/", []));
     }
 
@@ -307,11 +307,8 @@ class giftBoxController extends \mf\control\AbstractController {
         if($_POST["prenom"] != ""){
             $user->Prenom = $_POST["prenom"];
         }
-        if($_POST["email"] != ""){
+        if($_POST["email"] != "" && \giftBox\model\User::where("Email", "=", $_POST["login"])){
             $user->Email = $_POST["email"];
-        }
-        if($_POST["login"] != "" && \giftBox\model\User::where("Login", "=", $_POST["login"])){
-            $user->Login = $_POST["login"];
         }
         if($_POST["mdp"] != "" && $_POST["mdpconfirm"] != "" && $_POST["mdp"] == $_POST["mdpconfirm"]){
             $user->Mdp = password_hash($_POST["mdp"], PASSWORD_DEFAULT);

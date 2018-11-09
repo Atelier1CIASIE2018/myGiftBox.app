@@ -201,7 +201,6 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <p>Prénom : </p><input tpye='text' name='prenom'/>
                 <p>Nom : </p><input type='text' name='nom'/>
                 <p>E-mail : </p><input type='text' name='mail'/>
-                <p>Login : </p><input type='text' name='log'/>
                 <p>Mot de passe : </p><input type='password' name='mdp'/>                
                 <input type='submit' name='valider' value='Valider'/>
                 </form>";
@@ -407,7 +406,6 @@ class GiftBoxView extends \mf\view\AbstractView {
             <p>Nom : ".$this->data->Nom."</p>
             <p>Prénom : ".$this->data->Prenom."</p>
             <p>E-mail : ".$this->data->Email."</p>
-            <p>Pseudo : ".$this->data->Login."</p>
             <a href='".$this->router->urlFor("/profile/view/",[])."'><button>Modifier</button></a>";
         return $res;
     }
@@ -416,7 +414,6 @@ class GiftBoxView extends \mf\view\AbstractView {
         $res = "<form method='POST' action='".$this->router->urlFor("/profile/update/", [])."' id='viewProfile'><h1>Modification de votre profil : </h1> 
             <p>Nom : </p><input type='text' name='nom' value='".$this->data->Nom."' />
             <p>Prénom : </p><input type='text' name='prenom' value='".$this->data->Prenom."' />
-            <p>Pseudo : </p><input type='text' name='login' value='".$this->data->Login."' />
             <p>E-mail : </p><input type='email' name='email' value='".$this->data->Email."' />
             <p>Mot de passe : </p><input type='password' name='mdp' value='' />
             <p>Confirmation mot de passe : </p><input type='password' name='mdpconfirm' value='' />

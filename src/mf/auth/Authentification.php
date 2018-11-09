@@ -6,7 +6,7 @@ class authentification extends AbstractAuthentification{
 	function __construct(){
 
 	    if(isset($_SESSION['user_login'])){
-	        $this->user_login = $_SESSION['user_login']->login;
+	        $this->user_login = $_SESSION['user_login']->Email;
 	        $this->access_level = $_SESSION['user_login']->Level;	
 	        $this->logged_in = true;
 	    }
@@ -23,7 +23,7 @@ class authentification extends AbstractAuthentification{
 		$this->access_level = $level;
 		$this->logged_in = true;
 		$user = new \giftBox\model\User();
-		$user->Login = $username;
+		$user->Email = $username;
      	$user->Level = $level;
      	$user->Id = $id;
      	$_SESSION["user_login"] = $user;
