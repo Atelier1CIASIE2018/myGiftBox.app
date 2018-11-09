@@ -292,12 +292,12 @@ class GiftBoxView extends \mf\view\AbstractView {
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
             $res = $res . "<div>
-                <p>Nom :".$value['Nom']."</p>
-                <p>Prix :".$value['Prix']." €</p>
+                <p>Nom : ".$value['Nom']."</p>
+                <p>Prix : ".$value['Prix']." €</p>
             </div>";
             $total += $value["Prix"];
         }
-        $res .= "Total: ".$total." €</div>";
+        $res .= "<p>Total: ".$total." €</p></div>";
         if($_SESSION['box']['Etat'] > 2){
             $res .= "<p>Url du coffret pour le destinataire: ".$_SESSION["box"]["Url"]."</p>";
         }
