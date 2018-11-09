@@ -111,10 +111,10 @@ class giftBoxController extends \mf\control\AbstractController {
         }
         $vue = new \giftbox\view\giftBoxView(["box" => $box, "prestations" => $prestations, "categories" => $nomCategories]);
         $path_info = $_SERVER["PATH_INFO"];
-        var_dump($_SESSION);
+        $_SESSION["box"] = $box;
         if($path_info == "/box/"){
             if(isset($_GET["update"])){
-                //$vue->render('FormBox');
+                $vue->render('FormBox');
             }
             else{
                 $vue->render('Box');
@@ -127,6 +127,9 @@ class giftBoxController extends \mf\control\AbstractController {
             $vue->render('PayBox');
         }
         if($path_info == "/box/receiver/"){
+            if($box->Etat == 4){
+                $this->router->executeRoute("visitedBox");
+            }
             $vue->render('RenderDestinataire');
         }
     }
@@ -165,7 +168,7 @@ class giftBoxController extends \mf\control\AbstractController {
                     $_SESSION["box"]["Date"] = $_POST["date"];
                     $_SESSION["box"]["Etat"] = 1;
                     $this->router->executeRoute("updateBox");
-                    //header("Location: ".$this->router->urlFor("/boxes/", []));
+                    header("Location: ".$this->router->urlFor("/boxes/", []));
                 }
                 else{
                     $box = new \giftBox\model\Box();
@@ -252,11 +255,6 @@ class giftBoxController extends \mf\control\AbstractController {
         header("Location: ".$this->router->urlFor("/boxes/", []));
     }
 
-    public function payBox(){
-        $vue = new \giftbox\view\giftBoxView("");
-        $vue->render('PayBox');
-    }
-
     public function payBoxSend(){
         $id = $_GET["Id"];
         $box = \giftBox\model\Box::where("Id", "=", $id)->first();
@@ -272,10 +270,17 @@ class giftBoxController extends \mf\control\AbstractController {
     public function urlBox(){
         $id = $_GET["Id"];
         $box = \giftBox\model\Box::where("Id", "=", $id)->first();
-        $box->Etat = 3;
+        $box->Etat = 4;
+        $box->Url = $this->router->urlFor("/box/receiver/", ["Id"=>$id]);
+        $box->save();
+        header("Location: ".$this->router->urlFor("/box/", ["Id"=>$id]));
     }
 
-    public function receiverUrl(){
+    public function visitedBox(){
+        $id = $_GET["Id"];
+        $box = \giftBox\model\Box::where("Id", "=", $id)->first();
+        $box->Etat = 5;
+        $box->save();   
     }
 
     public function profile(){

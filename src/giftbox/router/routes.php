@@ -66,13 +66,16 @@ $router->addRoute('confirmBox', '/box/confirm/', '\giftbox\control\giftBoxContro
 $router->addRoute('summaryBox', '/box/summary/', '\giftbox\control\giftBoxController', 'viewBox', \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_USER); //GET
 
 //page pour payer : /box/pay/?id=x
-$router->addRoute('payBox', '/box/pay/', '\giftbox\control\giftBoxController', 'payBox', \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_USER); //GET
+$router->addRoute('payBox', '/box/pay/', '\giftbox\control\giftBoxController', 'viewBox', \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_USER); //GET
 
 //modifie l'état d'une box à 3 (payé) : /box/pay/send/?id=x
 $router->addRoute('payBoxSend', '/box/pay/send/', '\giftbox\control\giftBoxController', 'payBoxSend', \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_USER); //UPDATE
 
 //génère l'url de la box et le stocke dans la BDD et passe l'état à 4 (remis) : /box/url/?id=x
 $router->addRoute('urlBox', '/box/url/', '\giftbox\control\giftBoxController', 'urlBox', \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_USER); //UPDATE
+
+//Passe l'état à 5 si c'est la 1ère visite du destinataire : /box/visited?id=x
+$router->addRoute('visitedBox', '/box/visited/', '\giftbox\control\giftBoxController', 'visitedBox', \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_USER); //UPDATE
 
 //page de la box pour le destinataire : /box/receiver/?id=x
 $router->addRoute('receiverUrl', '/box/receiver/', '\giftbox\control\giftBoxController', 'viewBox', \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_NONE); //UPDATE
