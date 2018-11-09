@@ -335,7 +335,7 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderFormBox(){
         $res = "<form id='box' name='creer' method='POST' action='/giftBox/main.php/box/form/'>
-                <p> Nom : <p> <input type='text' name='nom' value='";
+                <p> Nom : </p> <input type='text' name='nom' value='";
         if(isset($_SESSION["box"]["Nom"])){
             $res .= $_SESSION["box"]["Nom"];
         }
