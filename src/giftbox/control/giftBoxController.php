@@ -304,13 +304,12 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function profile(){
-        if($_SERVER["PATH_INFO"] == "/profile/"){
-            $user = \giftBox\model\User::where("Id", "=", $_SESSION["user_login"]["Id"])->first();
-            $vue = new \giftbox\view\giftBoxView("user" => $user);
+        $user = \giftBox\model\User::where("Id", "=", $_SESSION["user_login"]["Id"])->first();
+        $vue = new \giftbox\view\giftBoxView($user);
+        if($_SERVER["PATH_INFO"] == "/profile/"){    
             $vue->render('Profil');
         }
         if($_SERVER["PATH_INFO"] == "/profile/view/"){
-            $vue = new \giftbox\view\giftBoxView("");
             $vue->render('ProfilView');
         }
     }
