@@ -10,12 +10,7 @@ class giftBoxController extends \mf\control\AbstractController {
     
     public function viewHome(){
         $prestations = \giftbox\model\Prestation::take(3)->orderBy('Id', 'desc')->get();
-        $categories = \giftbox\model\Categorie::all();
-        $nomCategories = array();
-        foreach ($categories as $categorie){
-            array_push($nomCategories, $categorie->Nom);
-        }
-        $vue = new \giftbox\view\giftBoxView(array("prestations" => $prestations, "categories" => $nomCategories));
+        $vue = new \giftbox\view\giftBoxView(array("prestations" => $prestations, "categories" => $this->categories()));
         $vue->render('Home');
     }
     
@@ -32,13 +27,13 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function viewPrestations(){
-        $prestations = \giftbox\model\Prestation::all();
-        $categories = \giftbox\model\Categorie::all();
-        $nomCategories = array();
-        foreach ($categories as $categorie){
-            array_push($nomCategories, $categorie->Nom);
+        if(isset($_GET["order"])){
+            $prestations = \giftBox\model\Prestation::orderby("Prix", $_GET["order"])->get();
         }
-        $vue = new \giftbox\view\giftBoxView(array("prestations" => $prestations, "categories" => $nomCategories));
+        else{
+            $prestations = \giftBox\model\Prestation::all();
+        }
+        $vue = new \giftbox\view\giftBoxView(array("prestations" => $prestations, "categories" => $this->categories(), "page" => "/prestations/"));
         if($_SERVER["PATH_INFO"] == "/prestations/"){
             $vue->render('Prestations');
         }
@@ -48,16 +43,21 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function viewCategories(){
-        $categorie = \giftbox\model\Categorie::all();
-        $vue = new \giftbox\view\giftBoxView($categorie);
+        $categories = \giftbox\model\Categorie::all();
+        $vue = new \giftbox\view\giftBoxView($categories);
         $vue->render('Categories');
     }
 
     public function viewCategorie(){
-        $id = $_GET['Id'];
-        $prestations = \giftbox\model\Prestation::where('IdCategorie', "=", $id)->get();
-        $vue = new \giftbox\view\giftBoxView($prestations);
-        $vue->render('Categorie');
+        $id = $_GET["Id"];
+        if(isset($_GET["order"])){
+            $prestations = \giftBox\model\Prestation::where('IdCategorie', "=", $id)->orderby("Prix", $_GET["order"])->get();
+        }
+        else{
+            $prestations = \giftbox\model\Prestation::where('IdCategorie', "=", $id)->get();
+        }
+        $vue = new \giftbox\view\giftBoxView(array("prestations"=>$prestations, "categories" => $this->categories(), "page" => "/categorie/"));
+        $vue->render('Prestations');
     }
 
     public function viewLogin(){
@@ -104,12 +104,7 @@ class giftBoxController extends \mf\control\AbstractController {
             array_push($idPrestations, $c->IdPrestation);
         }
         $prestations = \giftbox\model\Prestation::whereIn("Id", $idPrestations)->get();
-        $categories = \giftbox\model\Categorie::all();
-        $nomCategories = array();
-        foreach ($categories as $categorie){
-            array_push($nomCategories, $categorie->Nom);
-        }
-        $vue = new \giftbox\view\giftBoxView(["box" => $box, "prestations" => $prestations, "categories" => $nomCategories]);
+        $vue = new \giftbox\view\giftBoxView(["box" => $box, "prestations" => $prestations, "categories" => $this->categories()]);
         $path_info = $_SERVER["PATH_INFO"];
         $_SESSION["box"] = $box;
         if($path_info == "/box/"){
@@ -328,5 +323,14 @@ class giftBoxController extends \mf\control\AbstractController {
     public function newPrestation(){
         $vue = new \giftbox\view\giftBoxView("");
         $vue->render('NewPrestation');
+    }
+
+    private function categories(){
+        $categories = \giftbox\model\Categorie::all();
+        $nomCategories = array();
+        foreach ($categories as $categorie){
+            array_push($nomCategories, $categorie->Nom);
+        }
+        return $nomCategories;
     }
 }

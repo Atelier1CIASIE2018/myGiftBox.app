@@ -127,6 +127,14 @@ class GiftBoxView extends \mf\view\AbstractView {
 
         */
         $res = "<div id='prestations'>";
+        if($this->data["page"] == "/prestations/"){
+            $res .= "<a href='".$this->router->urlFor($this->data["page"], ["order"=>"asc"])."'><button>Prix croissants</button></a>
+                <a href='".$this->router->urlFor($this->data["page"], ["order"=>"desc"])."'><button>Prix décroissants</button></a>";
+        }
+        if($this->data["page"] == "/categorie/"){
+            $res .= "<a href='".$this->router->urlFor($this->data["page"], ["Id"=>$_GET["Id"], "order"=>"asc"])."'><button>Prix croissants</button></a>
+            <a href='".$this->router->urlFor($this->data["page"], ["Id"=>$_GET["Id"], "order"=>"desc"])."'><button>Prix décroissants</button></a>";
+        }
         foreach ($this->data["prestations"] as $value) {
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
@@ -163,41 +171,6 @@ class GiftBoxView extends \mf\view\AbstractView {
             $res .= "<div>
                 <a href='".$urlCategorie."'<p>".$value['Nom']."</p></a>
             </div>";
-        }
-        $res = $res."</div>";
-        return $res;
-    }
-
-    private function renderCategorie(){
-        /*
-        initialise les variables session box et prestations a ""
-
-        affiche toute les préstations d'une catégorie 
-
-        possibilité de cliquer sur nom - prix - image - description pour afficher les détails d'une préstation
-
-        possibilité d'ajouter une préstation a un coffret a l'aide du boutton "+"
-        */;
-        $res = "<div id='prestations'>";
-        foreach ($this->data as $value) {            
-            $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
-            $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
-            $res .="<div>
-                <a href='".$urlPrestation."'>
-                    <p>".$value['Nom']."</p>
-                    <p>".$value['Prix']." €</p>
-                </a><p></p>
-                <a href='".$urlPrestation."'>
-                    <img src ='/giftBox/img/".$value['Img']."'>
-                    <p>".$value['Description']."</p>
-                </a>";
-            if(isset($_SESSION["newPrestation"])){
-                $res .= "<div><a href='".$this->router->urlFor("/box/add/",['Id' => $this->data['Id']])."'><button>+</button></a></div>";
-            }
-            else{
-                $res .= "<div></div>";
-            }
-            $res .= "</div>";
         }
         $res = $res."</div>";
         return $res;
