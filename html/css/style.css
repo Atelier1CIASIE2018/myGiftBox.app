@@ -598,6 +598,25 @@ header {
   flex-direction: row;
   flex-wrap: wrap; }
 
+#summary > :last-child {
+  width: 80.4%;
+  margin-left: 9.8%;
+  text-align: center; }
+
+#summary + div > a > button {
+  width: 100%; }
+
+#summary > div > p {
+  text-align: center; }
+
+#summary + div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+#summary > div:nth-child(even) {
+  background-color: #DDDDDD; }
+
 @media all and (min-width: 720px) {
   #summary > div {
     width: 80.4%;
@@ -605,7 +624,23 @@ header {
 
   #summary > div > p {
     width: 47.6%;
-    margin-left: 1.6%; } }
+    margin-left: 1.6%; }
+
+  #summary + div > a {
+    width: 31.2%;
+    margin-left: 34.4%; } }
+@media all and (max-width: 720px) {
+  #summary > div {
+    width: 96.8%;
+    margin-left: 1.6%; }
+
+  #summary > div > p {
+    width: 47.6%;
+    margin-left: 1.6%; }
+
+  #summary + div > a {
+    width: 57.44%;
+    margin-left: 21.28%; } }
 /* Fin summary */
 
 /*# sourceMappingURL=style.css.map */

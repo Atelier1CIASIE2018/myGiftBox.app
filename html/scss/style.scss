@@ -257,19 +257,24 @@ header{
 
 /* Fin Viewprofile */
 /* Debut summary */
-#summary, #summary > div{
-	@include flex();
+#summary, #summary > div{@include flex();}
+#summary > :last-child{
+	@include grille(12, 1.6%, 1, 10);
+	text-align:center;
 }
+#summary + div > a >button{width:100%;}
+#summary > div > p{text-align:center;}
+#summary + div {@include flex();}
+#summary > div:nth-child(even){background-color:#DDDDDD;}
 @media all and (min-width:720px){
-	#summary > div{
-		@include grille(12, 1.6%, 1, 10);
-	}	
-	#summary > div > p{
-		@include grille(10, 1.6%, 0, 5);
-	}
+	#summary > div{@include grille(12, 1.6%, 1, 10);}	
+	#summary > div > p{@include grille(10, 1.6%, 0, 5);}
+	#summary + div > a {@include grille(3, 1.6%, 1, 1);}
 }
 @media all and (max-width:720px){
-	
+	#summary > div{@include grille(1, 1.6%, 0, 1);}	
+	#summary > div > p{@include grille(2, 1.6%, 0, 1);}
+	#summary + div > a {@include grille(5, 1.6%, 1, 3);}
 }
 
 /* Fin summary */

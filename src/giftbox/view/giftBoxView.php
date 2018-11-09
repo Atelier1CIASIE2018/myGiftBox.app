@@ -302,7 +302,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             $res .= "<p>Url du coffret pour le destinataire: ".$_SESSION["box"]["Url"]."</p>";
         }
         else{
-            $res .= "<a href='/giftBox/main.php/box/pay/?Id=".$_SESSION['box']['Id']."'><button>Passer au paiement</button></a>";      
+            $res .= "<div><a href='/giftBox/main.php/box/pay/?Id=".$_SESSION['box']['Id']."'><button>Passer au paiement</button></a></div>";      
         }
         $res .= "</div>";
         return $res;
