@@ -141,7 +141,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <p>Nom : </p><input type='text' name='nom'/>
                 <p>E-mail : </p><input type='text' name='mail'/>
                 <p>Login : </p><input type='text' name='log'/>
-                <p>Mot de passe : </p><input type='text' name='mdp'/>                
+                <p>Mot de passe : </p><input type='password' name='mdp'/>                
                 <input type='submit' name='valider' value='Valider'/>
                 </form>"; // FINI
     }
@@ -256,7 +256,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         else{
             $res .= date("Y-m-d")."'>";
         }
-        $res .= "<input type='submit' name='choixForm' value='Ajouter'/>";
+        $res .= "<input type='submit' name='choixForm' value='Ajouter une préstation'/>";
         /*if(isset($_SESSION["messageErreur"]) && $_SESSION["messageErreur"] != ""){
             echo "<p>".$_SESSION["messageErreur"]."</p>";
         }*/
@@ -357,8 +357,8 @@ class GiftBoxView extends \mf\view\AbstractView {
             <p>Prénom : </p><input type='text' name='prenom' value='".$this->data->Prenom."' />
             <p>Pseudo : </p><input type='text' name='login' value='".$this->data->Login."' />
             <p>E-mail : </p><input type='email' name='email' value='".$this->data->Email."' />
-            <p>Mot de passe : </p><input type='password' nam='mdp' value='' />
-            <p>Confirmation mot de passe : </p><input type='text' nam='mdpconfirm' value='' />
+            <p>Mot de passe : </p><input type='password' name='mdp' value='' />
+            <p>Confirmation mot de passe : </p><input type='password' name='mdpconfirm' value='' />
             <input type='submit' name='envoyer'/></form>";
         return $res;
     }
