@@ -193,7 +193,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                         <p>Catégorie: ".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
                         <img src ='/giftBox/img/".$value['Img']."'width='200'>
                         <p>".$value['Description']."</p>
-                    </div><hr>";
+                    </div>";
             }
             $urlBox =  $this->router->urlfor('/box/', ['Id'=>$_SESSION["box"]['Id']]);
             $urlSummaryBox = $this->router->urlfor('/box/summary/', ['Id'=>$_SESSION["box"]['Id']]);
@@ -345,9 +345,9 @@ class GiftBoxView extends \mf\view\AbstractView {
     private function renderProfil(){
         $res = "<div><h1> Voici votre profil : </h1> <br/> 
         Nom : ".$_SESSION['user']['Nom']."<br/> 
-        Prénom : ".$_SESSION['user']['Prenom']."<br/> 
-        E-mail : ".$_SESSION['user']['Email']."<br/> 
-        Pseudo : ".$_SESSION['user']['Login']."<br/>
+        Prénom : ".$_SESSION['user_login']['Prenom']."<br/> 
+        E-mail : ".$_SESSION['user_login']['Email']."<br/> 
+        Pseudo : ".$_SESSION['user_login']['Login']."<br/>
         <a href='/giftBox/main.php/profile/view/'><button>Modifier</button></a>";
         return $res;
     }

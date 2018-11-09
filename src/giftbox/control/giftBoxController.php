@@ -142,9 +142,10 @@ class giftBoxController extends \mf\control\AbstractController {
         if(isset($_POST["choixForm"])){
             if($_POST["choixForm"] == "Ajouter"){
                 if(isset($_SESSION["box"])){
-                    $_SESSION["box"]->Nom = $_POST["nom"];
-                    $_SESSION["box"]->IdUser = $_SESSION["user"]->Id;
-                    $_SESSION["box"]->Message = $_POST["Texte"];
+                    $_SESSION["box"]["Nom"] = $_POST["nom"];
+                    $_SESSION["box"]["IdUser"] = $_SESSION["user_login"]->Id;
+                    $_SESSION["box"]["Message"] = $_POST["Texte"];
+                    $_SESSION["box"]["Date"] = $_POST["date"];
                 }
                 else{
                     $box = new \giftBox\model\Box();
