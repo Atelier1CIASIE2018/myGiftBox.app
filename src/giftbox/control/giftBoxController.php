@@ -195,24 +195,29 @@ class giftBoxController extends \mf\control\AbstractController {
 
     public function addPrestationBox(){
         $id = $_GET["Id"];
-        $box = \giftBox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
-        if($box["Etat"] == 1){
-            $composer = new \giftbox\model\Composer();
-            $composer->IdBox = $_SESSION["box"]["Id"];
-            $composer->IdPrestation = $_GET["Id"];
-            try{
-                $composer->save();
-                header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
+        if($_SESSION["box"] != ""){
+            $box = \giftBox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
+            if($box["Etat"] == 1 || $box["Etat"] == 0){
+                $composer = new \giftbox\model\Composer();
+                $composer->IdBox = $_SESSION["box"]["Id"];
+                $composer->IdPrestation = $_GET["Id"];
+                try{
+                    $composer->save();
+                    header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
+                }
+                catch (\Exception $e){
+                    //$_SESSION["messageErreur"] = "Vous ne pouvez pas ajouter une 2e fois cette préstation";
+                    header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
+                } 
             }
-            catch (\Exception $e){
-                //$_SESSION["messageErreur"] = "Vous ne pouvez pas ajouter une 2e fois cette préstation";
-                header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
-            } 
+            if(isset($_SESSION["prestationTemp"])){
+                unset($_SESSION["prestationTemp"]);
+            }
         }
         else{
             $_SESSION["prestationTemp"] = $id;
             header("Location: ".$this->router->urlFor("/box/new/", []));
-        }     
+        }           
     }
 
     public function removePrestationBox(){
@@ -227,6 +232,7 @@ class giftBoxController extends \mf\control\AbstractController {
         $box->Nom = $_POST["nom"];
         $box->Message = $_POST["Texte"];
         $box->Date = $_POST["date"];
+        $box->Etat = 1;
         $box->save();
         unset($_SESSION["box"]);
         unset($_SESSION["prestations"]);
@@ -240,6 +246,7 @@ class giftBoxController extends \mf\control\AbstractController {
         $box->Message = $_POST["Texte"];
         $box->Date = $_POST["date"];
         $box->IdUser = $_SESSION["user_login"]->Id;
+        $box->Etat = 1;
         $box->save();
     }
 
@@ -297,18 +304,35 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function profile(){
-        if($_SERVER["PATH_INFO"] == "/profile/"){
-            $vue = new \giftbox\view\giftBoxView("");
+        $user = \giftBox\model\User::where("Id", "=", $_SESSION["user_login"]["Id"])->first();
+        $vue = new \giftbox\view\giftBoxView($user);
+        if($_SERVER["PATH_INFO"] == "/profile/"){    
             $vue->render('Profil');
         }
         if($_SERVER["PATH_INFO"] == "/profile/view/"){
-            $vue = new \giftbox\view\giftBoxView("");
             $vue->render('ProfilView');
         }
     }
 
     public function updateProfile(){
-        
+        $user = \giftBox\model\User::where("Id", "=", $_SESSION["user_login"]["Id"])->first();
+        if($_POST["nom"] != ""){
+            $user->Nom = $_POST["nom"];
+        }
+        if($_POST["prenom"] != ""){
+            $user->Prenom = $_POST["prenom"];
+        }
+        if($_POST["email"] != ""){
+            $user->Email = $_POST["email"];
+        }
+        if($_POST["login"] != "" && \giftBox\model\User::where("Login", "=", $_POST["login"])){
+            $user->Login = $_POST["login"];
+        }
+        if($_POST["mdp"] != "" && $_POST["mdpconfirm"] != "" && $_POST["mdp"] == $_POST["mdpconfirm"]){
+            $user->Mdp = password_hash($_POST["mdp"], PASSWORD_DEFAULT);
+        }
+        $user->save();
+        header("Location: ".$this->router->urlFor("/profile/", []));
     }
 
     public function newPrestation(){
