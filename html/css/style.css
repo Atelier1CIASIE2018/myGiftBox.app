@@ -538,7 +538,9 @@ body > footer {
   #viewBox > div {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    border: 2px black solid;
+    margin-top: 10px; }
 
   #viewBox > div > p:nth-child(1), #viewBox > div > p:nth-child(2), #viewBox > div > p:nth-child(3) {
     width: 31.2%;
@@ -552,16 +554,13 @@ body > footer {
     width: 64%;
     margin-left: 1.6%; }
 
-  #viewBox > div:nth-child(7) {
+  #viewBox > div:last-child {
     width: 57.44%;
     margin-left: 21.28%;
-    text-align: center; }
+    text-align: center;
+    border: none; }
 
-  #viewBox > div:nth-child(7) > a {
-    width: 31.2%;
-    margin-left: 1.6%; }
-
-  #viewBox > div:nth-child(7) > a > button {
+  #viewBox > div:last-child > a > button {
     width: 100%; }
 
   #viewBox > div > a {

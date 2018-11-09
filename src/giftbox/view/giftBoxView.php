@@ -146,29 +146,29 @@ class GiftBoxView extends \mf\view\AbstractView {
             $urlBox =  $this->router->urlfor('/box/', ['Id'=>$value['Id']]);
             $urlSummaryBox = $this->router->urlfor('/box/summary/', ['Id'=>$value["Id"]]);
             $urlConfirm = $this->router->urlfor('/box/confirm/', ['Id'=>$value["Id"]]);
-            $res .= "<p>".$value['Nom']."</p>";
+            $res .= "<p>".$value['Nom'];
             switch ($value['Etat']){
                 case 1:
-                    $res .= ": <div>
+                    $res .= ": </p><div>
                     <a href='".$urlBox."'><button>Aperçu</button></a>
                     <a href='".$urlBox."&update'><button>Modifier</button></a>
                     <a href='".$urlConfirm."'><button>Valider</button></a>
                     <a href='".$urlSummaryBox."'><button>Payer</button></a></div>";
                     break;
                 case 2:
-                    $res .= " (Validé) : <div>
+                    $res .= " (Validé) : </p><div>
                     <a href='".$urlBox."'><button>Aperçu</button></a>
                     <a href='".$urlSummaryBox."'><button>Payer</button></a></div>";
                     break;
                 default:                    
                     if($value["Etat"] == 3){
-                        $res .= " (Payé) : ";
+                        $res .= " (Payé) : </p>";
                     }
                     if($value["Etat"] == 4){
-                        $res .= " (Transmis) : ";
+                        $res .= " (Transmis) : </p>";
                     }
                     if($value["Etat"] == 5){
-                        $res .= " (Ouvert) : ";
+                        $res .= " (Ouvert) : </p>";
                     }
                     $res .= "<div><a href='".$urlBox."'><button>Aperçu</button></a></div>";
                     break;
