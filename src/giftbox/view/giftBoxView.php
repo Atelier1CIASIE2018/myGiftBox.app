@@ -234,7 +234,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderFormBox(){
-        //var_dump($_SESSION);
         $res = "<form id='box' name='creer' method='POST' action='/giftBox/main.php/box/form/'>
                 <p> Nom : <p> <input type='text' name='nom' value='";
         if(isset($_SESSION["box"]["Nom"])){
@@ -262,8 +261,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             echo "<p>".$_SESSION["messageErreur"]."</p>";
         }*/
         if(isset($_SESSION["prestationTemp"])){
-            echo "ici";
-            $this->router->executeRoute("addBox");
+            header("Location: ".$this->router->urlFor("/box/add/", ["Id"=>$_SESSION["prestationTemp"]]));
         }
         if(isset($_SESSION['prestations']) && !empty($_SESSION["prestations"])){
             foreach ($_SESSION['prestations'] as $value) {
@@ -345,11 +343,11 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderProfil(){
         $res = "<div id='profile'><h1> Voici votre profil : </h1>
-        <p>Nom : ".$_SESSION['user_login']['Nom']."</p>
-        <p>Prénom : ".$_SESSION['user_login']['Prenom']."</p>
-        <p>E-mail : ".$_SESSION['user_login']['Email']."</p>
-        <p>Pseudo : ".$_SESSION['user_login']['Login']."</p>
-        <a href='/giftBox/main.php/profile/view/'><button>Modifier</button></a>";
+            <p>Nom : ".$this->data["user"]->Nom."</p>
+            <p>Prénom : ".$this->data["user"]->Prenom."</p>
+            <p>E-mail : ".$this->data["user"]->Email."</p>
+            <p>Pseudo : ".$this->data["user"]->Login."</p>
+            <a href='/giftBox/main.php/profile/view/'><button>Modifier</button></a>";
         return $res;
     }
 
