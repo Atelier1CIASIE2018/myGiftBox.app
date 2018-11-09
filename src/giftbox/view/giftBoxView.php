@@ -146,7 +146,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             else{
                 $res .= "<span></span>";
             }
-            $res .= "</div>",
+            $res .= "</div>";
         }
         $res .= "</div>";
         return $res;
