@@ -388,13 +388,36 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderAdminPrestation(){
-        return "<h1> Modification de la préstation </h1>
+        return "<h1> Voici votre coffret :</h1>
                 <form name='update' method='POST'>
-                    <p>Nom : </p><input type='text' name='nom' value='".$this->data['Nom']."'/> <br/>
+                    <textarea
+                    <input type='textarea' name='nom' value='".$this->data['Nom']."'/> <br/>
                     <p>Description : </p><input type='text' name='nom' value='".$this->data['Description']."'/> <br/>
                     <p>Prix : </p><input type='text' name='nom' value='".$this->data['Prix']."'/> <br/>
                     <p>Image : </p><input type='file' name='image'/><br/>
                 </form>";
+    }
+
+    private function renderDestinataire(){
+        $res = "<h1> Modification de la préstation </h1>";
+
+            if($this->data['message'] == ""){
+                $res = "<form name='update' method='POST'>
+                        <textarea name='Texte' rows='10' cols='50' placeholder='Veuillez saisir votre message de retour'></textarea>
+                        </p><input type='submit' name='message' value='Envoyer'/>
+                        </form>";
+            }
+
+        foreach ($_SESSION['prestations'] as $value) {
+                $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
+                $res .= "<div>
+                        <p>Nom: ".$value['Nom']."</p>
+                        <img src ='/giftBox/img/".$value['Img']."'width='200'>
+                        <p>".$value['Description']."</p>
+                        <a href='".$urlPrestation."'><button>Visualiser la prestation</button></a>
+                    </div><hr>";
+            }
+
     }
     
     protected function renderBody($selector=null){
@@ -416,6 +439,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'Admin')$string = $string . self::renderAdmin();
         if ($selector == 'NewPrestation')$string = $string . self::renderNewPrestation();
         if ($selector == 'AdminPrestation')$string = $string . self::renderAdminPrestation();
+        if ($selector == 'RenderDestinataire')$string = $string . self::renderDestinataire();
         $string = $string ."</article></section><footer>".self::renderFooter()."</footer>";
         return $string;
     }
