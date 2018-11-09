@@ -89,11 +89,11 @@ class giftBoxAuthentification extends \mf\auth\Authentification {
 
         $res = \giftbox\model\User::where('Login', "=", $username)->first();
         var_dump($res);
-        /*if($res == null){
+        if($res == null){
             echo "erreur";
         }
         else{
             $this->login($username,$res['Mdp'],$password,$res['Level']);
-        }*/
+        }
     }
 }
