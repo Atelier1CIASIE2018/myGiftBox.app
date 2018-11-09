@@ -256,7 +256,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         else{
             $res .= date("Y-m-d")."'>";
         }
-        $res .= "<input type='submit' name='choixForm' value='Ajouter une préstation'/>";
+        $res .= "<input type='submit' name='choixForm' value='Ajouter une prestation'/>";
         /*if(isset($_SESSION["messageErreur"]) && $_SESSION["messageErreur"] != ""){
             echo "<p>".$_SESSION["messageErreur"]."</p>";
         }*/
