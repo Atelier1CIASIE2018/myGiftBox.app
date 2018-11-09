@@ -128,6 +128,9 @@ class giftBoxController extends \mf\control\AbstractController {
         if($_SERVER["PATH_INFO"] == "/box/pay/"){
             $vue->render('PayBox');
         }
+        if($_SERVER["PATH_INFO"] == "/box/receiver/"){
+            $vue->render('RenderDestinataire');
+        }
     }
 
     public function newBox(){
@@ -192,17 +195,24 @@ class giftBoxController extends \mf\control\AbstractController {
 
     public function addPrestationBox(){
         $id = $_GET["Id"];
-        $composer = new \giftbox\model\Composer();
-        $composer->IdBox = $_SESSION["box"]["Id"];
-        $composer->IdPrestation = $_GET["Id"];
-        try{
-            $composer->save();
-            header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
+        $box = \giftBox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
+        if($box["Etat"] == 1){
+            $composer = new \giftbox\model\Composer();
+            $composer->IdBox = $_SESSION["box"]["Id"];
+            $composer->IdPrestation = $_GET["Id"];
+            try{
+                $composer->save();
+                header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
+            }
+            catch (\Exception $e){
+                //$_SESSION["messageErreur"] = "Vous ne pouvez pas ajouter une 2e fois cette préstation";
+                header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
+            } 
         }
-        catch (\Exception $e){
-            //$_SESSION["messageErreur"] = "Vous ne pouvez pas ajouter une 2e fois cette préstation";
-            header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
-        }        
+        else{
+            $_SESSION["prestationTemp"] = $id;
+            header("Location: ".$this->router->urlFor("/box/new/", []));
+        }     
     }
 
     public function removePrestationBox(){
@@ -268,11 +278,14 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function payBoxSend(){
-        $id = $_GET["id"];
+        $id = $_GET["Id"];
         $box = \giftBox\model\Box::where("Id", "=", $id)->first();
+        if($box->Etat == 1){
+            $this->router->executeRoute("confirmBox");
+        }
         $box->Etat = 3;
         $box->save();
-        //header("Location: ".$this->router->urlFor("/box/", ["Id"=>$id]));
+        header("Location: ".$this->router->urlFor("/box/", ["Id"=>$id]));
     }
 
     public function urlBox(){

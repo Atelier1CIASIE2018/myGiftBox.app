@@ -75,7 +75,7 @@ $router->addRoute('payBoxSend', '/box/pay/send/', '\giftbox\control\giftBoxContr
 $router->addRoute('urlBox', '/box/url/', '\giftbox\control\giftBoxController', 'urlBox', \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_USER); //UPDATE
 
 //page de la box pour le destinataire : /box/receiver/?id=x
-$router->addRoute('receiverUrl', '/box/receiver/', '\giftbox\control\giftBoxController', 'receiverUrl', \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_NONE); //UPDATE
+$router->addRoute('receiverUrl', '/box/receiver/', '\giftbox\control\giftBoxController', 'viewBox', \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_NONE); //UPDATE
 
 //ajoute un message de retour de la part du destinataire : /box/receiver/message/?id=x
 $router->addRoute('receiverMessage', '/box/receiver/message/', '\giftbox\control\giftBoxController', 'receiverMessage', \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_NONE); //UPDATE

@@ -28,6 +28,8 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
     
     private function renderHome(){
+        $_SESSION["box"] = "";
+        $_SESSION["prestations"] = "";
         $res = "<div id='home'> 
                 <img src='/giftBox/img/cadeau.jpg' >
                 <div> <h1> Nouveautés : </h1>";
@@ -52,6 +54,8 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderPrestation(){
+        $_SESSION["box"] = "";
+        $_SESSION["prestations"] = "";
         $res = "<div id='prestation'>
             <p>".$this->data['Nom']."</p>
             <p>".$this->data['Prix']." €</p>
@@ -63,6 +67,8 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderPrestations(){
+        $_SESSION["box"] = "";
+        $_SESSION["prestations"] = "";
         $res = "<div id='prestations'><div>";
         foreach ($this->data["prestations"] as $value) {
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -97,6 +103,8 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderCategorie(){
+        $_SESSION["box"] = "";
+        $_SESSION["prestations"] = "";
         $res = "<div id='categorie'>";
         foreach ($this->data as $value) {            
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -226,6 +234,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderFormBox(){
+        //var_dump($_SESSION);
         $res = "<form id='box' name='creer' method='POST' action='/giftBox/main.php/box/form/'>
                 <p> Nom : <p> <input type='text' name='nom' value='";
         if(isset($_SESSION["box"]["Nom"])){
@@ -252,6 +261,10 @@ class GiftBoxView extends \mf\view\AbstractView {
         /*if(isset($_SESSION["messageErreur"]) && $_SESSION["messageErreur"] != ""){
             echo "<p>".$_SESSION["messageErreur"]."</p>";
         }*/
+        if(isset($_SESSION["prestationTemp"])){
+            echo "ici";
+            $this->router->executeRoute("addBox");
+        }
         if(isset($_SESSION['prestations']) && !empty($_SESSION["prestations"])){
             foreach ($_SESSION['prestations'] as $value) {
                 $res .= "<div>
@@ -309,25 +322,22 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderBoxPay(){
-        $res = "<div> <h1> Préstations sélectionnée : </h1>";
+        $res = "<div>";
         $total = 0;
         foreach ($_SESSION["prestations"] as $value) {
             $total += $value['Prix'];
-            $router = new \mf\router\Router();
-            $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
-            $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
-            $res = $res . "<div>
-                <p>".$value['Nom']."</p>
-                <p>".$value['Prix']." €</p>
-            </div><hr>";
         }
 
         $res .= "Tarif total : " . $total . " € <br/><br/>
             <form name='acheter' method='POST' action='/giftBox/main.php/box/pay/send/?Id=".$_SESSION['box']['Id']."'>
-                <input type='radio' name='test' value='' checked /> <img src='/giftBox/img/modePaiement/paypal.jpg' width='200'> <br/>
-                <input type='radio' name='test' value=''/> <img src='/giftBox/img/modePaiement/visa.png' width='200'> <br/>
-                <input type='radio' name='test' value=''/> <img src='/giftBox/img/modePaiement/mastercard.png' width='200'> <br/> <br/>
-                <input type='radio' name='test' value=''/> <img src='/giftBox/img/modePaiement/cartebleu.jpeg' width='200'> <br/> <br/>
+                <input type='radio' name='test' value='paypal' checked />
+                <img src='/giftBox/img/modePaiement/paypal.jpg'>
+                <input type='radio' name='test' value='visa'/> 
+                <img src='/giftBox/img/modePaiement/visa.png'>
+                <input type='radio' name='test' value='mastercard'/> 
+                <img src='/giftBox/img/modePaiement/mastercard.png'>
+                <input type='radio' name='test' value='cartebleu'/> 
+                <img src='/giftBox/img/modePaiement/cartebleu.jpeg'>
                 <input type='submit' name='payer' value='Payer'/>
             </form></div>";
         return $res;
