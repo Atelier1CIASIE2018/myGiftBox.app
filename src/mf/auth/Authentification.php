@@ -22,9 +22,11 @@ class authentification extends AbstractAuthentification{
 		$this->user_login = $username;
 		$this->access_level = $level;
 		$this->logged_in = true;
-		$_SESSION['user_login']->Login = $username;
-     	$_SESSION['user_login']->Level = $level;
-     	$_SESSION['user_login']->Id = $id;
+		$user new \giftBox\model\User();
+		$user->Login = $username;
+     	$user->Level = $level;
+     	$user->Id = $id;
+     	$_SESSION["user_login"] = $user;
 	}
 
 	function logout()
