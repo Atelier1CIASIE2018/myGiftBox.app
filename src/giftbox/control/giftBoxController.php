@@ -1,6 +1,5 @@
 <?php
 namespace giftbox\control;
-
 class giftBoxController extends \mf\control\AbstractController {
     private $router;
 
@@ -99,7 +98,7 @@ class giftBoxController extends \mf\control\AbstractController {
     public function viewBox(){
         $id = $_GET["Id"];
         $box = \giftbox\model\Box::where('Id', "=", $id)->first();
-        $composer = \giftbox\model\Composer::where("IdBox", "=", $box->Id)->get();
+        $composer = \giftbox\model\Composer::where("IdBox", "=", $id)->get();
         $idPrestations = array();
         foreach ($composer as $c) {
             array_push($idPrestations, $c->IdPrestation);
@@ -134,8 +133,6 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function newBox(){
-        $_SESSION["box"] = "";
-        $_SESSION["prestations"] = "";
         $box = new \giftbox\model\Box();
         $box->IdUser = $_SESSION["user_login"]->Id;
         $box->Etat = 0;
@@ -148,22 +145,12 @@ class giftBoxController extends \mf\control\AbstractController {
     public function formBox(){
         if(isset($_POST["choixForm"])){
             if($_POST["choixForm"] == "Ajouter une prestation"){
-                if(isset($_SESSION["box"])){
-                    $box = \giftBox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
-                    $box->Nom = $_POST["nom"];
-                    $box->IdUser = $_SESSION["user_login"]->Id;
-                    $box->Message = $_POST["Texte"];
-                    $box->Date = $_POST["date"];
-                    $box->Etat = 1;
-                }
-                else{
-                    $box = new \giftBox\model\Box();
-                    $box->Nom = $_POST["nom"];
-                    $box->IdUser = $_SESSION["user_login"]->Id;
-                    $box->Message = $_POST["Texte"];
-                    $box->Date = $_POST["date"];
-                    $box->Etat = 1;
-                }
+                $box = \giftBox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
+                $box->Nom = $_POST["nom"];
+                $box->IdUser = $_SESSION["user_login"]->Id;
+                $box->Message = $_POST["Texte"];
+                $box->Date = $_POST["date"];
+                $box->Etat = 1;
                 $box->save();
                 $_SESSION["box"] = $box;
                 header("Location: ".$this->router->urlFor("/prestations/", []));
@@ -176,6 +163,7 @@ class giftBoxController extends \mf\control\AbstractController {
                     $_SESSION["box"]->Date = $_POST["date"];
                     $_SESSION["box"]->Etat = 1;
                     $this->router->executeRoute("updateBox");
+                    header("Location: ".$this->router->urlFor("/boxes/", []));
                 }
                 else{
                     $box = new \giftBox\model\Box();
@@ -185,39 +173,30 @@ class giftBoxController extends \mf\control\AbstractController {
                     $box->Date = $_POST["date"];
                     $_SESSION["box"] = $box;
                     $this->router->executeRoute("postBox");
-                }                
+                }
             }
             if($_POST["choixForm"] == "Valider"){
-                header("Location: ".$this->router->urlFor("/box/confirm/", [])."/?Id=".$_SESSION["box"]["Id"]);
+                header("Location: ".$this->router->urlFor("/box/confirm/", ["Id"=>$_SESSION["box"]["Id"]]));
             }
         }
     }
 
     public function addPrestationBox(){
         $id = $_GET["Id"];
-        if($_SESSION["box"] != ""){
-            $box = \giftBox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
-            if($box["Etat"] == 1 || $box["Etat"] == 0){
-                $composer = new \giftbox\model\Composer();
-                $composer->IdBox = $_SESSION["box"]["Id"];
-                $composer->IdPrestation = $_GET["Id"];
-                try{
-                    $composer->save();
-                    header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
-                }
-                catch (\Exception $e){
-                    //$_SESSION["messageErreur"] = "Vous ne pouvez pas ajouter une 2e fois cette préstation";
-                    header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
-                } 
+        $box = \giftBox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
+        if($box["Etat"] == 1 || $box["Etat"] == 0){
+            $composer = new \giftbox\model\Composer();
+            $composer->IdBox = $_SESSION["box"]["Id"];
+            $composer->IdPrestation = $_GET["Id"];
+            try{
+                $composer->save();
+                header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
             }
-            if(isset($_SESSION["prestationTemp"])){
-                unset($_SESSION["prestationTemp"]);
-            }
-        }
-        else{
-            $_SESSION["prestationTemp"] = $id;
-            header("Location: ".$this->router->urlFor("/box/new/", []));
-        }           
+            catch (\Exception $e){
+                //$_SESSION["messageErreur"] = "Vous ne pouvez pas ajouter une 2e fois cette préstation";
+                header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
+            } 
+        }      
     }
 
     public function removePrestationBox(){
@@ -234,10 +213,8 @@ class giftBoxController extends \mf\control\AbstractController {
         $box->Date = $_POST["date"];
         $box->Etat = 1;
         $box->save();
-        unset($_SESSION["box"]);
-        unset($_SESSION["prestations"]);
-        unset($_SESSION["categories"]);
-        header("Location: ".$this->router->urlFor("/boxes/", []));      
+        $_SESSION["box"] = null;
+        $_SESSION["Prestations"] = null;    
     }
 
     public function postBox(){
@@ -272,10 +249,6 @@ class giftBoxController extends \mf\control\AbstractController {
                 $i++;
             }
         }
-        unset($_SESSION["box"]);
-        unset($_SESSION["prestations"]);
-        unset($_SESSION["date"]);
-        unset($_SESSION["categories"]);
         header("Location: ".$this->router->urlFor("/boxes/", []));
     }
 

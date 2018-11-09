@@ -28,8 +28,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
     
     private function renderHome(){
-        $_SESSION["box"] = "";
-        $_SESSION["prestations"] = "";
         $res = "<div id='home'> 
                 <img src='/giftBox/img/cadeau.jpg' >
                 <div> <h1> Nouveautés : </h1>";
@@ -54,8 +52,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderPrestation(){
-        $_SESSION["box"] = "";
-        $_SESSION["prestations"] = "";
         $res = "<div id='prestation'>
             <p>".$this->data['Nom']."</p>
             <p>".$this->data['Prix']." €</p>
@@ -67,8 +63,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderPrestations(){
-        $_SESSION["box"] = "";
-        $_SESSION["prestations"] = "";
         $res = "<div id='prestations'><div>";
         foreach ($this->data["prestations"] as $value) {
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -103,8 +97,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderCategorie(){
-        $_SESSION["box"] = "";
-        $_SESSION["prestations"] = "";
         $res = "<div id='categorie'>";
         foreach ($this->data as $value) {            
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -260,9 +252,6 @@ class GiftBoxView extends \mf\view\AbstractView {
         /*if(isset($_SESSION["messageErreur"]) && $_SESSION["messageErreur"] != ""){
             echo "<p>".$_SESSION["messageErreur"]."</p>";
         }*/
-        if(isset($_SESSION["prestationTemp"])){
-            header("Location: ".$this->router->urlFor("/box/add/", ["Id"=>$_SESSION["prestationTemp"]]));
-        }
         if(isset($_SESSION['prestations']) && !empty($_SESSION["prestations"])){
             foreach ($_SESSION['prestations'] as $value) {
                 $res .= "<div>
