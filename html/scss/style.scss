@@ -224,37 +224,37 @@ header{
 /* Fin boxes */
 /* Debut profile */
 
+#profile > p{
+	text-align:center;
+	margin-top:20px;
+}
+#profile > a > button{
+	width:100%;
+}
 @media all and (min-width:720px){
-
+	#profile{@include grille(3, 1.6%, 1, 1);}
 }
 @media all and (max-width:720px){
-
+	#profile{@include grille(1, 1.6%, 0, 1);}
 }
 
 /* Fin profile */
 /* Debut Viewprofile */
+
 #viewProfile > p{
 	text-align:center;
 	margin-top:20px;
 }
 #viewProfile > input{
 	margin-top:10px;
+	width:100%;
+	box-sizing:border-box;
 }
 @media all and (min-width:720px){
-	#viewProfile{
-		@include grille(3, 1.6%, 1, 1);
-	}
-	#viewProfile input{
-		width:100%;
-	}
-	#viewProfile >:last-child{
-		text-align:center;
-	}
+	#viewProfile{@include grille(3, 1.6%, 1, 1);}
 }
 @media all and (max-width:720px){
-	#viewProfile > p, #viewProfile > input, #viewProfile > a > button{
-		@include grille(1, 1.6%, 0, 1);
-	}
+	#viewProfile{@include grille(1, 1.6%, 0, 1);}
 }
 
 /* Fin Viewprofile */

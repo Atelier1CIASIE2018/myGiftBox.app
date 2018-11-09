@@ -557,6 +557,21 @@ header {
     width: 50%; } }
 /* Fin boxes */
 /* Debut profile */
+#profile > p {
+  text-align: center;
+  margin-top: 20px; }
+
+#profile > a > button {
+  width: 100%; }
+
+@media all and (min-width: 720px) {
+  #profile {
+    width: 31.2%;
+    margin-left: 34.4%; } }
+@media all and (max-width: 720px) {
+  #profile {
+    width: 96.8%;
+    margin-left: 1.6%; } }
 /* Fin profile */
 /* Debut Viewprofile */
 #viewProfile > p {
@@ -564,20 +579,16 @@ header {
   margin-top: 20px; }
 
 #viewProfile > input {
-  margin-top: 10px; }
+  margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box; }
 
 @media all and (min-width: 720px) {
   #viewProfile {
     width: 31.2%;
-    margin-left: 34.4%; }
-
-  #viewProfile input {
-    width: 100%; }
-
-  #viewProfile > :last-child {
-    text-align: center; } }
+    margin-left: 34.4%; } }
 @media all and (max-width: 720px) {
-  #viewProfile > p, #viewProfile > input, #viewProfile > a > button {
+  #viewProfile {
     width: 96.8%;
     margin-left: 1.6%; } }
 /* Fin Viewprofile */
