@@ -87,7 +87,7 @@ class giftBoxAuthentification extends \mf\auth\Authentification {
     
     public function loginUser($username, $password){
 
-        $res = \giftbox\model\User::where('Login', "=", $username)->where('Mdp', '=', $password)->first();
+        $res = \giftbox\model\User::where('Login', "=", $username)->first();
         echo $res;
         if($res == null){
             echo "erreur";
