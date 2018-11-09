@@ -31,8 +31,9 @@ class authentification extends AbstractAuthentification{
 
 	function logout()
     {
-        $_SESSION['user_login']->login = null;
-        $_SESSION['user_login']->Level = -9999;
+    	$_SESSION['user_login'] = null;
+        //$_SESSION['user_login']->login = null;
+        //$_SESSION['user_login']->Level = -9999;
         $this->user_login = null;
         $this->access_level = -9999;
         $this->logged_in = false;
