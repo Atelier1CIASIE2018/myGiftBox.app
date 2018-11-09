@@ -103,7 +103,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             <p>".$this->data['Prix']." €</p>
             <img src ='/giftBox/img/".$this->data['Img']."'>
             <p>".$this->data['Description']."</p>";
-        if($_SESSION["user_login"] != null){
+        if(isset($_SESSION["newPrestation"])){
             $res .= "<div><a href='".$this->router->urlFor("/box/add/",['Id' => $this->data['Id']])."'><button>+</button></a></div>";
         }
         else{
@@ -140,11 +140,11 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
                 </a>";
-            if($_SESSION["user_login"] != null){
-                $res .= "<div><a href='".$this->router->urlFor("/box/add/",['Id' => $value['Id']])."'><button>+</button></a></div>";
+            if(isset($_SESSION["newPrestation"])){
+                $res .= "<span><a href='".$this->router->urlFor("/box/add/",['Id' => $value['Id']])."'><button>+</button></a></span>";
             }
             else{
-                $res .= "<div></div>";
+                $res .= "<span></span>";
             }
         }
         $res .= "</div></div>";
@@ -190,7 +190,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
                 </a>";
-            if($_SESSION["user_login"] != null){
+            if(isset($_SESSION["newPrestation"])){
                 $res .= "<div><a href='".$this->router->urlFor("/box/add/",['Id' => $this->data['Id']])."'><button>+</button></a></div>";
             }
             else{
@@ -285,9 +285,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderBox(){
-
-        
-        
         $res = "<div id='viewBox'>
             <p>Nom : ".$_SESSION["box"]["Nom"]."</p>
             <p>Message : ".$_SESSION["box"]["Message"]."</p>

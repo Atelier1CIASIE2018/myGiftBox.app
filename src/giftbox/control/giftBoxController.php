@@ -155,6 +155,7 @@ class giftBoxController extends \mf\control\AbstractController {
                 $box->Etat = 1;
                 $box->save();
                 $_SESSION["box"] = $box;
+                $_SESSION["newPrestation"] = 1;
                 header("Location: ".$this->router->urlFor("/prestations/", []));
             }
             if($_POST["choixForm"] == "Sauvegarder"){
@@ -184,6 +185,7 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function addPrestationBox(){
+        unset($_SESSION["newPrestation"]);
         $id = $_GET["Id"];
         $box = \giftBox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
         if($box["Etat"] == 1 || $box["Etat"] == 0){
