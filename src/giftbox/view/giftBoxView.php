@@ -126,7 +126,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         possibilité d'ajouter une préstation a un coffret a l'aide du boutton "+"
 
         */
-        $res = "<div id='prestations'><div>";
+        $res = "<div id='prestations'>";
         foreach ($this->data["prestations"] as $value) {
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
