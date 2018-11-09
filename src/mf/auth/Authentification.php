@@ -22,7 +22,7 @@ class authentification extends AbstractAuthentification{
 		$this->user_login = $username;
 		$this->access_level = $level;
 		$this->logged_in = true;
-		$user new \giftBox\model\User();
+		$user = new \giftBox\model\User();
 		$user->Login = $username;
      	$user->Level = $level;
      	$user->Id = $id;
