@@ -642,5 +642,51 @@ header {
     width: 57.44%;
     margin-left: 21.28%; } }
 /* Fin summary */
+/* Debut achat */
+#achat > form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 30px; }
+
+#achat > p:first-child {
+  text-align: center;
+  font-size: 25px; }
+
+@media all and (min-width: 720px) {
+  #achat > form > div:first-child {
+    width: 14.8%;
+    margin-left: 18%; }
+
+  #achat form > div {
+    width: 14.8%;
+    margin-left: 1.6%;
+    text-align: center; }
+
+  #achat form > div > img {
+    width: 110px; }
+
+  #achat > form > input:last-child {
+    width: 31.2%;
+    margin-left: 34.4%;
+    height: 50px; } }
+@media all and (max-width: 720px) {
+  #achat > form > div:first-child {
+    width: 23%;
+    margin-left: 1.6%; }
+
+  #achat form > div {
+    width: 23%;
+    margin-left: 1.6%;
+    text-align: center; }
+
+  #achat form > div > img {
+    width: 100%; }
+
+  #achat > form > input:last-child {
+    width: 31.2%;
+    margin-left: 34.4%;
+    height: 50px; } }
+/* Fin achat */
 
 /*# sourceMappingURL=style.css.map */

@@ -257,6 +257,7 @@ header{
 
 /* Fin Viewprofile */
 /* Debut summary */
+
 #summary, #summary > div{@include flex();}
 #summary > :last-child{
 	@include grille(12, 1.6%, 1, 10);
@@ -278,3 +279,47 @@ header{
 }
 
 /* Fin summary */
+/* Debut achat */
+
+#achat > form{
+	@include flex();
+	margin-top:30px;
+}
+#achat > p:first-child{
+	text-align:center;
+	font-size:25px;
+}
+@media all and (min-width:720px){
+	#achat > form > div:first-child{
+		@include grille(6, 1.6%, 1, 1);
+	}
+	#achat form > div{
+		@include grille(6, 1.6%, 0, 1);
+		text-align:center;
+	}
+	#achat form > div > img{
+		width:110px;
+	}
+	#achat > form > input:last-child {
+		@include grille(3, 1.6%, 1, 1);
+		height:50px;
+	}
+}
+@media all and (max-width:720px){
+	#achat > form > div:first-child{
+		@include grille(4, 1.6%, 0, 1);
+	}
+	#achat form > div{
+		@include grille(4, 1.6%, 0, 1);
+		text-align:center;
+	}
+	#achat form > div > img{
+		width:100%
+	}
+	#achat > form > input:last-child {
+		@include grille(3, 1.6%, 1, 1);
+		height:50px;
+	}
+}
+
+/* Fin achat */
