@@ -285,7 +285,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderSummaryBox(){
-        $res = "<div id='summary'><h1>Prestations sélectionnées : </h1><div>";
+        $res = "<div><h1>Prestations sélectionnées : </h1><div id='summary'>";
         $total = 0;
         foreach ($_SESSION["prestations"] as $value) {
             $router = new \mf\router\Router();

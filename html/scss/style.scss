@@ -228,9 +228,7 @@ header{
 	text-align:center;
 	margin-top:20px;
 }
-#profile > a > button{
-	width:100%;
-}
+#profile > a > button{width:100%;}
 @media all and (min-width:720px){
 	#profile{@include grille(3, 1.6%, 1, 1);}
 }
@@ -258,3 +256,15 @@ header{
 }
 
 /* Fin Viewprofile */
+/* Debut summary */
+
+@media all and (min-width:720px){
+	#summary{
+		@include grille(12, 1.6%, 1, 10);
+	}	
+}
+@media all and (max-width:720px){
+	
+}
+
+/* Fin summary */
