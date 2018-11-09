@@ -157,7 +157,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         affiche toute les catégories de la bdd
         possibilité de cliquer sur une catégorie pour afficher toute ses préstations
         */
-        $res = "<div id='categorie'>";
+        $res = "<div id='categories'>";
         foreach ($this->data as $value) {
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['Id']]);
             $res .= "<div>
@@ -197,7 +197,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             else{
                 $res .= "<div></div>";
             }
-            $res .= "</div><hr>";
+            $res .= "</div>";
         }
         $res = $res."</div>";
         return $res;
