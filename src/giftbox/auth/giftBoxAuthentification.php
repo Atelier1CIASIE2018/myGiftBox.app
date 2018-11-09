@@ -49,7 +49,7 @@ class giftBoxAuthentification extends \mf\auth\Authentification {
     
     public function createUser($nom,$prenom,$email,$login, $pass,$level=self::ACCESS_LEVEL_USER) {
 
-        $resultRQ = \giftbox\model\User::where('Login', "=", $username)->first();
+        $resultRQ = \giftbox\model\User::where('Login', "=", $login)->first();
         if($resultRQ != null){
             echo "erreur";
         }
