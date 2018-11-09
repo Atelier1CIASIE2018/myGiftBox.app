@@ -170,7 +170,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                     if($value["Etat"] == 5){
                         $res .= " (Ouvert) : ";
                     }
-                    $res .= "<a href='".$urlBox."'><button>Aperçu</button></a>";
+                    $res .= "<div><a href='".$urlBox."'><button>Aperçu</button></a></div>";
                     break;
             }    
             $res .= "<br/><br/>";            
@@ -344,7 +344,7 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderProfil(){
         $res = "<div><h1> Voici votre profil : </h1> <br/> 
-        Nom : ".$_SESSION['user']['Nom']."<br/> 
+        Nom : ".$_SESSION['user_login']['Nom']."<br/> 
         Prénom : ".$_SESSION['user_login']['Prenom']."<br/> 
         E-mail : ".$_SESSION['user_login']['Email']."<br/> 
         Pseudo : ".$_SESSION['user_login']['Login']."<br/>

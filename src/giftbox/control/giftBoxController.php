@@ -134,9 +134,8 @@ class giftBoxController extends \mf\control\AbstractController {
         $box->IdUser = $_SESSION["user_login"]->Id;
         $box->save();
         $_SESSION["box"] = $box;
-        var_dump($_SESSION);
-        /*$vue = new \giftbox\view\giftBoxView("");
-        $vue->render('FormBox');*/
+        $vue = new \giftbox\view\giftBoxView("");
+        $vue->render('FormBox');
     }
 
     public function formBox(){
