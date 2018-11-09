@@ -298,19 +298,19 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderSummaryBox(){
-        $res = "<div><h1>Prestations sélectionnées : </h1><div>";
+        $res = "<div><h1>Prestations sélectionnées : </h1><div id='summary'>";
         $total = 0;
         foreach ($_SESSION["prestations"] as $value) {
             $router = new \mf\router\Router();
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
             $res = $res . "<div>
-                <p>".$value['Nom']."</p>
-                <p>".$value['Prix']." €</p>
-            </div><hr>";
+                <p>Nom : ".$value['Nom']."</p>
+                <p>Prix : ".$value['Prix']." €</p>
+            </div>";
             $total += $value["Prix"];
         }
-        $res .= "Total: ".$total." €</div>";
+        $res .= "<p>Total: ".$total." €</p></div>";
         if($_SESSION['box']['Etat'] > 2){
             $res .= "<p>Url du coffret pour le destinataire: ".$_SESSION["box"]["Url"]."</p>";
         }
@@ -344,11 +344,11 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderProfil(){
-        $res = "<div id='profile'><h1> Voici votre profil : </h1> <br/> 
-        <p>Nom : ".$_SESSION['user_login']['Nom']."</p><br/> 
-        <p>Prénom : ".$_SESSION['user_login']['Prenom']."</p><br/> 
-        <p>E-mail : ".$_SESSION['user_login']['Email']."</p><br/> 
-        <p>Pseudo : ".$_SESSION['user_login']['Login']."</p><br/>
+        $res = "<div id='profile'><h1> Voici votre profil : </h1>
+        <p>Nom : ".$_SESSION['user_login']['Nom']."</p>
+        <p>Prénom : ".$_SESSION['user_login']['Prenom']."</p>
+        <p>E-mail : ".$_SESSION['user_login']['Email']."</p>
+        <p>Pseudo : ".$_SESSION['user_login']['Login']."</p>
         <a href='/giftBox/main.php/profile/view/'><button>Modifier</button></a>";
         return $res;
     }
@@ -398,13 +398,36 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderAdminPrestation(){
-        return "<h1> Modification de la préstation </h1>
+        return "<h1> Voici votre coffret :</h1>
                 <form name='update' method='POST'>
-                    <p>Nom : </p><input type='text' name='nom' value='".$this->data['Nom']."'/> <br/>
+                    <textarea
+                    <input type='textarea' name='nom' value='".$this->data['Nom']."'/> <br/>
                     <p>Description : </p><input type='text' name='nom' value='".$this->data['Description']."'/> <br/>
                     <p>Prix : </p><input type='text' name='nom' value='".$this->data['Prix']."'/> <br/>
                     <p>Image : </p><input type='file' name='image'/><br/>
                 </form>";
+    }
+
+    private function renderDestinataire(){
+        $res = "<h1> Modification de la préstation </h1>";
+
+            if($this->data['message'] == ""){
+                $res = "<form name='update' method='POST'>
+                        <textarea name='Texte' rows='10' cols='50' placeholder='Veuillez saisir votre message de retour'></textarea>
+                        </p><input type='submit' name='message' value='Envoyer'/>
+                        </form>";
+            }
+
+        foreach ($_SESSION['prestations'] as $value) {
+                $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
+                $res .= "<div>
+                        <p>Nom: ".$value['Nom']."</p>
+                        <img src ='/giftBox/img/".$value['Img']."'width='200'>
+                        <p>".$value['Description']."</p>
+                        <a href='".$urlPrestation."'><button>Visualiser la prestation</button></a>
+                    </div><hr>";
+            }
+
     }
     
     protected function renderBody($selector=null){
@@ -426,6 +449,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         if ($selector == 'Admin')$string = $string . self::renderAdmin();
         if ($selector == 'NewPrestation')$string = $string . self::renderNewPrestation();
         if ($selector == 'AdminPrestation')$string = $string . self::renderAdminPrestation();
+        if ($selector == 'RenderDestinataire')$string = $string . self::renderDestinataire();
         $string = $string ."</article></section><footer>".self::renderFooter()."</footer>";
         return $string;
     }

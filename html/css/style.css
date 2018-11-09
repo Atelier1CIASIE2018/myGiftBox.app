@@ -557,27 +557,55 @@ header {
     width: 50%; } }
 /* Fin boxes */
 /* Debut profile */
+#profile > p {
+  text-align: center;
+  margin-top: 20px; }
+
+#profile > a > button {
+  width: 100%; }
+
+@media all and (min-width: 720px) {
+  #profile {
+    width: 31.2%;
+    margin-left: 34.4%; } }
+@media all and (max-width: 720px) {
+  #profile {
+    width: 96.8%;
+    margin-left: 1.6%; } }
 /* Fin profile */
 /* Debut Viewprofile */
 #viewProfile > p {
   text-align: center;
   margin-top: 20px; }
 
-#viewProfile > a > button {
-  margin-top: 10px; }
+#viewProfile > input {
+  margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box; }
 
 @media all and (min-width: 720px) {
   #viewProfile {
     width: 31.2%;
-    margin-left: 34.4%; }
-
-  #viewProfile > * {
-    width: 100%;
-    text-align: center; } }
+    margin-left: 34.4%; } }
 @media all and (max-width: 720px) {
-  #viewProfile > p, #viewProfile > input, #viewProfile > a > button {
+  #viewProfile {
     width: 96.8%;
     margin-left: 1.6%; } }
 /* Fin Viewprofile */
+/* Debut summary */
+#summary, #summary > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+@media all and (min-width: 720px) {
+  #summary > div {
+    width: 80.4%;
+    margin-left: 9.8%; }
+
+  #summary > div > p {
+    width: 47.6%;
+    margin-left: 1.6%; } }
+/* Fin summary */
 
 /*# sourceMappingURL=style.css.map */

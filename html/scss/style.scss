@@ -224,35 +224,52 @@ header{
 /* Fin boxes */
 /* Debut profile */
 
+#profile > p{
+	text-align:center;
+	margin-top:20px;
+}
+#profile > a > button{width:100%;}
 @media all and (min-width:720px){
-
+	#profile{@include grille(3, 1.6%, 1, 1);}
 }
 @media all and (max-width:720px){
-
+	#profile{@include grille(1, 1.6%, 0, 1);}
 }
 
 /* Fin profile */
 /* Debut Viewprofile */
+
 #viewProfile > p{
 	text-align:center;
 	margin-top:20px;
 }
-#viewProfile > a > button{
+#viewProfile > input{
 	margin-top:10px;
+	width:100%;
+	box-sizing:border-box;
 }
 @media all and (min-width:720px){
-	#viewProfile{
-		@include grille(3, 1.6%, 1, 1);
-	}
-	#viewProfile > *{
-		width:100%;
-		text-align:center;
-	}
+	#viewProfile{@include grille(3, 1.6%, 1, 1);}
 }
 @media all and (max-width:720px){
-	#viewProfile > p, #viewProfile > input, #viewProfile > a > button{
-		@include grille(1, 1.6%, 0, 1);
-	}
+	#viewProfile{@include grille(1, 1.6%, 0, 1);}
 }
 
 /* Fin Viewprofile */
+/* Debut summary */
+#summary, #summary > div{
+	@include flex();
+}
+@media all and (min-width:720px){
+	#summary > div{
+		@include grille(12, 1.6%, 1, 10);
+	}	
+	#summary > div > p{
+		@include grille(10, 1.6%, 0, 5);
+	}
+}
+@media all and (max-width:720px){
+	
+}
+
+/* Fin summary */
