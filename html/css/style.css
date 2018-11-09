@@ -58,6 +58,9 @@ header > div {
   flex-wrap: wrap;
   margin-bottom: 10px; }
 
+button, input {
+  height: 30px; }
+
 #home > img:first-child {
   width: 100%; }
 
@@ -497,7 +500,8 @@ header > div {
   border: none; }
 
 #viewBox > div > a {
-  margin: auto; }
+  margin: auto;
+  margin-top: 20px; }
 
 #viewBox > div > p:nth-child(1), #viewBox > div > p:nth-child(2), #viewBox > div > p:nth-child(3) {
   width: 31.2%;

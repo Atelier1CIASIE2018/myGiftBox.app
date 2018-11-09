@@ -44,6 +44,9 @@ header > div{
 	flex-wrap:wrap;
 	margin-bottom:10px;
 }
+button, input{
+	height:30px;
+}
 #home > img:first-child{width:100%;}
 @media all and (max-width:720px){
 	header div > div {@include grille(2, 1.6%, 0, 1);}
@@ -195,7 +198,10 @@ header > div{
 	margin-top: 10px;
 }
 #viewBox > div:last-child{border:none;}
-#viewBox > div > a{margin: auto;}
+#viewBox > div > a{
+	margin: auto; 
+	margin-top:20px;
+}
 #viewBox > div > p:nth-child(1), #viewBox > div > p:nth-child(2), #viewBox > div > p:nth-child(3){@include grille(12, 1.6%, 0, 4);}
 #viewBox > div > img{@include grille(12, 1.6%, 0, 3);}
 #viewBox > div:last-child >a > button{width:100%;}
