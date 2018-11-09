@@ -23,8 +23,8 @@ body > footer{
 	margin-top:50px;
 	@include grille(1, 1.6%, 0, 1);
 }
-header{background-color:DarkGray   ;}
-header div{height:50px;}
+header {background-color:DarkGray   ;}
+header div > div{height:50px;}
 header button{
 	height:50px;
 	width:100%;
@@ -37,20 +37,22 @@ header{
 	@include flex();
 	align-items: center;
 }
+header > div{
+	@include grille(1, 1.6%, 0, 1);
+	display:flex;
+	flex-direction:row-reverse;
+	flex-wrap:wrap;
+	margin-bottom:10px;
+}
 #home > img:first-child{width:100%;}
 @media all and (max-width:720px){
-	header div{@include grille(2, 1.6%, 0, 1);}
+	header div > div {@include grille(2, 1.6%, 0, 1);}
 	header a:first-child{@include grille(1, 1.6%, 0, 1);}
 	#home > img:first-child{display:none;}
-	header > div:nth-child(2){order:1}
-	header > div:nth-child(3){order:4}
-	header > div:nth-child(4){order:3}
-	header > div:nth-child(5){order:2}
 }
 @media all and (min-width:720px){
-	header div{@include grille(14, 1.6%, 0, 2);}
-	header a:first-child{@include grille(14, 1.6%, 0, 6);}
-	header div:last-child {margin-right:1.6%;}
+	header a:first-child{@include grille(6, 1.6%, 0, 6);}
+	header div > div {@include grille(6, 1.6%, 0, 1);}
 }
 
 /* Fin Menu */
@@ -327,3 +329,11 @@ header{
 }
 
 /* Fin achat */
+/* Debut categories */
+
+#categories > div{
+	text-align:center;
+	margin-top:25px;
+}
+
+/* Fin categories */

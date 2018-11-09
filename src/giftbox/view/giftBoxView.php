@@ -9,17 +9,27 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderHeader(){
-        $res = "<a href='/giftBox/main.php/home/'><h1>My Gift Box App</h1></a>";
+        $res = "<a href='/giftBox/main.php/home/'><h1>My Gift Box App</h1></a>
+        <div>";
+
         if(isset($_SESSION["user_login"])){
-            $res .= "<div><a href='".$this->router->urlFor("/profile/", [])."'><button>Mon Profil</button></a></div>
-            <div><a href='".$this->router->urlFor("/boxes/", [])."'><button>Mes coffrets</button></a></div>
+            $res .= "
+            <div><a href='".$this->router->urlFor("/logout/", [])."'><button>Déconnexion</button></a></div>
+            <div><a href='".$this->router->urlFor("/profile/", [])."'><button>Mon Profil</button></a></div>
             <div><a href='".$this->router->urlFor("/box/new/", [])."'><button>Créer coffret</button></a></div>
-            <div><a href='".$this->router->urlFor("/logout/", [])."'><button>Déconnexion</button></a></div>";
+            <div><a href='".$this->router->urlFor("/boxes/", [])."'><button>Mes coffrets</button></a></div>
+            
+            
+            ";
         }
         else{
-            $res .= "<div><a href='".$this->router->urlFor("/register/",[])."'><button>Inscription</button></a></div>
-            <div><a href='".$this->router->urlFor("/login/",[])."'><button>Connexion</button></a></div>";
+            $res .= "<div><a href='".$this->router->urlFor("/login/",[])."'><button>Connexion</button></a></div>
+            <div><a href='".$this->router->urlFor("/register/",[])."'><button>Inscription</button></a></div>
+            ";
         }
+        $res = $res . "
+        <div><a href='".$this->router->urlFor("/categories/", [])."'><button>Liste des catégories</button></a></div>
+        <div><a href='".$this->router->urlFor("/prestations/", [])."'><button>Liste des prestations</button></a></div></div>";
         return $res;
     }
     
@@ -91,7 +101,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderCategories(){
-        $res = "<div>";
+        $res = "<div id='categories'>";
         foreach ($this->data as $value) {
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['Id']]);
             $res .= "<div>
