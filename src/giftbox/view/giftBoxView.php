@@ -102,9 +102,14 @@ class GiftBoxView extends \mf\view\AbstractView {
             <p>".$this->data['Nom']."</p>
             <p>".$this->data['Prix']." €</p>
             <img src ='/giftBox/img/".$this->data['Img']."'>
-            <p>".$this->data['Description']."</p>
-            <div><a href='".$this->router->urlFor("/box/add/",['Id' => $this->data['Id']])."'><button>+</button></a></div>
-        </div>";
+            <p>".$this->data['Description']."</p>";
+        if($_SESSION["user_login"] != null){
+            $res .= "<div><a href='".$this->router->urlFor("/box/add/",['Id' => $this->data['Id']])."'><button>+</button></a></div>";
+        }
+        else{
+            $res .= "<div></div>";
+        }
+        $res .= "</div>";
         return $res;  // FINI
     }
 
@@ -134,9 +139,13 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <a href='".$urlPrestation."'>
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
-                </a>
-                <div><a href='".$this->router->urlFor("/box/add/",['Id' => $value['Id']])."'><button>+</button></a></div>
-            </div><hr>";
+                </a>";
+            if($_SESSION["user_login"] != null){
+                $res .= "<div><a href='".$this->router->urlFor("/box/add/",['Id' => $this->data['Id']])."'><button>+</button></a></div>";
+            }
+            else{
+                $res .= "<div></div>";
+            }
         }
         $res .= "</div></div>";
         return $res;
@@ -180,9 +189,14 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <a href='".$urlPrestation."'>
                     <img src ='/giftBox/img/".$value['Img']."' width='200'>
                     <p>".$value['Description']."</p>
-                </a>
-                <a href='".$this->router->urlFor("/box/add/",['Id' => $value['Id']])."'><button>+</button></a>
-            </div><hr>";
+                </a>";
+            if($_SESSION["user_login"] != null){
+                $res .= "<div><a href='".$this->router->urlFor("/box/add/",['Id' => $this->data['Id']])."'><button>+</button></a></div>";
+            }
+            else{
+                $res .= "<div></div>";
+            }
+            $res .= "</div><hr>";
         }
         $res = $res."</div>";
         return $res;
