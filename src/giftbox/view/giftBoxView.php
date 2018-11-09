@@ -326,9 +326,8 @@ class GiftBoxView extends \mf\view\AbstractView {
             $total += $value['Prix'];
         }
 
-<<<<<<< HEAD
         $res .= "<p>Tarif total : " . $total . " € </p>
-            <form name='acheter' method='POST' action='/giftBox/main.php/box/pay/send/?Id=".$_SESSION['box']['Id']."'>
+            <form name='acheter' method='POST' action='".$this->router->urlFor("/box/pay/send/",['Id' => $_SESSION['box']['Id']])."'>
                 <div><img src='/giftBox/img/modePaiement/paypal.jpg'><br />
                 <input type='radio' name='test' value='paypal' checked /></div>
                 <div><img src='/giftBox/img/modePaiement/visa.png'><br />
@@ -337,18 +336,6 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <input type='radio' name='test' value='mastercard'/></div>
                 <div><img src='/giftBox/img/modePaiement/cartebleu.jpeg'><br />
                 <input type='radio' name='test' value='cartebleu'/></div>
-=======
-        $res .= "Tarif total : " . $total . " € <br/><br/>
-            <form name='acheter' id='achat' method='POST' action='".$this->router->urlFor("/box/pay/send/",['Id' => $_SESSION['box']['Id']])."'>
-                <input type='radio' name='test' value='paypal' checked />
-                <img src='/giftBox/img/modePaiement/paypal.jpg'>
-                <input type='radio' name='test' value='visa'/> 
-                <img src='/giftBox/img/modePaiement/visa.png'>
-                <input type='radio' name='test' value='mastercard'/> 
-                <img src='/giftBox/img/modePaiement/mastercard.png'>
-                <input type='radio' name='test' value='cartebleu'/> 
-                <img src='/giftBox/img/modePaiement/cartebleu.jpeg'>
->>>>>>> 7da1a1ce5db74b61eb91508b48dbb2aefb855427
                 <input type='submit' name='payer' value='Payer'/>
             </form></div>";
         return $res;
