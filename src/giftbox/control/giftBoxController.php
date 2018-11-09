@@ -1,13 +1,6 @@
 <?php
 namespace giftbox\control;
 
-$_SESSION["user_login"] = new \giftbox\model\User();
-$_SESSION["user_login"]->Id = 1;
-$_SESSION["user_login"]->Prenom = "Test";
-$_SESSION["user_login"]->Nom = "Test";
-$_SESSION["user_login"]->Login = "TTest";
-$_SESSION["user_login"]->Level = 200;
-
 class giftBoxController extends \mf\control\AbstractController {
     private $router;
 
@@ -74,7 +67,10 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function postLogin(){
-        $data = json_decode(file_get_contents('php://input'));
+        $auth = new \giftbox\auth\giftBoxAuthentification();
+        $auth->loginUser($_POST["login"], $_POST["mdp"]);
+        var_dump($_SESSION);
+        //header("Location: ".$this->router->urlFor("/home/", []));
     }
 
     public function viewRegister(){
@@ -83,7 +79,9 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function postRegister(){
-        
+        $auth = new \giftbox\auth\giftBoxAuthentification();
+        $auth->createUser($_POST["nom"], $_POST["prenom"], $_POST["mail"], $_POST["log"], $_POST["mdp"]);
+        header("Location: ".$this->router->urlFor("/login/", []));
     }
 
     public function viewBoxes(){
@@ -197,6 +195,7 @@ class giftBoxController extends \mf\control\AbstractController {
             header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
         }
         catch (\Exception $e){
+            //$_SESSION["messageErreur"] = "Vous ne pouvez pas ajouter une 2e fois cette préstation";
             header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
         }        
     }

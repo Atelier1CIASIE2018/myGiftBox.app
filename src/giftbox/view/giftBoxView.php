@@ -123,7 +123,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         return "<h1> Connexion </h1>
                 <form id='log' name='connexion' method='POST' action='/giftBox/main.php/loginPost/'>
                 <p>Login : </p><input tpye='text' name='login'/>
-                <p>Mot de passe : </p><input type='text' name='mdp'/>
+                <p>Mot de passe : </p><input type='password' name='mdp'/>
                 <input type='submit' name='valider' value='Valider'/>
                 </form>";   // AUTHENTIFICATION 
     }
@@ -133,9 +133,9 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <form id='log' name='inscription' method='POST' action='/giftBox/main.php/registerPost/'>
                 <p>Prénom : </p><input tpye='text' name='prenom'/>
                 <p>Nom : </p><input type='text' name='nom'/>
-                <p>Login : </p><input type='text' name='log'/>
-                <p>Mot de passe : </p><input type='text' name='mdp'/>
                 <p>E-mail : </p><input type='text' name='mail'/>
+                <p>Login : </p><input type='text' name='log'/>
+                <p>Mot de passe : </p><input type='text' name='mdp'/>                
                 <input type='submit' name='valider' value='Valider'/>
                 </form>"; // FINI
     }
@@ -215,7 +215,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                             $res .= "<p>Votre coffret a été ouvert par le destinataire</p>";
                             break;
                     }
-                    $res .= "<p>".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]."/box/receiver/?Id=".$_SESSION["box"]["Id"]."</p>";
+                    $res .= "<p>url</p>";
                     break;
             }
         }
@@ -250,6 +250,9 @@ class GiftBoxView extends \mf\view\AbstractView {
             $res .= date("Y-m-d")."'>";
         }
         $res .= "<input type='submit' name='choixForm' value='Ajouter'/>";
+        /*if(isset($_SESSION["messageErreur"]) && $_SESSION["messageErreur"] != ""){
+            echo "<p>".$_SESSION["messageErreur"]."</p>";
+        }*/
         if(isset($_SESSION['prestations']) && !empty($_SESSION["prestations"])){
             foreach ($_SESSION['prestations'] as $value) {
                 $res .= "<div>
@@ -355,7 +358,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         $res = "<div><h1> Voici votre profil : </h1> <br/> 
             Pseudo : <input type='text' nam='pseudo' value='".$_SESSION['user_login']['Login']."' /><br/>
             E-mail : <input type='text' nam='email' value='".$_SESSION['user_login']['Email']."' /><br/>
-            Mot de passe : <input type='text' nam='mdp' value='' /><br/>
+            Mot de passe : <input type='password' nam='mdp' value='' /><br/>
             Confirmation mot de passe : <input type='text' nam='mdpconfirm' value='' /><br/>
             <a href='/giftBox/main.php/profile/update/'><button>Valider</button></a>";
         return $res;
