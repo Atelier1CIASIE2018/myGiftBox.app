@@ -9,25 +9,65 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderHeader(){
-        $res = "<a href='/giftBox/main.php/home/'><h1>My Gift Box App</h1></a>";
+        /*
+         affiche "My Gift Box App" qui redirige vers l'accueil du site
+
+        SI un utilisateur est connecté afficher les bouttons :
+            Mon profil
+            Mes coffrets
+            Créer coffret
+            Deconnexion
+
+        SINON
+            afficher les bouttons :
+                Inscription
+                Connexion
+        */
+
+        $res = "<div><a href='".$this->router->urlFor("/home/", [])."'><h1>My Gift Box App</h1></a>";
+
         if(isset($_SESSION["user_login"])){
-            $res .= "<div><a href='".$this->router->urlFor("/profile/", [])."'><button>Mon Profil</button></a></div>
-            <div><a href='".$this->router->urlFor("/boxes/", [])."'><button>Mes coffrets</button></a></div>
+            $res .= "
+            <div><a href='".$this->router->urlFor("/logout/", [])."'><button>Déconnexion</button></a></div>
+            <div><a href='".$this->router->urlFor("/profile/", [])."'><button>Mon Profil</button></a></div>
             <div><a href='".$this->router->urlFor("/box/new/", [])."'><button>Créer coffret</button></a></div>
-            <div><a href='".$this->router->urlFor("/logout/", [])."'><button>Déconnexion</button></a></div>";
+            <div><a href='".$this->router->urlFor("/boxes/", [])."'><button>Mes coffrets</button></a></div>
+            
+            
+            ";
         }
         else{
-            $res .= "<div><a href='".$this->router->urlFor("/register/",[])."'><button>Inscription</button></a></div>
-            <div><a href='".$this->router->urlFor("/login/",[])."'><button>Connexion</button></a></div>";
+            $res .= "<div><a href='".$this->router->urlFor("/login/",[])."'><button>Connexion</button></a></div>
+            <div><a href='".$this->router->urlFor("/register/",[])."'><button>Inscription</button></a></div>
+            ";
         }
+        $res = $res . "
+        <div><a href='".$this->router->urlFor("/categories/", [])."'><button>Liste des catégories</button></a></div>
+        <div><a href='".$this->router->urlFor("/prestations/", [])."'><button>Liste des prestations</button></a></div></div>";
         return $res;
     }
     
     private function renderFooter(){
+
+        // affiche cette ligne a la fin de chacune des pages
+
         return 'Atelier 1 CIASIE 2018 Toussaint Maillard Guebel &copy;2018';
     }
     
     private function renderHome(){
+        /*
+        Initialise les variable session box et prestations a ""
+
+        affiche les 3 dernieres prestations ajouté par l'administrateur 
+        avec leur nom - prix - activité - image - description
+
+        possibilité de cliquer sur nom - prix - image - description pour afficher les détails d'une préstation
+
+        possibilité de cliquer sur le nom de l'activité pour faire appraitre toute les préstations d'une activité
+
+        possibilité d'ajouter une préstation a un coffret a l'aide du boutton "+"
+
+        */
         $res = "<div id='home'> 
                 <img src='/giftBox/img/cadeau.jpg' >
                 <div> <h1> Nouveautés : </h1>";
@@ -48,10 +88,17 @@ class GiftBoxView extends \mf\view\AbstractView {
             </div><hr>";
         }
         $res .= " <a href='".$this->router->urlFor("/prestations/",[])."'><button>Voir plus...</button></a></div></div>";
-        return $res;   // FINI
+        return $res;   
     }
 
     private function renderPrestation(){
+        /*
+        initialise les variables session box et prestations a ""
+
+        affiche un préstation précise avec son nom - description - prix - image - activité
+
+        possibilité d'ajouter une préstation a un coffret a l'aide du boutton "+"
+        */
         $res = "<div id='prestation'>
             <p>".$this->data['Nom']."</p>
             <p>".$this->data['Prix']." €</p>
@@ -63,6 +110,18 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderPrestations(){
+        /*
+        initialise les variables session box et prestations a ""
+        
+        affiche un catalogue de toute les préstations avec leur nom - prix - activité - image - description
+
+        possibilité de cliquer sur nom - prix - image - description pour afficher les détails d'une préstation
+
+        possibilité de cliquer sur le nom de l'activité pour faire appraitre toute les préstations d'une activité
+
+        possibilité d'ajouter une préstation a un coffret a l'aide du boutton "+"
+
+        */
         $res = "<div id='prestations'><div>";
         foreach ($this->data["prestations"] as $value) {
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -81,11 +140,15 @@ class GiftBoxView extends \mf\view\AbstractView {
             </div><hr>";
         }
         $res .= "</div></div>";
-        return $res;  // FINI
+        return $res;
     }
 
     private function renderCategories(){
-        $res = "<div>";
+        /*
+        affiche toute les catégories de la bdd
+        possibilité de cliquer sur une catégorie pour afficher toute ses préstations
+        */
+        $res = "<div id='categories'>";
         foreach ($this->data as $value) {
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['Id']]);
             $res .= "<div>
@@ -93,10 +156,19 @@ class GiftBoxView extends \mf\view\AbstractView {
             </div>";
         }
         $res = $res."</div>";
-        return $res;    // FINI
+        return $res;
     }
 
     private function renderCategorie(){
+        /*
+        initialise les variables session box et prestations a ""
+
+        affiche toute les préstations d'une catégorie 
+
+        possibilité de cliquer sur nom - prix - image - description pour afficher les détails d'une préstation
+
+        possibilité d'ajouter une préstation a un coffret a l'aide du boutton "+"
+        */;
         $res = "<div id='categorie'>";
         foreach ($this->data as $value) {            
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
@@ -114,19 +186,29 @@ class GiftBoxView extends \mf\view\AbstractView {
             </div><hr>";
         }
         $res = $res."</div>";
-        return $res;    // FINI
+        return $res;
     }
 
     private function renderLogin(){
+
+        /*
+        affiche un formulaire de connexion
+        */
+
         return "<h1> Connexion </h1>
                 <form id='log' name='connexion' method='POST' action='".$this->router->urlFor("/loginPost/",[])."'>
                 <p>Login : </p><input tpye='text' name='login'/>
                 <p>Mot de passe : </p><input type='password' name='mdp'/>
                 <input type='submit' name='valider' value='Valider'/>
-                </form>";   // AUTHENTIFICATION 
+                </form>";
     }
 
     private function renderRegister(){
+
+        /*
+        affiche un formulaire d'inscription
+        */
+
         return "<h1> Inscription </h1>
                 <form id='log' name='inscription' method='POST' action='".$this->router->urlFor("/registerPost/",[])."'>
                 <p>Prénom : </p><input tpye='text' name='prenom'/>
@@ -135,10 +217,23 @@ class GiftBoxView extends \mf\view\AbstractView {
                 <p>Login : </p><input type='text' name='log'/>
                 <p>Mot de passe : </p><input type='password' name='mdp'/>                
                 <input type='submit' name='valider' value='Valider'/>
-                </form>"; // FINI
+                </form>";
     }
 
     private function renderBoxes(){
+
+        /*
+        affiche touts les coffrets d'un utilisateur
+        selon l'état du coffret plusiquers action son possible :
+        
+            etat = 1 :
+                affiche les bouttons Aperçu - Modifier - Valider - Payer
+            etat = 2
+                affiche les bouttons Aperçu - Payer
+            etat = 3 / 4 / 5 :
+                affiche le boutton Aperçu et son état
+        */
+
         $res = "<div id='boxes'>";
         foreach ($this->data as $value) {
             $urlBox =  $this->router->urlfor('/box/', ['Id'=>$value['Id']]);
@@ -173,10 +268,13 @@ class GiftBoxView extends \mf\view\AbstractView {
             }          
         }
         $res .= "</div>";
-        return $res;    // FINI
+        return $res;
     }
 
     private function renderBox(){
+
+        
+        
         $res = "<div id='viewBox'>
             <p>Nom : ".$_SESSION["box"]["Nom"]."</p>
             <p>Message : ".$_SESSION["box"]["Message"]."</p>
@@ -227,7 +325,7 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderFormBox(){
         $res = "<form id='box' name='creer' method='POST' action='/giftBox/main.php/box/form/'>
-                <p> Nom : <p> <input type='text' name='nom' value='";
+                <p> Nom : </p> <input type='text' name='nom' value='";
         if(isset($_SESSION["box"]["Nom"])){
             $res .= $_SESSION["box"]["Nom"];
         }
