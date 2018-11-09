@@ -1,6 +1,6 @@
 @import "_grille";
 @import "_prestation";
-
+@import "_flex";
 
 /* Debut regle global */
 
@@ -8,12 +8,8 @@ body{
 	margin:0;
 	background-color: #eaecee ;
 }
-h1{
-	text-align:center;
-}
-*{
-	font-family:sans-serif ;
-}
+h1{text-align:center;}
+*{font-family:sans-serif ;}
 a{
 	color:black;
 	text-decoration:none;
@@ -27,384 +23,236 @@ body > footer{
 	margin-top:50px;
 	@include grille(1, 1.6%, 0, 1);
 }
-@media all and (max-width:720px){
+header{background-color:DarkGray   ;}
+header div{height:50px;}
+header button{
+	height:50px;
+	width:100%;
+}
+header a:first-child{
+	flex-grow:1;
+	color:darken(Aqua, 3%) ;
+}
 header{
-		background-color:DarkGray   ;
-	}
-	header div{
-		@include grille(2, 1.6%, 0, 1);
-		height:50px;
-	}
-	header button{
-		height:50px;
-		width:-moz-available
-	}
-	header a:first-child{
-		@include grille(1, 1.6%, 0, 1);
-		flex-grow:1;
-		z-index:1;
-		color:darken(Aqua, 3%) ;
-	}
-	header{
-		display:flex;
-		flex-direction:row;
-		flex-wrap:wrap;
-		align-items: center;
-	}
-	#home > img:first-child{
-		width:100%;
-		z-index:0;
-	}
-	#home > img:first-child{
-		display:none;
-	}
-	header > div:nth-child(2){
-		order:1
-	}
-	header > div:nth-child(3){
-		order:4
-	}
-	header > div:nth-child(4){
-		order:3
-	}
-	header > div:nth-child(5){
-		order:2
-	}
+	@include flex();
+	align-items: center;
+}
+#home > img:first-child{width:100%;}
+@media all and (max-width:720px){
+	header div{@include grille(2, 1.6%, 0, 1);}
+	header a:first-child{@include grille(1, 1.6%, 0, 1);}
+	#home > img:first-child{display:none;}
+	header > div:nth-child(2){order:1}
+	header > div:nth-child(3){order:4}
+	header > div:nth-child(4){order:3}
+	header > div:nth-child(5){order:2}
 }
 @media all and (min-width:720px){
-	header{
-		background-color:DarkGray   ;
-	}
-	header div{
-		@include grille(14, 1.6%, 0, 2);
-		height:50px;
-	}
-	header button{
-		height:50px;
-		width:100%;
-	}
-	header a:first-child{
-		@include grille(14, 1.6%, 0, 6);
-		flex-grow:1;
-		z-index:1;
-		color:darken(Aqua, 3%) ;
-	}
-	header{
-		display:flex;
-		flex-direction:row;
-		flex-wrap:wrap;
-		align-items: center;
-	}
-	#home > img:first-child{
-		width:100%;
-		z-index:0;
-	}
+	header div{@include grille(14, 1.6%, 0, 2);}
+	header a:first-child{@include grille(14, 1.6%, 0, 6);}
+	header div:last-child {margin-right:1.6%;}
 }
-
 
 /* Fin Menu */
 /* Debut Home */
 
+#home > div:nth-child(2) > a:nth-child(8) > button:nth-child(1){height:50px;}
 @media all and (max-width:1100px){
-	#home > div{
-		@include prestationMobile();
-	}
+	#home > div{@include prestationMobile();}
 	#home > div:nth-child(2) > a:nth-child(8) > button:nth-child(1){
 		@include grille(12, 1.6%, 4, 4);
-		height:50px;
 	}
 }
-
 @media all and(min-width:1100px){
-	#home > div{
-		@include prestationPC();
-	}
+	#home > div{@include prestationPC();}
 	#home > div:nth-child(2) > a:nth-child(8) > button:nth-child(1){
 		@include grille(12, 1.6%, 5, 2);
-		height:50px;
 	}
 }
 
 /* Fin home */
 /* Debut Inscription/connection */
 
+#log{@include flex();}
+#log > input, #log > p{
+	width:100%;
+	text-align:center;
+}
+#log input:last-child{
+	margin-top:20px;
+	margin:auto;
+	margin-top:20px;
+}
 @media all and (min-width:720px){
-	#log {
-		display:flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		@include grille(3, 1.6%, 1, 1);
-	}
-	#log > input, #log > p{
-		width:100%;
-		text-align:center;
-	}
-	#log input:last-child{
-		width:auto;
-		margin:auto;
-		margin-top:20px;
-	}
+	#log {@include grille(3, 1.6%, 1, 1);}
 }
 @media all and (max-width:720px){
-	#log > form {
-		display:flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		@include grille(10, 1.6%, 1, 8);
-	}
-	#log > input, #log > p{
-		width:100%;
-		text-align:center;
-	}
-	#log input:last-child{
-		margin-top:20px;
-	}
+	#log > form {@include grille(10, 1.6%, 1, 8);}
 }
 
 /* Fin Inscription/Connection */
 /* Debut Prestations */
 
 @media all and (min-width:720px){
-	#prestations > div{
-		@include prestationPC();
-	}
+	#prestations > div{@include prestationPC();}
 }
 @media all and (max-width:720px){
-	#prestations > div{
-		@include prestationMobile();
-	}
-	
+	#prestations > div{@include prestationMobile();}
 }
+
 /* Fin categorie */
 /* Debut prestation */
 
+#prestation {@include flex();}
+#prestation a:last-child > button{width:100%;}
+#prestation > p:first-child{
+	text-align:left;
+	font-size:30px;
+	margin-top: 50px;
+}
+#prestation > p:nth-child(2){
+	text-align:right;
+	font-size:30px;
+	margin-top: 50px;
+}
+#prestation > p {text-align:justify;}
 @media all and (min-width:720px){
-	#prestation {
-		display:flex;
-		flex-direction:row;
-		flex-wrap:wrap;
-	}
-	#prestation > p:first-child{
-		@include grille(12, 1.6%, 2, 4);
-		text-align:left;
-		font-size:30px;
-		margin-top: 50px;
-	}
-	#prestation > p:nth-child(2){
-		@include grille(12, 1.6%, 0, 4);
-		text-align:right;
-		font-size:30px;
-		margin-top: 50px;
-	}
-	#prestation img{
-		@include grille(12, 1.6%, 2, 8);
-	}
-	#prestation > p {
-		@include grille(12, 1.6%, 2, 8);
-		text-align:justify;
-	}
-	#prestation a:last-child {
-		@include grille(12, 1.6%, 2, 8);
-	}
-	#prestation a:last-child > button{
-		width:100%;
-	}
+	#prestation > p:first-child{@include grille(12, 1.6%, 2, 4);}
+	#prestation > p:nth-child(2){@include grille(12, 1.6%, 0, 4);}
+	#prestation img{@include grille(12, 1.6%, 2, 8);}
+	#prestation > p {@include grille(12, 1.6%, 2, 8);}
+	#prestation a:last-child {@include grille(12, 1.6%, 2, 8);}
 }
 @media all and (max-width:720px){
-	#prestation {
-		display:flex;
-		flex-direction:row;
-		flex-wrap:wrap;
-	}
-	#prestation > p:first-child{
-		@include grille(2, 1.6%, 0, 1);
-		text-align:left;
-		font-size:30px;
-		margin-top: 50px;
-	}
-	#prestation > p:nth-child(2){
-		@include grille(2, 1.6%, 0, 1);
-		text-align:right;
-		font-size:30px;
-		margin-top: 50px;
-	}
-	#prestation img{
-		@include grille(1, 1.6%, 0, 1);
-	}
-	#prestation > p {
-		@include grille(1, 1.6%, 0, 1);
-		text-align:justify;
-	}
-	#prestation a:last-child {
-		@include grille(1, 1.6%, 0, 1);
-	}
-	#prestation a:last-child > button{
-		width:100%;
-	}
+	#prestation > p:first-child{@include grille(2, 1.6%, 0, 1);}
+	#prestation > p:nth-child(2){@include grille(2, 1.6%, 0, 1);}
+	#prestation img{@include grille(1, 1.6%, 0, 1);}
+	#prestation > p {@include grille(1, 1.6%, 0, 1);}
+	#prestation a:last-child {@include grille(1, 1.6%, 0, 1);}
 }
 
 /* Fin prestation */
 /* Debut categorie */
 
 @media all and (min-width:720px){
-	#categorie {
-		@include prestationPC();
-	}
+	#categorie {@include prestationPC();}
 }
 @media all and (max-width:720px){
-	#categorie {
-		@include prestationMobile();
-	}
-	
+	#categorie {@include prestationMobile();}
 }
 
 /* Fin prestation */
 /* Debut box */
 
+#box, #box > div > a, #box > div{@include flex();}
+#box > p, #box > textarea, #box > h2{text-align:center;}
+#box > input{@include grille(12, 1.6%, 4, 4);}
+#box > div{
+	border: 2px black solid;
+	margin-top:20px;
+}
+#box > div > p:nth-child(1), #box > div > p:nth-child(2), #box > div > p:nth-child(3){text-align:center;}
+#box > div > a{
+	text-align:right;
+	font-size:30px;
+}
+#box > div > img{@include grille(10, 1.6%, 0, 3);}
+#box > div > p:last-child{@include grille(10, 1.6%, 0, 7);}
+#box > div > a:nth-child(2){@include grille(10, 1.6%, 0, 1);}
 @media all and (min-width:720px){
-	#box, #box > div > a, #box > div{
-		display:flex;
-		flex-direction:row;
-		flex-wrap:wrap;
-	}
-	#box > p, #box > textarea, #box > h2{
-		@include grille(12, 1.6%, 1, 10);
-		text-align:center;
-	}
-	#box > input{
-		@include grille(12, 1.6%, 4, 4);
-	}
-	#box > div{
-		@include grille(12, 1.6%, 1, 10);
-		border: 2px black solid;
-		margin-top:20px;
-	}
-	#box > div > p:nth-child(1), #box > div > p:nth-child(2), #box > div > p:nth-child(3){
-		@include grille(100, 1.6%, 0, 25);
-		text-align:center;
-	}
-	#box > div > a{
-		@include grille(100, 1.6%, 22, 3);
-		text-align:right;
-		font-size:30px;
-
-	}
-	#box > div > img{
-		@include grille(10, 1.6%, 0, 3);
-	}
-	#box > div > p:last-child{
-		@include grille(10, 1.6%, 0, 7);
-	}
-	#box > div > a:nth-child(2){
-		@include grille(10, 1.6%, 0, 1);
-	}
+	#box > p, #box > textarea, #box > h2{@include grille(12, 1.6%, 1, 10);}
+	#box > div{@include grille(12, 1.6%, 1, 10);}
+	#box > div > p:nth-child(1), #box > div > p:nth-child(2), #box > div > p:nth-child(3){@include grille(100, 1.6%, 0, 25);}
+	#box > div > a{@include grille(100, 1.6%, 22, 3);}
 }
 @media all and (max-width:720px){
-	#box, #box > div > a, #box > div{
-		display:flex;
-		flex-direction:row;
-		flex-wrap:wrap;
-	}
-	#box > p, #box > textarea, #box > h2{
-		@include grille(1, 1.6%, 0, 1);
-		text-align:center;
-	}
-	#box > input{
-		@include grille(12, 1.6%, 4, 4);
-	}
-	#box > div{
-		@include grille(1, 1.6%, 0, 1);
-		border: 2px black solid;
-		margin-top:20px;
-	}
-	#box > div > p:nth-child(1), #box > div > p:nth-child(2), #box > div > p:nth-child(3){
-		@include grille(20, 1.6%, 0, 5);
-		text-align:center;
-	}
-	#box > div > a{
-		@include grille(20, 1.6%, 4, 1);
-		text-align:right;
-		font-size:30px;
-	}
-	#box > div > img{
-		@include grille(10, 1.6%, 0, 3);
-	}
-	#box > div > p:last-child{
-		@include grille(10, 1.6%, 0, 7);
-	}
-	#box > div > a:nth-child(2){
-		@include grille(10, 1.6%, 0, 1);
-	}
+	#box > p, #box > textarea, #box > h2{@include grille(1, 1.6%, 0, 1);}
+	#box > div{@include grille(1, 1.6%, 0, 1);}
+	#box > div > p:nth-child(1), #box > div > p:nth-child(2), #box > div > p:nth-child(3){@include grille(20, 1.6%, 0, 5);}
+	#box > div > a{@include grille(20, 1.6%, 4, 1);}
 }
 
 /* Fin box */
 /*  Debut viewBox */
 
+#viewBox > p, #viewBox > div{text-align:center;}
+#viewBox > div{
+	@include flex();
+	border: 2px black solid;
+	margin-top: 10px;
+}
+#viewBox > div:last-child{border:none;}
+#viewBox > div > a{margin: auto;}
+#viewBox > div > p:nth-child(1), #viewBox > div > p:nth-child(2), #viewBox > div > p:nth-child(3){@include grille(12, 1.6%, 0, 4);}
+#viewBox > div > img{@include grille(12, 1.6%, 0, 3);}
+#viewBox > div:last-child >a > button{width:100%;}
+#viewBox > div > p:nth-child(5){@include grille(12, 1.6%, 0, 8);}
+#viewBox > div:last-child > a {@include grille(3, 1.6%, 0, 1);}
 @media all and (min-width:720px){
-	#viewBox > p, #viewBox > div{
-		@include grille(12, 1.6%, 1, 10);
-		text-align:center;
-	}
-	#viewBox > div{
-		display:flex;
-		flex-direction:row;
-		flex-wrap:wrap;
-		border: 2px black solid;
-		margin-top: 10px;
-	}
-	#viewBox > div > p:nth-child(1), #viewBox > div > p:nth-child(2), #viewBox > div > p:nth-child(3){
-		@include grille(12, 1.6%, 0, 4);
-	}
-	#viewBox > div > img{
-		@include grille(12, 1.6%, 0, 3);
-	}
-	#viewBox > div > p:nth-child(5){
-		@include grille(12, 1.6%, 0, 8);
-	}
-	#viewBox > div:last-child{
-		@include grille(5, 1.6%, 1, 3);
-		text-align:center;
-		border:none;
-	}
-	#viewBox > div:last-child >a > button{
-		width:100%;
+	#viewBox > p, #viewBox > div{@include grille(12, 1.6%, 1, 10);}
+}
+@media all and (max-width:720px){
+	#viewBox > p, #viewBox > div{@include grille(1, 1.6%, 0, 1);}
+}
 
-	}
-	#viewBox > div > a{
-		margin: auto;
+/* Fin viewBox */
+/* Debut boxes */
+
+#boxes{@include flex();}
+#boxes > p{
+	@include grille(1, 1.6%, 0, 1);
+	text-align:center;
+	margin-top:40px;
+	margin-bottom:0;
+}
+#boxes > div{
+	@include grille(1, 1.6%, 0, 1);
+	text-align:center;
+}
+@media all and (min-width:720px){
+	#boxes{@include grille(12, 1.6%, 1, 10);}
+	#boxes > div > a > button {
+		width:20%;
+		max-width:200px;
 	}
 }
 @media all and (max-width:720px){
-	#viewBox > p, #viewBox > div{
-		@include grille(1, 1.6%, 0, 1);
-		text-align:center;
+	#boxes{@include grille(1, 1.6%, 0, 1);}
+	#boxes > div > a > button {width:50%;}
+}
+
+/* Fin boxes */
+/* Debut profile */
+
+@media all and (min-width:720px){
+
+}
+@media all and (max-width:720px){
+
+}
+
+/* Fin profile */
+/* Debut Viewprofile */
+#viewProfile > p{
+	text-align:center;
+	margin-top:20px;
+}
+#viewProfile > a > button{
+	margin-top:10px;
+}
+@media all and (min-width:720px){
+	#viewProfile{
+		@include grille(3, 1.6%, 1, 1);
 	}
-	#viewBox > div{
-		display:flex;
-		flex-direction:row;
-		flex-wrap:wrap;
-	}
-	#viewBox > div > p:nth-child(1), #viewBox > div > p:nth-child(2), #viewBox > div > p:nth-child(3){
-		@include grille(12, 1.6%, 0, 4);
-	}
-	#viewBox > div > img{
-		@include grille(12, 1.6%, 0, 3);
-	}
-	#viewBox > div > p:nth-child(5){
-		@include grille(12, 1.6%, 0, 8);
-	}
-	#viewBox > div:nth-child(7){
-		@include grille(3, 1.6%, 0, 3);
-		text-align:center;
-	}
-	#viewBox > div:nth-child(7) >a {
-		@include grille(3, 1.6%, 0, 1);
-	}
-	#viewBox > div:nth-child(7) >a > button{
+	#viewProfile > *{
 		width:100%;
-	}
-	#viewBox > div > a{
-		margin: auto;
+		text-align:center;
 	}
 }
-/* Fin viewBox */
+@media all and (max-width:720px){
+	#viewProfile > p, #viewProfile > input, #viewProfile > a > button{
+		@include grille(1, 1.6%, 0, 1);
+	}
+}
+
+/* Fin Viewprofile */
