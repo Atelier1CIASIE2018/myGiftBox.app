@@ -345,21 +345,21 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderProfil(){
         $res = "<div id='profile'><h1> Voici votre profil : </h1> <br/> 
-        Nom : ".$_SESSION['user_login']['Nom']."<br/> 
-        Prénom : ".$_SESSION['user_login']['Prenom']."<br/> 
-        E-mail : ".$_SESSION['user_login']['Email']."<br/> 
-        Pseudo : ".$_SESSION['user_login']['Login']."<br/>
+        <p>Nom : ".$_SESSION['user_login']['Nom']."</p><br/> 
+        <p>Prénom : ".$_SESSION['user_login']['Prenom']."</p><br/> 
+        <p>E-mail : ".$_SESSION['user_login']['Email']."</p><br/> 
+        <p>Pseudo : ".$_SESSION['user_login']['Login']."</p><br/>
         <a href='/giftBox/main.php/profile/view/'><button>Modifier</button></a>";
         return $res;
     }
 
     private function renderProfilView(){
-        $res = "<div id='viewProfile'><h1> Voici votre profil : </h1> <br/> 
-            Pseudo : <input type='text' nam='pseudo' value='".$_SESSION['user_login']['Login']."' /><br/>
-            E-mail : <input type='text' nam='email' value='".$_SESSION['user_login']['Email']."' /><br/>
-            Mot de passe : <input type='password' nam='mdp' value='' /><br/>
-            Confirmation mot de passe : <input type='text' nam='mdpconfirm' value='' /><br/>
-            <a href='/giftBox/main.php/profile/update/'><button>Valider</button></a>";
+        $res = "<form method='POST' action='/profile/update' id='viewProfile'><h1> Voici votre profil : </h1> 
+            <p>Pseudo : </p><input type='text' nam='pseudo' value='".$_SESSION['user_login']['Login']."' />
+            <p>E-mail : </p><input type='text' nam='email' value='".$_SESSION['user_login']['Email']."' />
+            <p>Mot de passe : </p><input type='password' nam='mdp' value='' />
+            <p>Confirmation mot de passe : </p><input type='text' nam='mdpconfirm' value='' />
+            <a href='/giftBox/main.php/profile/update/'><button>Valider</button></a></form>";
         return $res;
     }
 
