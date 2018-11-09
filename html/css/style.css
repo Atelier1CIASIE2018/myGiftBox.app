@@ -593,10 +593,19 @@ header {
     margin-left: 1.6%; } }
 /* Fin Viewprofile */
 /* Debut summary */
+#summary, #summary > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
 @media all and (min-width: 720px) {
-  #summary {
+  #summary > div {
     width: 80.4%;
-    margin-left: 9.8%; } }
+    margin-left: 9.8%; }
+
+  #summary > div > p {
+    width: 47.6%;
+    margin-left: 1.6%; } }
 /* Fin summary */
 
 /*# sourceMappingURL=style.css.map */

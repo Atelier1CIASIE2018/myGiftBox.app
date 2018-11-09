@@ -257,11 +257,16 @@ header{
 
 /* Fin Viewprofile */
 /* Debut summary */
-
+#summary, #summary > div{
+	@include flex();
+}
 @media all and (min-width:720px){
-	#summary{
+	#summary > div{
 		@include grille(12, 1.6%, 1, 10);
 	}	
+	#summary > div > p{
+		@include grille(10, 1.6%, 0, 5);
+	}
 }
 @media all and (max-width:720px){
 	

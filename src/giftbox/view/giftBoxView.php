@@ -292,9 +292,9 @@ class GiftBoxView extends \mf\view\AbstractView {
             $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
             $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
             $res = $res . "<div>
-                <p>".$value['Nom']."</p>
-                <p>".$value['Prix']." €</p>
-            </div><hr>";
+                <p>Nom :".$value['Nom']."</p>
+                <p>Prix :".$value['Prix']." €</p>
+            </div>";
             $total += $value["Prix"];
         }
         $res .= "Total: ".$total." €</div>";
