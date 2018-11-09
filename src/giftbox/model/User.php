@@ -10,6 +10,5 @@ class User extends \Illuminate\Database\Eloquent\Model{
 	public function box() {
      		return $this->hasMany('\giftbox\model\Box', 'IdUser');
 	}
-
 }
 

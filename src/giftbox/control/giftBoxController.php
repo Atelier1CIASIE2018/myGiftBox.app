@@ -328,7 +328,7 @@ class giftBoxController extends \mf\control\AbstractController {
         if($_POST["login"] != "" && \giftBox\model\User::where("Login", "=", $_POST["login"])){
             $user->Login = $_POST["login"];
         }
-        if($_POST["mdp"] != "" && $_POST["confirmmdp"]  != "" && $_POST["mdp"] == $_POST["mdpconfirm"]){
+        if($_POST["mdp"] != "" && $_POST["mdpconfirm"] != "" && $_POST["mdp"] == $_POST["mdpconfirm"]){
             $user->Mdp = password_hash($_POST["mdp"], PASSWORD_DEFAULT);
         }
         $user->save();
