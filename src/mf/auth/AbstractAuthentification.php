@@ -83,7 +83,7 @@ abstract class AbstractAuthentification {
      *
      */
     
-    abstract protected function updateSession($username, $level);
+    abstract protected function updateSession($username, $level, $id);
 
      /* la méthode logout :
       * 
@@ -136,7 +136,7 @@ abstract class AbstractAuthentification {
      *
      */
 
-    abstract public function login($username, $db_pass, $given_pass, $level);
+    abstract public function login($username, $db_pass, $given_pass, $level, $id);
     
     /* Méthode hashPassword :
      *
