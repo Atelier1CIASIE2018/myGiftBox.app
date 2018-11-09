@@ -283,6 +283,16 @@ class giftBoxController extends \mf\control\AbstractController {
         $box->save();   
     }
 
+    public function receiverMessage(){
+        $id = $_GET["Id"];
+        if($_POST["texte"] != ""){
+            $box = \giftBox\model\Box::where("Id", "=", $id)->first();
+            $box->MessageRetour = $_POST["texte"];
+            $box->save();
+        }
+        header("Location: ".$this->router->urlFor("/box/receiver/", ["Id"=>$id]));
+    }
+
     public function profile(){
         $user = \giftBox\model\User::where("Id", "=", $_SESSION["user_login"]["Id"])->first();
         $vue = new \giftbox\view\giftBoxView($user);

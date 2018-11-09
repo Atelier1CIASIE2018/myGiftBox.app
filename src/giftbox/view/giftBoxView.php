@@ -501,8 +501,8 @@ class GiftBoxView extends \mf\view\AbstractView {
         $res .= "<p>Nom : ".$this->data["box"]["Nom"]."</p>
             <p>Message : ".$this->data["box"]["Message"]."</p>";
         if($this->data["box"]["MessageRetour"] == null){
-            $res .= "<form name='update' method='POST' action=''>
-                <textarea name='Texte' rows='10' cols='50' placeholder='Veuillez saisir votre message de retour'></textarea>
+            $res .= "<form name='update' method='POST' action='".$this->router->urlFor("/box/receiver/message/", ["Id"=>$this->data["box"]["Id"]])."'>
+                <textarea name='texte' rows='10' cols='50' placeholder='Veuillez saisir votre message de retour'></textarea>
                 <input type='submit' name='message' value='Envoyer'/>
                 </form>";
         }
@@ -511,7 +511,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         }
         foreach ($this->data['prestations'] as $value){
             $res .= "<div><p>Nom: ".$value['Nom']."</p>
-                    <img src ='/giftBox/img/".$value['Img'].">
+                    <img src ='/giftBox/img/".$value['Img']."'>
                     <p>".$value['Description']."</p>
                     <a href='".$this->router->urlfor('/prestation/', ['Id'=>$value['Id']])."'><button>Visualiser la prestation</button></a>
                 </div>";
