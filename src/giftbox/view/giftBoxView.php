@@ -329,7 +329,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         }
 
         $res .= "Tarif total : " . $total . " € <br/><br/>
-            <form name='acheter' method='POST' action='/giftBox/main.php/box/pay/send/?Id=".$_SESSION['box']['Id']."'>
+            <form name='acheter' id='achat' method='POST' action='/giftBox/main.php/box/pay/send/?Id=".$_SESSION['box']['Id']."'>
                 <input type='radio' name='test' value='paypal' checked />
                 <img src='/giftBox/img/modePaiement/paypal.jpg'>
                 <input type='radio' name='test' value='visa'/> 
