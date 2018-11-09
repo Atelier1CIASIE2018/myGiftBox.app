@@ -81,7 +81,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 </a>
                 <a href='".$urlCategorie."'><p>".$this->data["categories"][$value["IdCategorie"] - 1]."</p></a>
                 <a href='".$urlPrestation."'>
-                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
+                    <img src ='/giftBox/img/".$value['Img']."'>
                     <p>".$value['Description']."</p>
                 </a>
             </div><hr>";
@@ -137,7 +137,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 </a>
                 <p><a href='".$urlCategorie."'>".$this->data["categories"][$value["IdCategorie"] - 1]."</p>
                 <a href='".$urlPrestation."'>
-                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
+                    <img src ='/giftBox/img/".$value['Img']."'>
                     <p>".$value['Description']."</p>
                 </a>";
             if(isset($_SESSION["newPrestation"])){
@@ -188,7 +188,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                     <p>".$value['Prix']." €</p>
                 </a><p></p>
                 <a href='".$urlPrestation."'>
-                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
+                    <img src ='/giftBox/img/".$value['Img']."'>
                     <p>".$value['Description']."</p>
                 </a>";
             if(isset($_SESSION["newPrestation"])){
@@ -252,14 +252,13 @@ class GiftBoxView extends \mf\view\AbstractView {
         foreach ($this->data as $value) {
             $urlBox =  $this->router->urlfor('/box/', ['Id'=>$value['Id']]);
             $urlSummaryBox = $this->router->urlfor('/box/summary/', ['Id'=>$value["Id"]]);
-            $urlConfirm = $this->router->urlfor('/box/confirm/', ['Id'=>$value["Id"]]);
             $res .= "<p>".$value['Nom'];
             switch ($value['Etat']){
                 case 1:
                     $res .= "</p><div>
                     <a href='".$urlBox."'><button>Aperçu</button></a>
-                    <a href='".$urlBox."&update'><button>Modifier</button></a>
-                    <a href='".$urlConfirm."'><button>Valider</button></a>
+                    <a href='".$this->router->urlfor('/box/', ['Id'=>$value['Id'], "update"=>null])."'><button>Modifier</button></a>
+                    <a href='".$this->router->urlfor('/box/confirm/', ['Id'=>$value["Id"]])."'><button>Valider</button></a>
                     <a href='".$urlSummaryBox."'><button>Payer</button></a></div>";
                     break;
                 case 2:
@@ -287,35 +286,33 @@ class GiftBoxView extends \mf\view\AbstractView {
 
     private function renderBox(){
         $res = "<div id='viewBox'>
-            <p>Nom : ".$_SESSION["box"]["Nom"]."</p>
-            <p>Message : ".$_SESSION["box"]["Message"]."</p>
-            <p>Date : ".$_SESSION["box"]["Date"]."</p>";
-        if(!empty($_SESSION["prestations"])){
-            foreach ($_SESSION['prestations'] as $value) {
+            <p>Nom : ".$this->data["box"]["Nom"]."</p>
+            <p>Message : ".$this->data["box"]["Message"]."</p>
+            <p>Date : ".$this->data["box"]["Date"]."</p>";
+        if(!empty($this->data["prestations"])){
+            foreach ($this->data['prestations'] as $value) {
                 $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
                 $urlCategorie = $this->router->urlfor('/categorie/', ['Id'=>$value['IdCategorie']]);
                 $res .= "<div>
                         <p>Nom: ".$value['Nom']."</p>
                         <p>Prix: ".$value['Prix']." €</p>
-                        <p>Catégorie: ".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
-                        <img src ='/giftBox/img/".$value['Img']."'width='200'>
+                        <p>Catégorie: ".$this->data["categories"][$value["IdCategorie"] - 1]."</p>
+                        <img src ='/giftBox/img/".$value['Img']."'>
                         <p>".$value['Description']."</p>
                     </div>";
             }
-            $urlBox =  $this->router->urlfor('/box/', ['Id'=>$_SESSION["box"]['Id']]);
-            $urlSummaryBox = $this->router->urlfor('/box/summary/', ['Id'=>$_SESSION["box"]['Id']]);
-            $urlConfirm = $this->router->urlfor('/box/confirm/', ['Id'=>$_SESSION["box"]["Id"]]);
-            switch($_SESSION["box"]["Etat"]){
+            $urlSummaryBox = $this->router->urlfor('/box/summary/', ['Id'=>$this->data["box"]['Id']]);
+            switch($this->data["box"]["Etat"]){
                 case 1:
-                    $res .= "<div><a href='".$urlBox."&update'><button>Modifier</button></a>
-                    <a href='".$urlConfirm."'><button>Valider</button></a>
+                    $res .= "<div><a href='".$this->router->urlfor('/box/', ['Id'=>$this->data["box"]['Id']])."&update'><button>Modifier</button></a>
+                    <a href='".$this->router->urlfor('/box/confirm/', ['Id'=>$this->data["box"]["Id"]])."'><button>Valider</button></a>
                     <a href='".$urlSummaryBox."'><button>Payer</button></a><div>";
                     break;
                 case 2:
                     $res .= "<div><a href='".$urlSummaryBox."'><button>Payer</button></a><div>";
                     break;
                 default:
-                    switch($_SESSION["box"]["Etat"]){
+                    switch($this->data["box"]["Etat"]){
                         case 4:
                             $res .= "<p>Votre coffret a été ou peut être transmis au destinataire</p>";
                             break;
@@ -323,7 +320,9 @@ class GiftBoxView extends \mf\view\AbstractView {
                             $res .= "<p>Votre coffret a été ouvert par le destinataire</p>";
                             break;
                     }
-                    $res .= "<p>url</p>";
+                    if($this->data["box"]["Url"] != ""){
+                        $res .= "<p>url</p>";
+                    }                    
                     break;
             }
         }
@@ -337,13 +336,13 @@ class GiftBoxView extends \mf\view\AbstractView {
     private function renderFormBox(){
         $res = "<form id='box' name='creer' method='POST' action='/giftBox/main.php/box/form/'>
                 <p> Nom : </p> <input type='text' name='nom' value='";
-        if(isset($_SESSION["box"]["Nom"])){
-            $res .= $_SESSION["box"]["Nom"];
+        if(isset($this->data["box"]["Nom"])){
+            $res .= $this->data["box"]["Nom"];
         }
         $res .= "'/>
             <p> Message : </p><textarea name='Texte' rows='10' cols='50'";
-        if(isset($_SESSION['box']["Message"]) && $_SESSION['box']['Message'] != ""){
-            $res .= ">".$_SESSION['box']['Message'];
+        if(isset($this->data['box']["Message"]) && $this->data['box']['Message'] != ""){
+            $res .= ">".$this->data['box']['Message'];
         }
         else{
             $res .= " placeholder='Veuillez entrer votre message pour le destinataire'>";
@@ -351,31 +350,28 @@ class GiftBoxView extends \mf\view\AbstractView {
         $res .= "</textarea>
             <p>Choix de la date d'activation du coffret, la date d'aujourd'hui activera le coffret lors de la validation</p>
             <input type='date' name='date' min='".date("Y-m-d")."' value='";
-        if(isset($_SESSION["box"]["Date"]) && $_SESSION["box"]["Date"] != null){
-            $res .= $_SESSION["box"]["Date"]."'>";
+        if(isset($this->data["box"]["Date"]) && $this->data["box"]["Date"] != null){
+            $res .= $this->data["box"]["Date"]."'>";
         }
         else{
             $res .= date("Y-m-d")."'>";
         }
         $res .= "<input type='submit' name='choixForm' value='Ajouter une prestation'/>";
-        /*if(isset($_SESSION["messageErreur"]) && $_SESSION["messageErreur"] != ""){
-            echo "<p>".$_SESSION["messageErreur"]."</p>";
-        }*/
-        if(isset($_SESSION['prestations']) && !empty($_SESSION["prestations"])){
-            foreach ($_SESSION['prestations'] as $value) {
+        if(isset($this->data['prestations']) && !empty($this->data["prestations"])){
+            foreach ($this->data['prestations'] as $value) {
                 $res .= "<div>
                     <p>Titre: ".$value['Nom']."</p>
                     <p>Prix: ".$value['Prix']." €</p>
-                    <p>Catégorie: ".$_SESSION["categories"][$value["IdCategorie"] - 1]."</p>
-                    <a href='".$this->router->urlFor("/box/add/",['Id' =>$value['Id']])."'>X</a>
-                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
+                    <p>Catégorie: ".$this->data["categories"][$value["IdCategorie"] - 1]."</p>
+                    <a href='".$this->router->urlFor("/box/remove/",['Id' =>$value['Id']])."'>X</a>
+                    <img src ='/giftBox/img/".$value['Img']."'>
                     <p>".$value['Description']."</p>
                 </div>";
             }
         }
-        if(isset($_SESSION['prestations'][0])){
+        if(isset($this->data['prestations'][0])){
             $total = 0;
-            foreach ($_SESSION['prestations'] as $value) {
+            foreach ($this->data['prestations'] as $value) {
                 $total += $value['Prix'];
             }
             $res .= "<h2> Tarif : ".$total." € </h2>";
@@ -383,10 +379,10 @@ class GiftBoxView extends \mf\view\AbstractView {
         else{
             $res .= "<h2> Tarif : 00,00 € </h2>";
         }
-        if(isset($_SESSION["box"]["Id"])){
+        if(isset($this->data["box"]["Id"])){
             $res .= "<input type='submit' name='choixForm' value='Sauvegarder'/>";
         }
-        if(isset($_SESSION["box"]["Etat"]) && $_SESSION["box"]["Etat"] != 0){
+        if(isset($this->data["box"]["Etat"]) && $this->data["box"]["Etat"] != 0){
             $res .= "<input type='submit' name='choixForm' value='Valider'/>";
         }
         $res .= "</form>";
@@ -474,7 +470,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 </a>
                 <p><a href='".$urlCategorie."'>".$this->data["categories"][$value["IdCategorie"] - 1]."</a></p>
                 <a href='".$urlPrestation."'>
-                    <img src ='/giftBox/img/".$value['Img']."' width='200'>
+                    <img src ='/giftBox/img/".$value['Img']."'>
                     <p>".$value['Description']."</p>
                 </a>
                 <a href='".$this->router->urlFor("/register/",[])."'><button>Modifier</button></a>
@@ -507,25 +503,20 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderDestinataire(){
-        $res = "<h1> Modification de la préstation </h1>";
-
-            if($this->data['message'] == ""){
-                $res = "<form name='update' method='POST' action=''>
-                        <textarea name='Texte' rows='10' cols='50' placeholder='Veuillez saisir votre message de retour'></textarea>
-                        </p><input type='submit' name='message' value='Envoyer'/>
-                        </form>";
-            }
-
-        foreach ($_SESSION['prestations'] as $value) {
-                $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
-                $res .= "<div>
-                        <p>Nom: ".$value['Nom']."</p>
-                        <img src ='/giftBox/img/".$value['Img']."'width='200'>
-                        <p>".$value['Description']."</p>
-                        <a href='".$urlPrestation."'><button>Visualiser la prestation</button></a>
-                    </div><hr>";
-            }
-
+        $res = "<h1>Contenu du coffret</h1>";
+        $res .= "<form name='update' method='POST' action=''>
+                <textarea name='Texte' rows='10' cols='50' placeholder='Veuillez saisir votre message de retour'></textarea>
+                </p><input type='submit' name='message' value='Envoyer'/>
+            </form>";
+        foreach ($this->data['prestations'] as $value) {
+            $urlPrestation = $this->router->urlfor('/prestation/', ['Id'=>$value['Id']]);
+            $res .= "<div>
+                    <p>Nom: ".$value['Nom']."</p>
+                    <img src ='/giftBox/img/".$value['Img'].">
+                    <p>".$value['Description']."</p>
+                    <a href='".$urlPrestation."'><button>Visualiser la prestation</button></a>
+                </div><hr>";
+        }
     }
     
     protected function renderBody($selector=null){

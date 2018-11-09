@@ -53,7 +53,10 @@ class Router Extends AbstractRouter{
                     $url .= $key."=".$value;
                 }
                 else{
-                    $url .= "&".$key."=".$value;
+                    $url .= "&".$key;
+                    if($key != "update"){
+                        $url .= "=".$value;
+                    }
                 }
             }
         }

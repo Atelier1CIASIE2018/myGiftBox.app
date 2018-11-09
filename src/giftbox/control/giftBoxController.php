@@ -109,25 +109,24 @@ class giftBoxController extends \mf\control\AbstractController {
         foreach ($categories as $categorie){
             array_push($nomCategories, $categorie->Nom);
         }
-        $_SESSION["box"] = $box;
-        $_SESSION["prestations"] = $prestations;
-        $_SESSION["categories"] = $nomCategories;
-        $vue = new \giftbox\view\giftBoxView("");
-        if($_SERVER["PATH_INFO"] == "/box/"){
+        $vue = new \giftbox\view\giftBoxView(["box" => $box, "prestations" => $prestations, "categories" => $nomCategories]);
+        $path_info = $_SERVER["PATH_INFO"];
+        var_dump($_SESSION);
+        if($path_info == "/box/"){
             if(isset($_GET["update"])){
-                $vue->render('FormBox');
+                //$vue->render('FormBox');
             }
             else{
                 $vue->render('Box');
             }
         }
-        if($_SERVER["PATH_INFO"] == "/box/summary/"){
+        if($path_info == "/box/summary/"){
             $vue->render('SummaryBox');
         }
-        if($_SERVER["PATH_INFO"] == "/box/pay/"){
+        if($path_info == "/box/pay/"){
             $vue->render('PayBox');
         }
-        if($_SERVER["PATH_INFO"] == "/box/receiver/"){
+        if($path_info == "/box/receiver/"){
             $vue->render('RenderDestinataire');
         }
     }
@@ -159,14 +158,14 @@ class giftBoxController extends \mf\control\AbstractController {
                 header("Location: ".$this->router->urlFor("/prestations/", []));
             }
             if($_POST["choixForm"] == "Sauvegarder"){
-                if(isset($_SESSION["box"]) && !empty($_SESSION["box"])){
-                    $_SESSION["box"]->Nom = $_POST["nom"];
-                    $_SESSION["box"]->IdUser = $_SESSION["user_login"]->Id;
-                    $_SESSION["box"]->Message = $_POST["Texte"];
-                    $_SESSION["box"]->Date = $_POST["date"];
-                    $_SESSION["box"]->Etat = 1;
+                if(isset($_SESSION["box"]) && $_SESSION["box"] != null){
+                    $_SESSION["box"]["Nom"] = $_POST["nom"];
+                    $_SESSION["box"]["IdUser"] = $_SESSION["user_login"]->Id;
+                    $_SESSION["box"]["Message"] = $_POST["Texte"];
+                    $_SESSION["box"]["Date"] = $_POST["date"];
+                    $_SESSION["box"]["Etat"] = 1;
                     $this->router->executeRoute("updateBox");
-                    header("Location: ".$this->router->urlFor("/boxes/", []));
+                    //header("Location: ".$this->router->urlFor("/boxes/", []));
                 }
                 else{
                     $box = new \giftBox\model\Box();
@@ -186,8 +185,7 @@ class giftBoxController extends \mf\control\AbstractController {
 
     public function addPrestationBox(){
         unset($_SESSION["newPrestation"]);
-        $id = $_GET["Id"];
-        $box = \giftBox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
+        $box = \giftBox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();;
         if($box["Etat"] == 1 || $box["Etat"] == 0){
             $composer = new \giftbox\model\Composer();
             $composer->IdBox = $_SESSION["box"]["Id"];
@@ -204,21 +202,19 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function removePrestationBox(){
-        $id = $_GET["Id"];
-        $composer = \giftbox\model\Composer::where("IdBox", "=", $_SESSION["box"]["Id"])->where("IdPrestation", "=", $id)->first();
-        \giftbox\model\Composer::where("IdBox", "=", $_SESSION["box"]["Id"])->where("IdPrestation", "=", $id)->delete();
+        \giftbox\model\Composer::where("IdBox", "=", $_SESSION["box"]["Id"])->where("IdPrestation", "=", $_GET["Id"])->delete();
         header("Location: ".$this->router->urlFor("/box/", ["Id"=>$_SESSION["box"]["Id"], "update"=>null]));
     }
 
     public function updateBox(){
-        $box = \giftbox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first();
-        $box->Nom = $_POST["nom"];
-        $box->Message = $_POST["Texte"];
-        $box->Date = $_POST["date"];
+        $box = \giftbox\model\Box::where("Id", "=", $_SESSION["box"]["Id"])->first(); 
+        $box->Nom = $_SESSION["box"]["Nom"];
+        $box->Message = $_SESSION["box"]["Message"];
+        $box->Date = $_SESSION["box"]["Date"];
         $box->Etat = 1;
         $box->save();
         $_SESSION["box"] = null;
-        $_SESSION["Prestations"] = null;    
+        $_SESSION["Prestations"] = null;   
     }
 
     public function postBox(){
@@ -274,11 +270,12 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function urlBox(){
-        
+        $id = $_GET["Id"];
+        $box = \giftBox\model\Box::where("Id", "=", $id)->first();
+        $box->Etat = 3;
     }
 
     public function receiverUrl(){
-        
     }
 
     public function profile(){
