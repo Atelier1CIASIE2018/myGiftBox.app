@@ -60,15 +60,20 @@ button, input{
 
 /* Fin Menu */
 /* Debut Home */
-
+#home >div > div > a:nth-child(2){
+	@include grille(3, 1.6%, 0, 1);
+	text-align:center;
+}
+#home > div > div > a:nth-child(3){@include grille(1, 1.6%, 0, 1);}
 #home > div:nth-child(2) > a:nth-child(8) > button:nth-child(1){height:50px;}
-@media all and (max-width:1100px){
+@media all and (max-width:720px){
 	#home > div{@include prestationMobile();}
 	#home > div:nth-child(2) > a:nth-child(8) > button:nth-child(1){
 		@include grille(12, 1.6%, 4, 4);
 	}
+	
 }
-@media all and(min-width:1100px){
+@media all and(min-width:720px){
 	#home > div{@include prestationPC();}
 	#home > div:nth-child(2) > a:nth-child(8) > button:nth-child(1){
 		@include grille(12, 1.6%, 5, 2);
@@ -108,8 +113,8 @@ button, input{
 /* Fin categorie */
 /* Debut prestation */
 
-#prestation {@include flex();}
-#prestation a:last-child > button{width:100%;}
+#prestation, #prestation > div {@include flex();}
+#prestation > div > a:last-child > button{width:100%;}
 #prestation > p:first-child{
 	text-align:left;
 	font-size:30px;
@@ -120,13 +125,15 @@ button, input{
 	font-size:30px;
 	margin-top: 50px;
 }
+#prestation > div{@include grille(1, 1.6%, 0, 1);}
 #prestation > p {text-align:justify;}
 @media all and (min-width:720px){
+
 	#prestation > p:first-child{@include grille(12, 1.6%, 2, 4);}
 	#prestation > p:nth-child(2){@include grille(12, 1.6%, 0, 4);}
 	#prestation img{@include grille(12, 1.6%, 2, 8);}
 	#prestation > p {@include grille(12, 1.6%, 2, 8);}
-	#prestation a:last-child {@include grille(12, 1.6%, 2, 8);}
+	#prestation > div > a {@include grille(12, 1.6%, 2, 8);}
 }
 @media all and (max-width:720px){
 	#prestation > p:first-child{@include grille(2, 1.6%, 0, 1);}
