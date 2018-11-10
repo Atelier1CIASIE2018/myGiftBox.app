@@ -1,4 +1,4 @@
--- --------------------------------------------------------
+﻿-- --------------------------------------------------------
 -- Hôte :                        127.0.0.1
 -- Version du serveur:           5.7.23 - MySQL Community Server (GPL)
 -- SE du serveur:                Win32
@@ -13,8 +13,8 @@
 
 
 -- Export de la structure de la base pour mygiftbox
-CREATE DATABASE IF NOT EXISTS `mygiftbox` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `mygiftbox`;
+CREATE DATABASE IF NOT EXISTS `guebel5u`/*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `guebel5u`;
 
 -- Export de la structure de la table mygiftbox. box
 CREATE TABLE IF NOT EXISTS `box` (
