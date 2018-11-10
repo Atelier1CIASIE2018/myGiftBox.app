@@ -49,17 +49,17 @@ class giftBoxAuthentification extends \mf\auth\Authentification {
     
     public function createUser($nom, $prenom, $email, $pass, $level=self::ACCESS_LEVEL_USER) {
 
-        $resultRQ = \giftbox\model\User::where('Email', "=", $email)->first();
+        $resultRQ = \giftbox\model\User::where('email', "=", $email)->first();
         if($resultRQ != null){
             echo "erreur";
         }
         else{
             $user = new \giftbox\model\User();
-            $user->Nom = $nom; 
-            $user->Prenom = $prenom; 
-            $user->Email = $email; 
-            $user->Mdp = $this->hashPassword($pass);     
-            $user->Level = $level; 
+            $user->nom = $nom; 
+            $user->prenom = $prenom; 
+            $user->email = $email; 
+            $user->mdp = $this->hashPassword($pass);     
+            $user->level = $level; 
 
             $user->save();
         }
@@ -86,12 +86,12 @@ class giftBoxAuthentification extends \mf\auth\Authentification {
     
     public function loginUser($username, $password){
 
-        $res = \giftbox\model\User::where('Email', "=", $username)->first();
+        $res = \giftbox\model\User::where('email', "=", $username)->first();
         if($res == null){
             echo "erreur";
         }
         else{
-            $this->login($username, $res['Mdp'], $password, $res['Level'], $res['Id']);
+            $this->login($username, $res['mdp'], $password, $res['level'], $res['id']);
         }
     }
 }
