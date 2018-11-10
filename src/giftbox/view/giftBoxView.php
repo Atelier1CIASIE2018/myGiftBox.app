@@ -9,21 +9,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderHeader(){
-        /*
-         affiche "My Gift Box App" qui redirige vers l'accueil du site
-
-        SI un utilisateur est connecté afficher les bouttons :
-            Mon profil
-            Mes coffrets
-            Créer coffret
-            Deconnexion
-
-        SINON
-            afficher les bouttons :
-                Inscription
-                Connexion
-        */
-
         $res = "<div><a href='".$this->router->urlFor("/home/", [])."'><h1>My Gift Box App</h1></a>";
 
         if(isset($_SESSION["user_login"])){
@@ -51,26 +36,10 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
     
     private function renderFooter(){
-
-        // affiche cette ligne a la fin de chacune des pages
-
         return 'Atelier 1 CIASIE 2018 Toussaint Maillard Guebel &copy;2018';
     }
     
     private function renderHome(){
-        /*
-        Initialise les variable session box et prestations a ""
-
-        affiche les 3 dernieres prestations ajouté par l'administrateur 
-        avec leur nom - prix - activité - image - description
-
-        possibilité de cliquer sur nom - prix - image - description pour afficher les détails d'une préstation
-
-        possibilité de cliquer sur le nom de l'activité pour faire appraitre toute les préstations d'une activité
-
-        possibilité d'ajouter une préstation a un coffret a l'aide du boutton "+"
-
-        */
         $res = "<div id='home'> 
                 <img src='/giftBox/img/cadeau.jpg' >
                 <div><h1>Nouveautés : </h1>";
@@ -93,13 +62,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderPrestation(){
-        /*
-        initialise les variables session box et prestations a ""
-
-        affiche un préstation précise avec son nom - description - prix - image - activité
-
-        possibilité d'ajouter une préstation a un coffret a l'aide du boutton "+"
-        */
         $res = "<div id='prestation'>
             <p>".$this->data->nom."</p>
             <p>".$this->data->prix." €</p>
@@ -116,18 +78,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderPrestations(){
-        /*
-        initialise les variables session box et prestations a ""
-        
-        affiche un catalogue de toute les préstations avec leur nom - prix - activité - image - description
-
-        possibilité de cliquer sur nom - prix - image - description pour afficher les détails d'une préstation
-
-        possibilité de cliquer sur le nom de l'activité pour faire appraitre toute les préstations d'une activité
-
-        possibilité d'ajouter une préstation a un coffret a l'aide du boutton "+"
-
-        */
         $res = "<div id='prestations'>";
         if($this->data["page"] == "/prestations/"){
             $res .= "<a href='".$this->router->urlFor($this->data["page"], ["order" => "asc"])."'><button>Prix croissants</button></a>
@@ -162,10 +112,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderCategories(){
-        /*
-        affiche toute les catégories de la bdd
-        possibilité de cliquer sur une catégorie pour afficher toute ses préstations
-        */
         $res = "<div id='categories'>";
         foreach ($this->data as $categorie) {
             $urlCategorie = $this->router->urlfor('/categorie/', ['id' => $categorie->id]);
@@ -178,11 +124,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderLogin(){
-
-        /*
-        affiche un formulaire de connexion
-        */
-
         return "<h1> Connexion </h1>
                 <form id='log' name='connexion' method='POST' action='".$this->router->urlFor("/loginPost/",[])."'>
                 <p>Login : </p><input tpye='text' name='login'/>
@@ -192,11 +133,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderRegister(){
-
-        /*
-        affiche un formulaire d'inscription
-        */
-
         return "<h1> Inscription </h1>
                 <form id='log' name='inscription' method='POST' action='".$this->router->urlFor("/registerPost/",[])."'>
                 <p>Prénom : </p><input tpye='text' name='prenom'/>
@@ -208,18 +144,6 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderBoxes(){
-
-        /*
-        affiche touts les coffrets d'un utilisateur
-        selon l'état du coffret plusiquers action son possible :
-        
-            etat = 1 :
-                affiche les bouttons Aperçu - Modifier - Valider - Payer
-            etat = 2
-                affiche les bouttons Aperçu - Payer
-            etat = 3 / 4 / 5 :
-                affiche le boutton Aperçu et son état
-        */
         $res = "<div id='boxes'>";
         foreach ($this->data as $box) {
             $urlBox =  $this->router->urlfor('/box/', ['id' => $box->id]);
@@ -420,7 +344,8 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderAdmin(){
-        $res = "<a href='".$this->router->urlFor("/admin/prestations/new/", [])."'><button>Ajouter une préstation</button></a><div>";
+        $res = "<h1>CETTE PARTIE PEUT NE PAS ETRE COMPLETEMENT FONCTIONNELLE</h1>
+            <a href='".$this->router->urlFor("/admin/prestation/new/", [])."'><button>Ajouter une préstation</button></a><div>";
         foreach ($this->data['prestations'] as $prestation) {
             $router = new \mf\router\Router();
             $urlPrestation = $this->router->urlfor('/prestation/', ['id'=>$prestation->id]);
@@ -441,25 +366,31 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderNewPrestation(){
-        return "<h1> Ajout d'une préstation : </h1>
-                <form name='ajout' method='POST'>
-                    <p>Categorie : </p><input type='text' name='categ'/> <br/>
-                    <p>Nom : </p><input type='text' name='nom'/> <br/>
-                    <p>Description : </p><input type='text' name='desc'/><br/>
-                    <p>Prix : </p><input type='text' name='prix'/><br/>
-                    <p>Image : </p><input type='file' name='image'/><br/>
-                    <input type='submit' name='valider' value='valider'/><br/>
-                </form>";
+        $res =  "<h1> Ajout d'une préstation : </h1>
+            <form name='ajout' method='POST' action='".$this->router->urlFor("/admin/prestation/post/", [])."'>
+                <p>Categorie : </p><select name='categorie'>";
+        foreach ($this->data["categories"] as $categorie){
+            $res .= "<option value='".$categorie->id."'>".$categorie->nom."</option>";
+        }
+        $res .= "</select>
+                <p>Nom : </p><input type='text' name='nom'/>
+                <p>Description : </p><textarea name='description'cols=50 rows=10></textarea>
+                <p>Prix : </p><input type='number' name='prix' min=0 step='1' pattern='^\d*(\.\d{0})?$'/>
+                <p>Image : </p><input type='file' name='image'/><br>
+                <input type='submit' name='valider' value='Ajouter'/>
+            </form>";
+        return $res;
     }
 
     private function renderAdminPrestation(){
-        return "<h1> Voici votre coffret :</h1>
+        $res = "<h1> Voici votre coffret :</h1>
                 <form name='update' method='POST'>
                     <textarea name='nom'>".$this->data->nom."</textarea>
                     <p>Description : </p><input type='text' name='nom' value='".$this->data->description."'/> <br/>
                     <p>Prix : </p><input type='text' name='nom' value='".$this->data->prix."'/> <br/>
                     <p>Image : </p><input type='file' name='image'/><br/>
                 </form>";
+        return $res;
     }
 
     private function renderDestinataire(){

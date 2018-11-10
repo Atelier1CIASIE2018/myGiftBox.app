@@ -323,8 +323,20 @@ class giftBoxController extends \mf\control\AbstractController {
     }
 
     public function newPrestation(){
-        $vue = new giftBoxView("");
+        $categories = Categorie::all();
+        $vue = new giftBoxView(array("categories" => $categories));
         $vue->render('NewPrestation');
+    }
+
+    public function postPrestation(){
+        $prestation = new Prestation();
+        $prestation->idCategorie = $_POST["categorie"];
+        $prestation->nom = $_POST["nom"];
+        $prestation->prix = $_POST["prix"];
+        $prestation->description = $_POST["description"];
+        $prestation->img = "/";
+        $prestation->save();
+        header("Location: ".$this->router->urlFor("/admin/prestation/", ["id" => $prestation->id]));
     }
 
     private function categories(){
