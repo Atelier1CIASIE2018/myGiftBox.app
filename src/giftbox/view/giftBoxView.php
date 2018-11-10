@@ -41,9 +41,12 @@ class GiftBoxView extends \mf\view\AbstractView {
             <div><a href='".$this->router->urlFor("/register/",[])."'><button>Inscription</button></a></div>
             ";
         }
-        $res = $res . "
-        <div><a href='".$this->router->urlFor("/categories/", [])."'><button>Liste des catégories</button></a></div>
-        <div><a href='".$this->router->urlFor("/prestations/", [])."'><button>Liste des prestations</button></a></div></div>";
+        $res .= "<div><a href='".$this->router->urlFor("/categories/", [])."'><button>Liste des catégories</button></a></div>
+        <div><a href='".$this->router->urlFor("/prestations/", [])."'><button>Liste des prestations</button></a></div>";
+        if(isset($_SESSION["user_login"]->level) && $_SESSION["user_login"]->level >= \giftbox\auth\giftBoxAuthentification::ACCESS_LEVEL_ADMIN){
+            $res .= "<div><a href='".$this->router->urlFor("/admin/", [])."'><button>Administration</button></a></div></div>";
+        }
+        $res .= "</div>";
         return $res;
     }
     
@@ -217,18 +220,17 @@ class GiftBoxView extends \mf\view\AbstractView {
             etat = 3 / 4 / 5 :
                 affiche le boutton Aperçu et son état
         */
-
         $res = "<div id='boxes'>";
         foreach ($this->data as $box) {
             $urlBox =  $this->router->urlfor('/box/', ['id' => $box->id]);
-            $urlSummaryBox = $this->router->urlfor('/box/summary/', ['Id'=>$box->id]);
+            $urlSummaryBox = $this->router->urlfor('/box/summary/', ['id'=>$box->id]);
             $aAperçu = "<a href='".$urlBox."'><button>Aperçu</button></a>";
             $res .= "<p>".$box->nom;
             switch ($box->etat){
                 case 1:
                     $res .= "</p><div>".$aAperçu."
                     <a href='".$this->router->urlfor('/box/', ['id'=>$box->id, "update"=>null])."'><button>Modifier</button></a>
-                    <a href='".$this->router->urlfor('/box/confirm/', ['Id'=>$box->id])."'><button>Valider</button></a>
+                    <a href='".$this->router->urlfor('/box/confirm/', ['id'=>$box->id])."'><button>Valider</button></a>
                     <a href='".$urlSummaryBox."'><button>Payer</button></a></div>";
                     break;
                 case 2:
@@ -342,7 +344,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         else{
             $res .= "<h2> Tarif : 00,00 € </h2>";
         }
-        if(isset($this->data["box"]->id)){
+        if(isset($_SESSION["box"]->id)){
             $res .= "<input type='submit' name='choixForm' value='Sauvegarder'/>";
         }
         if(isset($this->data["box"]->id) && $this->data["box"]->etat != 0){
@@ -370,7 +372,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             $res .= "<p>Url du coffret pour le destinataire: ".$this->data["box"]->url."</p>";
         }
         else{
-            $res .= "<div><a href='".$this->router->urlFor("/box/pay/",['Id' => $_SESSION['box']->id])."'><button>Passer au paiement</button></a></div>";      
+            $res .= "<div><a href='".$this->router->urlFor("/box/pay/",['id' => $_SESSION['box']->id])."'><button>Passer au paiement</button></a></div>";      
         }
         $res .= "</div>";
         return $res;
@@ -418,23 +420,23 @@ class GiftBoxView extends \mf\view\AbstractView {
     }
 
     private function renderAdmin(){
-        $res = "<a href='".$this->router->urlFor("/admin/prestations/new/",[])."'><button>Ajouter une préstation</button></a><div>";
-            foreach ($this->data['prestations'] as $prestation) {
-                $router = new \mf\router\Router();
-                $urlPrestation = $this->router->urlfor('/prestation/', ['id'=>$prestation->id]);
-                 $res = $res . "<div>
-                <a href='".$urlPrestation."'>
-                    <p>".$prestation->nom."</p>
-                    <p>".$prestation->prix." €</p>
-                </a>
-                <p><a href='".$this->router->urlfor('/categorie/', ['id'=>$prestation->idCategorie])."'>".$this->data["categories"][$prestation->idCategorie - 1]."</a></p>
-                <a href='".$urlPrestation."'>
-                    <img src ='".$this->router->urlFor("/img/", []).$prestation->img."'>
-                    <p>".$prestation->description."</p>
-                </a>
-                <a href='".$this->router->urlFor("/register/",[])."'><button>Modifier</button></a>
-                <a href='".$this->router->urlFor("/admin/prestation/remove/",[])."'><button>X</button></a></div><hr>";
-            }
+        $res = "<a href='".$this->router->urlFor("/admin/prestations/new/", [])."'><button>Ajouter une préstation</button></a><div>";
+        foreach ($this->data['prestations'] as $prestation) {
+            $router = new \mf\router\Router();
+            $urlPrestation = $this->router->urlfor('/prestation/', ['id'=>$prestation->id]);
+             $res = $res . "<div>
+            <a href='".$urlPrestation."'>
+                <p>".$prestation->nom."</p>
+                <p>".$prestation->prix." €</p>
+            </a>
+            <p><a href='".$this->router->urlfor('/categorie/', ['id'=>$prestation->idCategorie])."'>".$this->data["categories"][$prestation->idCategorie - 1]."</a></p>
+            <a href='".$urlPrestation."'>
+                <img src ='".$this->router->urlFor("/img/", []).$prestation->img."'>
+                <p>".$prestation->description."</p>
+            </a>
+            <a href='".$this->router->urlFor("/admin/prestation/",["id" => $prestation->id])."'><button>Modifier</button></a>
+            <a href='".$this->router->urlFor("/admin/prestation/remove/",[])."'><button>X</button></a></div><hr>";
+        }
         return $res;
     }
 
@@ -453,8 +455,7 @@ class GiftBoxView extends \mf\view\AbstractView {
     private function renderAdminPrestation(){
         return "<h1> Voici votre coffret :</h1>
                 <form name='update' method='POST'>
-                    <textarea
-                    <input type='textarea' name='nom' value='".$this->data->nom."'/> <br/>
+                    <textarea name='nom'>".$this->data->nom."</textarea>
                     <p>Description : </p><input type='text' name='nom' value='".$this->data->description."'/> <br/>
                     <p>Prix : </p><input type='text' name='nom' value='".$this->data->prix."'/> <br/>
                     <p>Image : </p><input type='file' name='image'/><br/>

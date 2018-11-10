@@ -4,7 +4,7 @@ namespace giftbox\model;
 
 class Prestation extends \Illuminate\Database\Eloquent\Model{
 	protected $table = "Prestation";
-	protected $primaryKey = "Id";
+	protected $primaryKey = "id";
 	public    $timestamps = false; 
 
 	public function categorie() {

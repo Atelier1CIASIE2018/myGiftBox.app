@@ -5,7 +5,7 @@ use \giftbox\model\Prestation as Prestation;
 use \giftbox\model\Categorie as Categorie;
 use \giftbox\model\Composer as Composer;
 use \giftbox\model\User as User;
-use \giftbox\model\giftBoxView as giftBoxView;
+use \giftbox\view\giftBoxView as giftBoxView;
 use \giftBox\auth\giftBoxAuthentification as giftBoxAuthentification;
 class giftBoxController extends \mf\control\AbstractController {
     private $router;
@@ -142,7 +142,7 @@ class giftBoxController extends \mf\control\AbstractController {
         $box->etat = 0;
         $box->save();
         $_SESSION["box"] = $box;
-        $vue = new giftBoxView("");
+        $vue = new giftBoxView(array("box" => $box));
         $vue->render('FormBox');
     }
 
@@ -164,7 +164,7 @@ class giftBoxController extends \mf\control\AbstractController {
                 if(isset($_SESSION["box"]) && $_SESSION["box"] != null){
                     $_SESSION["box"]->nom = $_POST["nom"];
                     $_SESSION["box"]->idUser = $_SESSION["user_login"]->id;
-                    $_SESSION["box"]->message = $_POST["Texte"];
+                    $_SESSION["box"]->message = $_POST["texte"];
                     $_SESSION["box"]->date = $_POST["date"];
                     $_SESSION["box"]->etat = 1;
                     $this->router->executeRoute("updateBox");
@@ -174,7 +174,7 @@ class giftBoxController extends \mf\control\AbstractController {
                     $box = new Box();
                     $box->nom = $_POST["nom"];
                     $box->idUser = $_SESSION["user_login"]->id;
-                    $box->message = $_POST["Texte"];
+                    $box->message = $_POST["texte"];
                     $box->date = $_POST["date"];
                     $_SESSION["box"] = $box;
                     $this->router->executeRoute("postBox");
@@ -217,7 +217,7 @@ class giftBoxController extends \mf\control\AbstractController {
         $box->etat = 1;
         $box->save();
         $_SESSION["box"] = null;
-        $_SESSION["Prestations"] = null;   
+        $_SESSION["prestations"] = null;   
     }
 
     public function postBox(){

@@ -4,7 +4,7 @@ namespace giftbox\model;
 
 class Box extends \Illuminate\Database\Eloquent\Model{
 	protected $table = "Box";
-	protected $primaryKey = "Id";
+	//	protected $primaryKey = "id";
 	public    $timestamps = false; 
 
 	public function user() {
