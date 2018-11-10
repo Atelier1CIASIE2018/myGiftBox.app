@@ -210,7 +210,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                         $res .= "<p>Url: ".$this->data["box"]->url."</p>";
                     }
                     else{
-                        $res .= "<a href='".$this->router->urlfor('/box/receiver/', ['id'=>$this->data["box"]->id])."'><button>Générer l'url</button></a>";
+                        $res .= "<a href='".$this->router->urlfor('/box/url/', ['id'=>$this->data["box"]->id])."'><button>Générer l'url</button></a>";
                     }                 
                     break;
             }

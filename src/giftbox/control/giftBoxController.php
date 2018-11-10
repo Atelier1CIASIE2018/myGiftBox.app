@@ -263,7 +263,6 @@ class giftBoxController extends \mf\control\AbstractController {
         }
         $box->etat = 3;
         $box->save();
-        $this->router->executeRoute("urlBox");
         header("Location: ".$this->router->urlFor("/box/", ["id" => $id]));
     }
 

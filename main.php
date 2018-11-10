@@ -4,12 +4,6 @@ require_once "src/mf/router/Router.php";
 $loader = new ClassLoader('src');
 $loader->register();
 
-use \giftbox\model\Box as Box;
-use \giftbox\model\Prestation as Prestation;
-use \giftbox\model\Categorie as Categorie;
-use \giftbox\model\Composer as Composer;
-use \giftbox\model\User as User;
-
 use mf\router\Router as Router;
 
 /* pour le chargement automatique des classes dans vendor */
