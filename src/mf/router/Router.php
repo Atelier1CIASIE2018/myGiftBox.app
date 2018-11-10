@@ -42,10 +42,15 @@ class Router Extends AbstractRouter{
     }
 
     public function urlFor($route_name, $param_list=[]){
-        $url = '/giftBox/main.php';
-        if(array_key_exists($route_name, self::$routes)){
-            $url .= $route_name;
+        $url = parse_ini_file("conf/confURL.ini")["url"];
+        if($route_name == "/img/"){
+            $url .= "img/";
         }
+        else{
+            if(array_key_exists($route_name, self::$routes)){
+                $url .= "main.php".$route_name;
+            }
+        }        
         if ($param_list != null) {
             $url .= "?";
             foreach ($param_list as $key => $value) {

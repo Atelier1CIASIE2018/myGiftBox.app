@@ -80,7 +80,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 </a>
                 <a href='".$this->router->urlfor('/categorie/', ['id' => $prestation->idCategorie])."'><p>".$this->data["categories"][$prestation->idCategorie - 1]."</p></a>
                 <a href='".$urlPrestation."'>
-                    <img src ='/giftBox/img/".$prestation->img."'>
+                    <img src ='".$this->router->urlFor("/img/", []).$prestation->img."'>
                     <p>".$prestation->description."</p>
                 </a>
             </div><hr>";
@@ -100,7 +100,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         $res = "<div id='prestation'>
             <p>".$this->data->nom."</p>
             <p>".$this->data->prix." €</p>
-            <img src ='/giftBox/img/".$this->data->img."'>
+            <img src ='".$this->router->urlFor("/img/", []).$this->data->img."'>
             <p>".$this->data->description."</p>";
         if(isset($_SESSION["newPrestation"])){
             $res .= "<div><a href='".$this->router->urlFor("/box/add/",['id' => $this->data->id])."'><button>+</button></a></div>";
@@ -143,7 +143,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 </a>
                 <p><a href='".$this->router->urlfor('/categorie/', ['id' => $prestation['idCategorie']])."'>".$this->data["categories"][$prestation->idCategorie - 1]."</p>
                 <a href='".$urlPrestation."'>
-                    <img src ='/giftBox/img/".$prestation->img."'>
+                    <img src ='".$this->router->urlFor("/img/", []).$prestation->img."'>
                     <p>".$prestation->description."</p>
                 </a>";
             if(isset($_SESSION["newPrestation"])){
@@ -224,7 +224,7 @@ class GiftBoxView extends \mf\view\AbstractView {
             $urlSummaryBox = $this->router->urlfor('/box/summary/', ['Id'=>$box->id]);
             $aAperçu = "<a href='".$urlBox."'><button>Aperçu</button></a>";
             $res .= "<p>".$box->nom;
-            switch ($box['Etat']){
+            switch ($box->etat){
                 case 1:
                     $res .= "</p><div>".$aAperçu."
                     <a href='".$this->router->urlfor('/box/', ['id'=>$box->id, "update"=>null])."'><button>Modifier</button></a>
@@ -235,15 +235,15 @@ class GiftBoxView extends \mf\view\AbstractView {
                     $res .= " (Validé)</p><div>".$aAperçu."
                     <a href='".$urlSummaryBox."'><button>Payer</button></a></div>";
                     break;
-                default:                    
-                    if($box["Etat"] == 3){
+                default:             
+                    if($box->etat == 3){
                         $res .= " (Payé)</p><div>".$aAperçu."
                             <a href='".$this->router->urlfor('/box/url/', ['id'=>$box->id])."'><button>Générer l'url</button></a></div>";
                     }
-                    if($box["Etat"] == 4){
+                    if($box->etat == 4){
                         $res .= " (Transmis)</p><div>".$aAperçu."</div>";
                     }
-                    if($box["Etat"] == 5){
+                    if($box->etat == 5){
                         $res .= " (Ouvert)</p><div>".$aAperçu."</div>";
                     }
                     
@@ -265,7 +265,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                         <p>Nom: ".$prestation->nom."</p>
                         <p>Prix: ".$prestation->prix." €</p>
                         <p>Catégorie: ".$this->data["categories"][$prestation->idCategorie - 1]."</p>
-                        <img src ='/giftBox/img/".$prestation->img."'>
+                        <img src ='".$this->router->urlFor("/img/", []).$prestation->img."'>
                         <p>".$prestation->description."</p>
                     </div>";
             }
@@ -429,7 +429,7 @@ class GiftBoxView extends \mf\view\AbstractView {
                 </a>
                 <p><a href='".$this->router->urlfor('/categorie/', ['id'=>$prestation->idCategorie])."'>".$this->data["categories"][$prestation->idCategorie - 1]."</a></p>
                 <a href='".$urlPrestation."'>
-                    <img src ='/giftBox/img/".$prestation->img."'>
+                    <img src ='".$this->router->urlFor("/img/", []).$prestation->img."'>
                     <p>".$prestation->description."</p>
                 </a>
                 <a href='".$this->router->urlFor("/register/",[])."'><button>Modifier</button></a>
@@ -476,7 +476,7 @@ class GiftBoxView extends \mf\view\AbstractView {
         }
         foreach ($this->data['prestations'] as $prestation){
             $res .= "<div><p>Nom: ".$prestation->nom."</p>
-                    <img src ='/giftBox/img/".$prestation->img."'>
+                    <img src ='".$this->router->urlFor("/img/", []).$prestation->img."'>
                     <p>".$prestation->description."</p>
                     <a href='".$this->router->urlfor('/prestation/', ['id' => $prestation->id])."'><button>Visualiser la prestation</button></a>
                 </div>";
