@@ -4,3 +4,4 @@ Procédure d'instalation du projet:
 -Changer les logs de la base de données dans conf/conf.ini 
 -Dans conf/confURL.ini, mettre l'URL racine de votre site exemple pour webetu 
 'https://webetu.iutnc.univ-lorraine.fr/www/guebel5u' mettre '/www/guebel5u'
+-Avec le jeu d'essai dans la base de données, il y a 2 comptes déjà créé (login/mdp): user@mail.fr/user et admin@mail.fr/admin
